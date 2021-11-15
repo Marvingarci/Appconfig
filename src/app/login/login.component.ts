@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TestService } from './test.service';
+import { TestService } from '../test.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
-export class AppComponent implements OnInit{
+export class LoginComponent implements OnInit {
   
   // formInfo = new FormGroup({
   //   servername: new FormControl('',[]),
@@ -42,7 +42,7 @@ export class AppComponent implements OnInit{
 
   login(){
     if(this.formLogin.valid){
-      this.router.navigate(['home']);
+      this.router.navigate(['/','home']);
     }
   }
 

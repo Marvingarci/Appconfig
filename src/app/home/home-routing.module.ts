@@ -5,20 +5,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
  const routes: Routes = [
   {
-    path:'',
-    children:[
-      {path:'', component: DashboardComponent,
+      path:'', component: DashboardComponent,
         children:[
-          // {path:'location', component: LocationComponent},
+           //{path:'dashboard', component: DashboardComponent},
           // {path:'payment', component: PaymentComponent},
           // {path:'contract/:id/:corpId/:companyName', component: ContractComponent},
         ]
-      },
-      {path:'**', redirectTo:""},
-            {path:'**', redirectTo:""},
-
-    ]
-  }
+      }, 
 ];
 
 @NgModule({
