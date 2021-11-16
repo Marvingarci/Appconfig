@@ -1,6 +1,6 @@
-<div class="flex-row w-full min-h-full ">
+<div class="flex-row w-full min-h-screen">
     <div class="flex-row full">
-        <div class="flex justify-between px-10 items-center border-2 shadow-xl">
+        <div class="flex justify-between w-full bg-white px-10 items-center border-2 shadow-xl absolute top-0">
             <!-- <div ngbDropdown class="d-inline-block">
                 <button  id="dropdownBasic1" ngbDropdownToggle><svg xmlns="http://www.w3.org/2000/svg" class="ml-24  text-gray h-14 w-14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -30,17 +30,40 @@
                 <h1 class="text-gray-600 text-xl font-thin">Company name</h1>
             </div> -->
            
-           
-    <!-- C(simbolo) aedpay 2015. All Rights Reserved. -->
         </div>
         <!-- <div class="full border-t border-blue-400 border-2 mx-24"></div> -->
     
-        <div class="d-flex h-100">
-            
-            <div class="w-full md:px-12 lg:px-30 xl:px-60 justify-content-center">
-                <router-outlet></router-outlet>
-    
+        <div class="flex flex-row">
+            <div class="w-44 h-screen pt-24 space-y-2 px-5 bg-white border-r border-2 border-gray-200 min-h-69">
+                <div class="flex flex-row gap-5 transition border-2 border-blue-400 text-gray-600 group hover:bg-blue-400 rounded-xl px-2 py-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="group-hover:text-white h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <h1 class="font-semibold text-lg group-hover:text-white">Events</h1>
+                </div>
+
+                <div class="flex flex-row gap-5 transition border-2 border-blue-400 text-gray-600 group hover:bg-blue-400 rounded-xl px-2 py-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="group-hover:text-white h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                      </svg>
+                    <h1 class="font-semibold text-lg group-hover:text-white">Sales</h1>
+                </div>
+
+                <div class="flex flex-row gap-5 transition border-2 border-blue-400 text-gray-600 group hover:bg-blue-400 rounded-xl px-2 py-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="group-hover:text-white h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                      </svg>
+                    <h1 class="font-semibold text-lg group-hover:text-white">Orders</h1>
+                </div>
             </div>
+            
+            
+            <div class="pt-28">
+             <router-outlet></router-outlet>   
+            </div>
+            
+    
+            
         </div>
     </div>
    
