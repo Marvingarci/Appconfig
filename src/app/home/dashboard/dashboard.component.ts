@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import * as versionsC from './../../versionsaedpay.json'; 
+import * as versionA from './../../versionsaedpay.json'; 
 
 @Component({
   selector: 'app-dashboard',
@@ -7,7 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  versionCloud:  any  = (versionsC  as  any).default;
+  constructor() {
+    console.log(this.versionCloud);
+   }
 
   events: Array<any> =[
     {
