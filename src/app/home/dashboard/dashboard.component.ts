@@ -57,6 +57,8 @@ export class DashboardComponent implements OnInit {
     this.test.execphp().subscribe(
       res => {
         console.log(res);
+        this.modalService.dismissAll();
+        window.location.reload();
     }, (err) => {
         console.log(err);
     }
