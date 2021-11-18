@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as versionsC from './../../versionsaedpay.json'; 
-import * as versionA from './../../versionsaedpay.json'; 
+import * as versionA from './../../../../angular.json'; 
+import { TestService } from 'src/app/test.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,8 +11,10 @@ import * as versionA from './../../versionsaedpay.json';
 export class DashboardComponent implements OnInit {
 
   versionCloud:  any  = (versionsC  as  any).default;
-  constructor() {
+  versionAngular:  any  = (versionA  as  any).default.version;
+  constructor(private test: TestService) {
     console.log(this.versionCloud);
+    console.log(this.versionAngular);
    }
 
   events: Array<any> =[
@@ -35,6 +38,16 @@ export class DashboardComponent implements OnInit {
     },
   ]
   ngOnInit(): void {
+  }
+
+  execphp(){
+    this.test.execphp().subscribe(
+      res => {
+        console.log(res);
+    }, (err) => {
+        console.log(err);
+    }
+    );
   }
 
 }
