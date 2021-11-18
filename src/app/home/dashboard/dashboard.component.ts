@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import * as versionsC from './../../versionsaedpay.json'; 
 import * as versionA from './../../../../angular.json'; 
 import { TestService } from 'src/app/test.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,10 +13,15 @@ export class DashboardComponent implements OnInit {
 
   versionCloud:  any  = (versionsC  as  any).default;
   versionAngular:  any  = (versionA  as  any).default.version;
-  constructor(private test: TestService) {
-    console.log(this.versionCloud);
-    console.log(this.versionAngular);
+@ViewChild('modallogout', {static: false}) content!: ElementRef;;
+
+
+  constructor(private test: TestService, private modalService: NgbModal) {
    }
+
+  
+
+  
 
   events: Array<any> =[
     {
@@ -37,10 +43,17 @@ export class DashboardComponent implements OnInit {
       place:"College US united for 3"
     },
   ]
-  ngOnInit(): void {
+  ngOnInit(): void {  }
+
+
+  ngAfterViewInit() {
+      if(this.versionCloud[this.versionCloud.length-1].version != this.versionAngular){
+        this.modalService.open(this.content, { size: 'lg', centered: true });
+      }
   }
 
-  execphp(){
+
+  updateVersion(){
     this.test.execphp().subscribe(
       res => {
         console.log(res);
