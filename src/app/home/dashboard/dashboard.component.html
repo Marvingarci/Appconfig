@@ -62,7 +62,7 @@
              <router-outlet></router-outlet>   
             </div>
             
-            <button  class="btn btn-primary" (click)="execphp()">execphp</button>
+
             
         </div>
     </div>
@@ -72,3 +72,31 @@
         </h1>
     </div>
 </div>
+
+
+
+ <!-- modal delete -->
+ <ng-template #modallogout let-modal>  
+    <div  aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class=" items-end justify-center   text-center ">
+     
+      <div class="align-bottom bg-white rounded-lg    transition-all  ">
+        <div class="bg-white px-4 py-4 sm:p-6 sm:pb-4">
+          <div class="text-center ">
+              <h3 class="text-lg mb-3 leading-6 font-medium text-gray-900" id="modal-title"> aedpay has a new version</h3>
+              <div class="container">
+                <p>Are you want to get it right now?</p>
+              </div>
+          </div>
+        </div>
+    
+        <div class="bg-gray-50 px-4 py-2 sm:px-6 sm:flex sm:flex-row-reverse">
+          <button  type="button" class="buttonprimary  w-auto" (click)="updateVersion()">Update</button>
+            &nbsp;
+          <button  type="button" (click)="modal.close()" class="buttonsecondary  w-auto"> Cancel</button> 
+        </div>
+      </div>
+    
+    </div>
+    </div>
+    </ng-template>
