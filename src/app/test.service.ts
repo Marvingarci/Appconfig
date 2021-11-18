@@ -11,7 +11,7 @@ export class TestService {
 
 
 
-  post(articulo:any) {
-    return this.http.post(`${this.url}DBTest`, JSON.stringify(articulo));    
+  execphp() {
+    return this.http.get(`${this.url}UpdatesAngular.php`);    
   }
 }
