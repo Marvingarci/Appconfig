@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit {
   
   actualV:any;
   newV:any;
+  msgToast:any;
 
 @ViewChild('modallogout', {static: false}) content!: ElementRef;;
 
@@ -61,7 +62,10 @@ export class DashboardComponent implements OnInit {
       if(parseFloat(this.versionCloud[this.versionCloud.length-1].version) > parseFloat(this.versionActual[0].version)){
        this.actualV = this.versionActual[0].version;
        this.newV = this.versionCloud[this.versionCloud.length-1].version;
-  this.toastService.show('Haz click para saludar', { classname: 'bg-gray-900  fixed bottom-0 right-0 m-1', delay: 20000 });              
+      this.msgToast ='aedpay has a new version. You currently have version'+this.actualV+'. Do you want to get version '+this.newV+' right now?';
+   
+  this.toastService.show(this.msgToast,
+   { classname: ' text-light fixed  left-0  bottom-0 h-16 mb-2 ', delay: 20000 });            
      
         // this.modalService.open(this.content, {backdrop :'static', backdropClass: 'light-blue-backdrop',size: 'lg', centered: true ,keyboard:false});
       }
