@@ -5,13 +5,13 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class TestService {
-  url='http://localhost/';
+  url='http://localhost/UpdatesAngular.php';
 
   constructor(private http: HttpClient) { }
 
 
 
-  post(articulo:any) {
-    return this.http.post(`${this.url}DBTest`, JSON.stringify(articulo));    
+  execphp() {
+    return this.http.get(this.url);    
   }
 }
