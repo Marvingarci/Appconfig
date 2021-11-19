@@ -3,7 +3,8 @@ import * as versionsCloud from './../../../../versionsaedpay.json';
 import * as versionActual from './../../../../version.json'; 
 import { TestService } from 'src/app/test.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ToastService } from 'src/toast.services';
+import { ToastServiceUpdate } from 'src/toastUpdate.services';
+import { ToastServiceAlert } from 'src/toastAlert.services';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,7 +24,9 @@ export class DashboardComponent implements OnInit {
 @ViewChild('modallogout', {static: false}) content!: ElementRef;;
 
 
-  constructor( public toastService:ToastService,private test: TestService, private modalService: NgbModal) {
+  constructor( public toastUpdateService:ToastServiceUpdate,
+    private toastAlertService:ToastServiceAlert,
+    private test: TestService, private modalService: NgbModal) {
    }
 
   
@@ -62,10 +65,10 @@ export class DashboardComponent implements OnInit {
       if(parseFloat(this.versionCloud[this.versionCloud.length-1].version) > parseFloat(this.versionActual[0].version)){
        this.actualV = this.versionActual[0].version;
        this.newV = this.versionCloud[this.versionCloud.length-1].version;
-      this.msgToast ='aedpay has a new version. You currently have version'+this.actualV+'. Do you want to get version '+this.newV+' right now?';
+      this.msgToast ='aedpay has a new version. You currently have version '+this.actualV+'. Do you want to get version '+this.newV+' right now?';
    
-  this.toastService.show(this.msgToast,
-   { classname: ' text-light fixed  left-0  bottom-0 h-16 mb-2 ', delay: 20000 });            
+  this.toastUpdateService.show(this.msgToast, { classname: ' text-light fixed  left-0  bottom-0 h-16 mb-2 ', delay: 20000 }); 
+  this.toastAlertService.show('estilo provicional msg alert', { classname:'text-light', delay: 5000 });             
      
         // this.modalService.open(this.content, {backdrop :'static', backdropClass: 'light-blue-backdrop',size: 'lg', centered: true ,keyboard:false});
       }

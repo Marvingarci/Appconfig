@@ -1,5 +1,5 @@
 import {Component, TemplateRef} from '@angular/core';
-import { ToastService } from '../../toast.services';
+import { ToastServiceUpdate } from './toastUpdate.services';
 import { TestService } from 'src/app/test.service';
 
 
@@ -9,11 +9,11 @@ import { TestService } from 'src/app/test.service';
     <ngb-toast
 
     style="background-color:#000; width:100%;opacity: 0.90;"
-      *ngFor="let toast of toastService.toasts"
+      *ngFor="let toast of toastServiceUpdate.toasts"
       [class]="toast.classname "
       [autohide]="true"
       [delay]="toast.delay || 20000"
-      (hidden)="toastService.remove(toast)" 
+      
       
     >
     
@@ -27,7 +27,20 @@ import { TestService } from 'src/app/test.service';
     
 
     <div class=" pr-10" >
-    <button (click)=updateVersion() class="w-auto h-10 px-3 text-black bg-white  rounded-sm outline-none hover:bg-gray-500">Update</button>
+    <div class="row">
+     <button (click)=updateVersion() class="w-auto h-10 px-3 text-black bg-white  rounded-sm outline-none ">
+    Update
+    </button>
+    &nbsp;
+    <button (click)="toastServiceUpdate.remove(toast)" class="w-auto h-10 mx-3 text-white  rounded-sm outline-none ">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+  </svg>
+  </button>
+    </div>
+   
+    
+    
     </div>
 
     
@@ -44,8 +57,10 @@ import { TestService } from 'src/app/test.service';
   `,
   host: {'[class.ngb-toasts]': 'true'}
 })
-export class ToastsContainer {
-  constructor(private test: TestService, public toastService: ToastService) {}
+export class ToastsUpdateVersion {
+  constructor(private test: TestService, public toastServiceUpdate: ToastServiceUpdate) {}
+
+  
 
   updateVersion(){
     this.test.execphp().subscribe(

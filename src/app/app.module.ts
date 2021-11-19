@@ -7,14 +7,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ToastsContainer } from 'src/app/home/toast-container.component';
+import { ToastsUpdateVersion } from 'src/toast-updateversion.component';
+import { ToastsAlert } from 'src/toast-alert.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
   
-    ToastsContainer
+    ToastsUpdateVersion,
+    ToastsAlert,
   ],
   imports: [
     BrowserModule,
