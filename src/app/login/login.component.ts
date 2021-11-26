@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit():void{
     this.formLogin = this.form.group({
-      email : ['', [Validators.required, Validators.email]],
+      username : ['', [Validators.required, Validators.email]],
       password : ['', [Validators.required]],
     })
   }
@@ -42,7 +42,8 @@ export class LoginComponent implements OnInit {
 
   login(){
     if(this.formLogin.valid){
-      this.router.navigate(['/','home']);
+
+      this.router.navigate(['/','home'])
     }
   }
 
