@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TestService } from '../test.service';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
   //   password: new FormControl('',[])
   // });
 
-  constructor(private test: TestService, private form:FormBuilder, private router: Router){
+  constructor(private SvcLogin: LoginService, private form:FormBuilder, private router: Router){
 
   }
 
@@ -41,10 +42,13 @@ export class LoginComponent implements OnInit {
   // }
 
   login(){
-    if(this.formLogin.valid){
-
-      this.router.navigate(['/','home'])
+    this.SvcLogin.execphpLogin(this.formLogin.value).subscribe(
+      res => {
+        console.log(res);
+    }, (err) => {
+        console.log(err);
     }
+    );
   }
 
 
