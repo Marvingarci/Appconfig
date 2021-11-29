@@ -6,11 +6,16 @@ import { Injectable } from '@angular/core';
 })
 export class HomeService {
 
-  url='http://localhost/Appconfig/Events.php';
 
   constructor(private http: HttpClient) { }
 
   getEvents(data:any) {
-    return this.http.post(this.url,data);    
+    return this.http.post('http://localhost/Appconfig/Events.php',data);    
   }
+
+  getSalesOrders(data:any) {
+    return this.http.post('http://localhost/Appconfig/getOrders.php',data);    
+  }
+
+  
 }
