@@ -15,7 +15,7 @@ $pass = $request['password'];
 
 // Create connections
 $connServer = mysqli_connect("10.0.10.168", "melvinsevilla", "M3lv1n**", "apiAedPayCustomers");
-$connLocal = mysqli_connect("localhost", "root", "","serverLocal");
+$connLocal = mysqli_connect("localhost", "melvinsevilla", "M3lv1n**","serverLocal");
 
 // Check connection
 // if ($mysqli->connect_error) {
@@ -48,13 +48,14 @@ if ($resultado = $connServer->query("select * from location_accs where username 
                     $statusFirstDb = $row[4];
                 }
 
-                if($statusFirstDb == 'need setup'){
+                if($statusFirstDb == 'Need Setup'){
                 $connLocal->query("create database ".$dbServer.";");
                 $connLocal->query("create database apiAedPayCustomers;");
                 
                 //vamos a bajar las dbs.sql
                 Shell_exec("/Applications/MAMP/library/bin/mysqldump -h 10.0.10.168 -u melvinsevilla -pM3lv1n** ".$dbServer." --triggers --routines > /Applications/MAMP/htdocs/php/db/dbLocalDealer.sql");
                 Shell_exec("/Applications/MAMP/library/bin/mysqldump -h 10.0.10.168 -u melvinsevilla -pM3lv1n** apiAedPayCustomers Globals HelpCenter location_accs StyleItems Styles Suppliers supven --routines --triggers > /Applications/MAMP/htdocs/php/db/dbLocalaedpayCustomers.sql");
+                Shell_exec("/Applications/MAMP/library/bin/mysqldump -h 10.0.10.168 -u melvinsevilla -pM3lv1n** apiAedPayCustomers location_accs --where=\"dbServer='$dbServer'\" > /Applications/MAMP/htdocs/php/db/locations.sql");
                 
                 //change collation
                 $oldFile="/Applications/MAMP/htdocs/php/db/dbLocalaedpayCustomers.sql"; 
@@ -64,25 +65,29 @@ if ($resultado = $connServer->query("select * from location_accs where username 
                 //vamos a ejecutar los dbs.sql
                 Shell_exec("/Applications/MAMP/Library/bin/mysql --host=localhost -umelvinsevilla -pM3lv1n** -D".$dbServer." < /Applications/MAMP/htdocs/php/db/dbLocalDealer.sql");
                 Shell_exec("/Applications/MAMP/Library/bin/mysql --host=localhost -umelvinsevilla -pM3lv1n**  -DapiAedPayCustomers < /Applications/MAMP/htdocs/php/db/dbLocalaedpayCustomers.sql");
+                Shell_exec("/Applications/MAMP/Library/bin/mysql --host=localhost -umelvinsevilla -pM3lv1n**  -DapiAedPayCustomers < /Applications/MAMP/htdocs/php/db/locations.sql");
                 Shell_exec("/Applications/MAMP/Library/bin/mysql --host=localhost -umelvinsevilla -pM3lv1n**  -DapiAedPayCustomers < /Applications/MAMP/htdocs/php/db/ViewVSuppliers.sql");
                 Shell_exec("/Applications/MAMP/Library/bin/mysql --host=localhost -umelvinsevilla -pM3lv1n**  -DapiAedPayCustomers < /Applications/MAMP/htdocs/php/db/ViewVDistinctSuppliers.sql");
 
                 $connLocal->query("UPDATE serverDetailsInfo SET statusFirstDb='Setup Complet' WHERE id = 1;");
                 $connLocal->query("UPDATE serverDetailsInfo SET serverName='".$dbServer."' WHERE id = 1;");
+
+                http_response_code(200);
+                echo json_encode($dbServer);
+                return;
                 
-                echo "se ejecuta todo";  
               }else{
-                    echo "solo actualizar lo necesario";
-                }
+                http_response_code(200);
+                echo json_encode($dbServer);
+                return;
+              }
 
 
 
 
 
 
-        http_response_code(200);
-        echo json_encode($dbServer);
-        return;
+        
       }else{
         echo json_encode('Invalid Credential');
         http_response_code(401);
