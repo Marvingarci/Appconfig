@@ -80,6 +80,8 @@ if ($resultado = $connServer->query("select * from location_accs where username 
 
 
         http_response_code(200);
+        echo json_encode($fila[10]);
+        return;
       }else{
         echo 'contrasena incorrecta';
       }
