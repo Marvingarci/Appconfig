@@ -15,7 +15,7 @@ $pass = $request['password'];
 
 // Create connections
 $connServer = mysqli_connect("10.0.10.168", "melvinsevilla", "M3lv1n**", "apiAedPayCustomers");
-$connLocal = mysqli_connect("localhost", "melvinsevilla", "M3lv1n**","serverLocal");
+$connLocal = mysqli_connect("localhost", "root", "","serverLocal");
 
 // Check connection
 // if ($mysqli->connect_error) {
@@ -28,13 +28,14 @@ if ($resultado = $connServer->query("select * from location_accs where username 
   while ($fila = $resultado->fetch_row()) {
     $hashPassword = $fila[7];
     $dbServer = $fila[10];    
+    $hashUser = $fila[6];
   }
 
 
     if($hashPassword){
     //   printf (" la contra es %s\n", $fila[7]);
       //$hashPassword = $fila[7];
-      if(password_verify($pass,$hashPassword)){
+      if(password_verify($pass,$hashPassword) && ($user == $hashUser)){
 
 
 
@@ -80,13 +81,17 @@ if ($resultado = $connServer->query("select * from location_accs where username 
 
 
         http_response_code(200);
-        echo json_encode($fila[10]);
+        echo json_encode($dbServer);
         return;
       }else{
-        echo 'contrasena incorrecta';
+        echo json_encode('Invalid Credential');
+        http_response_code(401);
+        return;
       }
     }else{
-      echo 'usuario incorrecto';
+      echo json_encode('Invalid Credential');
+      http_response_code(401);
+      return;
     }
   
   /* liberar el conjunto de resultados */
