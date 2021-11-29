@@ -23,15 +23,15 @@ if ($mysqli->connect_error) {
 }
 //echo "Connected successfully";
 //$result = mysqli_query($mysqli, "select * from location_accs where username = 'oel077@aedsoft.com';");
-if ($resultado = $mysqli->query("select * from location_accs where username = '".$user."';")) {
+if ($resultado = $mysqli->query("select * from location_accs where username = '".$user."';")) {////
   /* obtener el array de objetos */
 
-  while ($fila = $resultado->fetch_row()) {
+  while ($fila = $resultado->fetch_row()) {//
    
     //   printf (" la contra es %s\n", $fila[7]);
       $hashPassword = $fila[7];
       $hashUser = $fila[6];
-      if((password_verify($pass,$hashPassword)) && ($user == $hashUser)){
+      if((password_verify($pass,$hashPassword)) && ($user == $hashUser)){///
         http_response_code(200);
         echo json_encode($fila[10]);
         return;
@@ -39,29 +39,11 @@ if ($resultado = $mysqli->query("select * from location_accs where username = '"
         echo json_encode('Invalid Credential');
         http_response_code(401);
         return;
-      }
+      }///
     
      
 
-  }
+  }//
   echo json_encode('Invalid Credential');
   http_response_code(401);
-  /* liberar el conjunto de resultados */
-  //$resultado->close();
-}
-
-
-
-
-// $mysqli = new mysqli('localhost','user','password','myDatabaseName');
-// $myArray = array();
-// if ($result = $mysqli->query("SELECT * FROM phase1")) {
-
-//     while($row = $result->fetch_array(MYSQLI_ASSOC)) {
-//             $myArray[] = $row;
-//     }
-//     echo json_encode($myArray);
-// }
-
-// $result->close();
-// $mysqli->close();
+}////
