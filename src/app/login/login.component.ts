@@ -5,6 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { ToastServiceAlert } from 'src/toastAlert.services';
 import { TestService } from '../test.service';
 import { LoginService } from './login.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-login',
@@ -19,8 +20,13 @@ export class LoginComponent implements OnInit {
   //   password: new FormControl('',[])
   // });
 
-  constructor(private Cookie: CookieService, private SvcLogin: LoginService, private form:FormBuilder, private router: Router, private alert: ToastServiceAlert){
-
+  constructor(private Cookie: CookieService, 
+              private SvcLogin: LoginService, 
+              private form:FormBuilder, 
+              private router: Router, 
+              private alert: ToastServiceAlert,
+              private loading: NgxSpinnerService
+              ){
   }
 
   public formLogin! : FormGroup;
@@ -45,16 +51,19 @@ export class LoginComponent implements OnInit {
 
   login(){
     if(this.formLogin.valid){
+      this.loading.show();
       this.SvcLogin.execphpLogin(this.formLogin.value).subscribe(
         res => {
           //console.log(res);
           this.Cookie.set('dbServer', res.toString());
           //console.log(this.Cookie.get('dbServer'))
           this.router.navigate(['home'])
-          this.alert.show('Welcome', { classname:'text-light', delay: 5000 });             
+          this.alert.show('Welcome', { classname:'text-light', delay: 5000 });     
+          this.loading.hide();                     
       }, (err) => {
           console.log(err);
-          this.alert.show('invalid', { classname:'text-light', delay: 5000 });             
+          this.alert.show('invalid', { classname:'text-light', delay: 5000 });
+          this.loading.hide();             
         }
       );
     }
