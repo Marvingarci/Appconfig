@@ -5,6 +5,8 @@ import { TestService } from 'src/app/test.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastServiceUpdate } from 'src/toastUpdate.services';
 import { ToastServiceAlert } from 'src/toastAlert.services';
+import { HomeService } from '../home.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,13 +22,14 @@ export class DashboardComponent implements OnInit {
   actualV:any;
   newV:any;
   msgToast:any;
+  events:any;
 
 @ViewChild('modallogout', {static: false}) content!: ElementRef;;
 
 
   constructor( public toastUpdateService:ToastServiceUpdate,
     private toastAlertService:ToastServiceAlert,
-    private test: TestService, private modalService: NgbModal) {
+    private test: TestService, private modalService: NgbModal, private homeService: HomeService, private cookies: CookieService) {
    }
 
   
@@ -54,7 +57,7 @@ export class DashboardComponent implements OnInit {
   //   },
   // ]
   ngOnInit(): void { 
-    
+   
    }
 
 
@@ -68,7 +71,7 @@ export class DashboardComponent implements OnInit {
       this.msgToast ='aedpay has a new version. You currently have version '+this.actualV+'. Do you want to get version '+this.newV+' right now?';
    
   this.toastUpdateService.show(this.msgToast, { classname: ' text-light fixed  left-0  bottom-0 h-16 mb-2 ', delay: 20000 }); 
-  this.toastAlertService.show('estilo provicional msg alert', { classname:'text-light', delay: 5000 });             
+  //this.toastAlertService.show('estilo provicional msg alert', { classname:'text-light', delay: 5000 });             
      
         // this.modalService.open(this.content, {backdrop :'static', backdropClass: 'light-blue-backdrop',size: 'lg', centered: true ,keyboard:false});
       }

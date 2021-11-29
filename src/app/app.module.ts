@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastsUpdateVersion } from 'src/toast-updateversion.component';
 import { ToastsAlert } from 'src/toast-alert.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { ToastsAlert } from 'src/toast-alert.component';
     FormsModule,
     NgbModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
