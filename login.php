@@ -12,58 +12,69 @@ $request = json_decode($postdata, true);
 $user = $request['username'];
 $pass = $request['password'];
 
-// Create connection
+
+// Create connections
 $connServer = mysqli_connect("10.0.10.168", "melvinsevilla", "M3lv1n**", "apiAedPayCustomers");
-$mysqli = mysqli_connect("localhost", "melvinsevilla", "M3lv1n**","serverLocal");
+$connLocal = mysqli_connect("localhost", "melvinsevilla", "M3lv1n**","serverLocal");
 
 // Check connection
-if ($mysqli->connect_error) {
-  die("Connection failed: " . $mysqli->connect_error);
-}
-//echo "Connected successfully";
-//$result = mysqli_query($mysqli, "select * from location_accs where username = 'oel077@aedsoft.com';");
-if ($resultado = $mysqli->query("select * from location_accs where username = '".$user."';")) {
+// if ($mysqli->connect_error) {
+//   die("Connection failed: " . $mysqli->connect_error);
+// }
+
+if ($resultado = $connServer->query("select * from location_accs where username = '".$user."';")) {
+  
   /* obtener el array de objetos */
-
   while ($fila = $resultado->fetch_row()) {
-   
+    $hashPassword = $fila[7];
+    $dbServer = $fila[10];    
+  }
+
+
+    if($hashPassword){
     //   printf (" la contra es %s\n", $fila[7]);
-      $hashPassword = $fila[7];
-      $hashUser = $fila[6];
-      if((password_verify($pass,$hashPassword)) && ($user == $hashUser)){
+      //$hashPassword = $fila[7];
+      if(password_verify($pass,$hashPassword)){
 
 
-        //verificar si la conexion se ya se hizo por primera vez
-        $datos = $connLocal->query("select * from setting where id = 1;");
-        while($row  = $datos->fetch_row()){
-            $status = $row[1];
-        }
 
-        if($status == 'need setup'){
-        $connLocal->query("create database ".$dbServer.";");
-        $connLocal->query("create database apiAedPayCustomers;");
-        
 
-        //vamos a bajar las dbs.sql
-        Shell_exec("/Applications/MAMP/library/bin/mysqldump -h 10.0.10.168 -u melvinsevilla -pM3lv1n** ".$dbServer." --triggers --routines > /Applications/MAMP/htdocs/php/db/dbLocalDealer.sql");
-        Shell_exec("/Applications/MAMP/library/bin/mysqldump -h 10.0.10.168 -u melvinsevilla -pM3lv1n** apiAedPayCustomers Globals HelpCenter location_accs StyleItems Styles Suppliers supven --routines --triggers > /Applications/MAMP/htdocs/php/db/dbLocalaedpayCustomers.sql");
-        
-        $oldFile="/Applications/MAMP/htdocs/php/db/dbLocalaedpayCustomers.sql"; 
-        $newFile="/Applications/MAMP/htdocs/php/db/dbLocalaedpayCustomers.sql"; 
-        file_put_contents($newFile,str_replace('utf8mb4_0900_ai_ci','utf8_general_ci',file_get_contents($oldFile)));
-        
 
-        //vamos a ejecutar los dbs.sql
-        // Shell_exec("/Applications/MAMP/Library/bin/mysql --host=localhost -umelvinsevilla -pM3lv1n** -D".$dbServer." < /Applications/MAMP/htdocs/php/db/dbLocalDealer.sql");
-        Shell_exec("/Applications/MAMP/Library/bin/mysql --host=localhost -umelvinsevilla -pM3lv1n**  -DapiAedPayCustomers < /Applications/MAMP/htdocs/php/db/dbLocalaedpayCustomers.sql");
-        Shell_exec("/Applications/MAMP/Library/bin/mysql --host=localhost -umelvinsevilla -pM3lv1n**  -DapiAedPayCustomers < /Applications/MAMP/htdocs/php/db/ViewVSuppliers.sql");
-        Shell_exec("/Applications/MAMP/Library/bin/mysql --host=localhost -umelvinsevilla -pM3lv1n**  -DapiAedPayCustomers < /Applications/MAMP/htdocs/php/db/ViewVDistinctSuppliers.sql");
 
-        
-        echo "se ejecuta todo";  
-      }else{
-            echo "solo actualizar lo necesario";
-        }
+                //verificar si la conexion se ya se hizo por primera vez
+                $datos = $connLocal->query("select * from setting where id = 1;");
+                while($row  = $datos->fetch_row()){
+                    $status = $row[1];
+                }
+
+                if($status == 'need setup'){
+                $connLocal->query("create database ".$dbServer.";");
+                $connLocal->query("create database apiAedPayCustomers;");
+                
+
+                //vamos a bajar las dbs.sql
+                Shell_exec("/Applications/MAMP/library/bin/mysqldump -h 10.0.10.168 -u melvinsevilla -pM3lv1n** ".$dbServer." --triggers --routines > /Applications/MAMP/htdocs/php/db/dbLocalDealer.sql");
+                Shell_exec("/Applications/MAMP/library/bin/mysqldump -h 10.0.10.168 -u melvinsevilla -pM3lv1n** apiAedPayCustomers Globals HelpCenter location_accs StyleItems Styles Suppliers supven --routines --triggers > /Applications/MAMP/htdocs/php/db/dbLocalaedpayCustomers.sql");
+                
+                $oldFile="/Applications/MAMP/htdocs/php/db/dbLocalaedpayCustomers.sql"; 
+                $newFile="/Applications/MAMP/htdocs/php/db/dbLocalaedpayCustomers.sql"; 
+                file_put_contents($newFile,str_replace('utf8mb4_0900_ai_ci','utf8_general_ci',file_get_contents($oldFile)));
+                
+
+                //vamos a ejecutar los dbs.sql
+                // Shell_exec("/Applications/MAMP/Library/bin/mysql --host=localhost -umelvinsevilla -pM3lv1n** -D".$dbServer." < /Applications/MAMP/htdocs/php/db/dbLocalDealer.sql");
+                Shell_exec("/Applications/MAMP/Library/bin/mysql --host=localhost -umelvinsevilla -pM3lv1n**  -DapiAedPayCustomers < /Applications/MAMP/htdocs/php/db/dbLocalaedpayCustomers.sql");
+                Shell_exec("/Applications/MAMP/Library/bin/mysql --host=localhost -umelvinsevilla -pM3lv1n**  -DapiAedPayCustomers < /Applications/MAMP/htdocs/php/db/ViewVSuppliers.sql");
+                Shell_exec("/Applications/MAMP/Library/bin/mysql --host=localhost -umelvinsevilla -pM3lv1n**  -DapiAedPayCustomers < /Applications/MAMP/htdocs/php/db/ViewVDistinctSuppliers.sql");
+
+                
+                echo "se ejecuta todo";  
+              }else{
+                    echo "solo actualizar lo necesario";
+                }
+
+
+
 
 
 
@@ -71,17 +82,12 @@ if ($resultado = $mysqli->query("select * from location_accs where username = '"
         echo json_encode($fila[10]);
         return;
       }else{
-        echo json_encode('Invalid Credential');
-        http_response_code(401);
-        return;
+        echo 'contrasena incorrecta';
       }
-    
-     
-
-  }
-  echo json_encode('Invalid Credential');
-  http_response_code(401);
- 
+    }else{
+      echo 'usuario incorrecto';
+    }
+  
+  /* liberar el conjunto de resultados */
+  $resultado->close();
 }
-
-
