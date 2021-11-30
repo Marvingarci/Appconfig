@@ -1,0 +1,11 @@
+{
+    "name": "vendor/appconfig",
+    "description": "package to use in php",
+    "authors": [
+        {
+            "name": "Marvingarci",
+            "email": "55658113+Marvingarci@users.noreply.github.com"
+        }
+    ],
+    "require": {}
+}
