@@ -8,6 +8,7 @@ $postdata = file_get_contents("php://input");
  if (!$postdata) {
        return;
   }
+
 $request = json_decode($postdata, true);
 $database = $request['dbServer'];
 $today = date('Y-m-d');
