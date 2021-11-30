@@ -6,18 +6,21 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ListEventsComponent } from './list-events/list-events.component';
 import { ServerSettingsComponent } from './server-settings/server-settings.component';
 import { ListOrdersComponent } from './list-orders/list-orders.component';
+import { WifiSettingsComponent } from './wifi-settings/wifi-settings.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
     ListEventsComponent,
-    ServerSettingsComponent,
-    ListOrdersComponent
+    
+    ListOrdersComponent,
+    WifiSettingsComponent
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
   ]
 })
 export class HomeModule { }

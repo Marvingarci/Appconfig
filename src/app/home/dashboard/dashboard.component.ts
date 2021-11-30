@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import * as versionsCloud from './../../../../versionsaedpay.json'; 
-import * as versionActual from './../../../../version.json'; 
+import * as versionActual from './../../../../version.json';
 import { TestService } from 'src/app/test.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastServiceUpdate } from 'src/toastUpdate.services';
@@ -68,12 +68,8 @@ export class DashboardComponent implements OnInit {
       if(parseFloat(this.versionCloud[this.versionCloud.length-1].version) > parseFloat(this.versionActual[0].version)){
        this.actualV = this.versionActual[0].version; //la version dentro del json local
        this.newV = this.versionCloud[this.versionCloud.length-1].version; //consuminedo la API de versiones de aedpay
-      this.msgToast ='aedpay has a new version. You currently have version '+this.actualV+'. Do you want to get version '+this.newV+' right now?';
-   
-  this.toastUpdateService.show(this.msgToast, { classname: ' text-light fixed  left-0  bottom-0 h-16 mb-2 ', delay: 20000 }); 
-  //this.toastAlertService.show('estilo provicional msg alert', { classname:'text-light', delay: 5000 });             
-     
-        // this.modalService.open(this.content, {backdrop :'static', backdropClass: 'light-blue-backdrop',size: 'lg', centered: true ,keyboard:false});
+       this.msgToast ='aedpay has a new version. You currently have version '+this.actualV+'. Do you want to get version '+this.newV+' right now?';   
+       this.toastUpdateService.show(this.msgToast, { classname: ' text-light fixed  left-0  bottom-0 h-16 mb-2 ', delay: 20000 }); 
       }
   }
 

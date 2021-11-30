@@ -54,10 +54,10 @@ export class LoginComponent implements OnInit {
       this.loading.show();
       this.SvcLogin.execphpLogin(this.formLogin.value).subscribe(
         res => {
-          //console.log(res);
+          console.log(res);
           this.Cookie.set('dbServer', res.toString());
           //console.log(this.Cookie.get('dbServer'))
-          this.router.navigate(['home'])
+          this.router.navigate(['home/serverSettings'])
           this.alert.show('Welcome', { classname:'text-light', delay: 5000 });     
           this.loading.hide();                     
       }, (err) => {

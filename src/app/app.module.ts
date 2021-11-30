@@ -12,11 +12,14 @@ import { ToastsAlert } from 'src/toast-alert.component';
 import { CookieService } from 'ngx-cookie-service';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ServerSettingsComponent } from './home/server-settings/server-settings.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    ServerSettingsComponent,
   
     ToastsUpdateVersion,
     ToastsAlert,
@@ -29,7 +32,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     NgbModule,
     NgxSpinnerModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FontAwesomeModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],

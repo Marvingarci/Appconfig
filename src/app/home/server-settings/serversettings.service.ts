@@ -6,11 +6,25 @@ import { Injectable } from '@angular/core';
 })
 export class ServersettingsService {
 
-  url='http://localhost/Appconfig/ServerSettings.php';
+  urlGetServerSett='http://localhost/Appconfig/getServerSettings.php';
+  urlUpdateserverAlias='http://localhost/Appconfig/updateServerAlias.php';
+  urlGetVersions='http://localhost/Appconfig/getVersions.php';
+  urlUpdateApps='http://localhost/Appconfig/UpdateAppsGitHub.php';
   
   constructor(private http: HttpClient) { }
 
   getDetailsServer() {
-    return this.http.get(this.url);    
+    return this.http.get(this.urlGetServerSett);    
+  }
+
+  updateServerAlias(newAlias:any) {
+    return this.http.post(this.urlUpdateserverAlias,newAlias);    
+  }
+  getVersions() {
+    return this.http.get(this.urlGetVersions);    
+  }
+
+  updateApp(typeUpdate:any){
+    return this.http.post(this.urlUpdateApps,typeUpdate);  
   }
 }

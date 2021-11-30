@@ -1,19 +1,167 @@
+<div class="grid grid-cols-3 gap-4">
+  <div>
+    <div class="max-w-md py-2 px-4 bg-white shadow-lg rounded-lg my-3 mx-3">
+      <div class="flex justify-center md:justify-end ">
+        <div class="w-11 h-11 p-1 object-cover rounded-full border-2 border-blue-500 bg-blue-500">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 p-0 m-0 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+          </svg>
+        </div>
+      </div>
+      <div>
+        <h2 class="text-gray-800 text-3xl font-semibold">Server Name</h2>
+        <p class="mt-2 text-gray-600">{{details.serverName}} </p>
+      </div>
+    </div>
+  </div>
 
-<div class="w-60 max-h-screen border-t p-2 border-2 border-gray-200 overflow-auto">
-    <!-- {{events | json}} -->
-    <div *ngFor="let item of details"  class="border border-1 justify-center items-center border-gray-200 flex flex-col p-2 my-1">
-      <h1 class="text-gray-500 text-lg">{{item.serverId}}</h1>
-      <h1 class="text-gray-500 text-sm">{{item.serverName}}</h1>
-      <div class="flex flex-row space-x-4">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <div>
+    <div class="max-w-md py-2 px-4 bg-white shadow-lg rounded-lg my-3 mx-3">
+      <div class="flex justify-center md:justify-end ">
+        <div class="w-11 h-11 p-1 object-cover rounded-full border-2 border-blue-500 bg-blue-500 transform rotate-45 ">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 p-0 m-0 text-white transform rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+        </div>
+      </div>
+      <div>
+        <h2 class="text-gray-800 text-3xl font-semibold">AnyDesk Id</h2>
+        <p class="mt-2 text-gray-600">{{details.anyDeskId}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="max-w-md py-2 px-4 bg-white shadow-lg rounded-lg my-3 mx-3">
+      <div class="flex justify-center md:justify-end ">
+        <div class="w-11 h-11 p-1 object-cover rounded-full border-2 border-blue-500 bg-blue-500">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 p-0 m-0 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
+          </svg>
+        </div>
+      </div>
+      <div>
+        <h2 class="text-gray-800 text-3xl font-semibold">Wi-Fi Password</h2>
+        <div class="mt-2 text-gray-600 mb-3">
+           <button (click)="seepassword()" > 
+            <svg xmlns="http://www.w3.org/2000/svg" *ngIf="show == false" class="h-3 w-3 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
             </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20" />
-            </svg>
+            <svg *ngIf="show == true" xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+            </svg>          
+           </button>
+        <input  value="{{details.wifiPassword}}" [readOnly]="true" [type]="show ? 'text' : 'password'" >
+        </div>
+       
       </div>
+    </div>
   </div>
+
+  <div>
+    <div class="max-w-md py-2 px-4 bg-white shadow-lg rounded-lg my-3 mx-3">
+      <div class="flex justify-center md:justify-end ">
+        <div class="w-11 h-11 p-1 object-cover rounded-full border-2 border-blue-500 bg-blue-500">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 p-0 m-0 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+          </svg>
+        </div>
+      </div>
+      <div>
+        <h2 class="text-gray-800 text-3xl font-semibold">ServerAlias</h2>
+      
+        <div class="mt-2 text-gray-600 mb-3" *ngIf="showEditServerAlias==false"> 
+          <button (click)=editserverAlias(details.serverAlias)>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+            </svg>
+          </button>
+          {{details.serverAlias}} 
+        </div>
+
+        <div class="mt-2 text-gray-600 mb-3" *ngIf="showEditServerAlias==true"> 
+        <form [formGroup]="serverAliasForm" >
+         
+          <button (click)=editserverAlias(details.serverAlias)>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <button (click)=updateServerAlias()>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+            </svg>
+          </button>
+          <input minlength="2" maxlength="50" formControlName="serverAliasInput" type="text" placeholder="Please Complete this information" > 
+        </form>
+
+        </div>
+      </div>
+    </div>
   </div>
-  
-  
+
+  <div>
+    <div class="max-w-md py-2 px-4 bg-white shadow-lg rounded-lg my-3 mx-3">
+      <div class="flex justify-center md:justify-end ">
+        <div class="w-11 h-11 p-1 object-cover rounded-full border-2 border-blue-500 bg-blue-500">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 p-0 m-0 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+          </svg>
+         
+        </div>
+      </div>
+      <div>
+        <h2 class="text-gray-800 text-3xl font-semibold">Ip Address</h2>
+        <p class="mt-2 text-gray-600">{{details.ipAdress}} </p>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="max-w-md py-2 px-4 bg-white shadow-lg rounded-lg my-3 mx-3">
+      <div class="flex justify-center md:justify-end ">
+        <div class="w-11 h-11 p-1 object-cover rounded-full border-2 border-blue-500 bg-blue-500">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 p-0 m-0 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>         
+        </div>
+      </div>
+      <div>
+        <h2 class="text-gray-800 text-3xl font-semibold">Updates</h2>
+       
+        <div class="mt-2 text-gray-600"> 
+          <button (click)="clickUpdateAppAedPay()" *ngIf="updatedApp !='AppUpdated'">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg> 
+        </button>
+        <button  *ngIf="updatedApp =='AppUpdated'">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+        </button>
+         {{msgUpdateApp}}
+      </div>
+        
+        <div class="mt-2 text-gray-600">
+        <button (click)="clickUpdateAppConfig()" *ngIf="updateConfig == 'updateOnlyConfig'">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg> 
+        </button>
+        <button  *ngIf="updateConfig =='ConfigUpdated'">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+        </button>
+        {{msgUpdateConfig}} 
+        </div>
+       
+      </div>
+    </div>
+  </div>
+
+
+</div>
+

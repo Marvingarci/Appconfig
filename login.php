@@ -11,20 +11,19 @@ $postdata = file_get_contents("php://input");
 $request = json_decode($postdata, true);
 $user = $request['username'];
 $pass = $request['password'];
-
 // Create connections
 $connServerLocal = mysqli_connect("localhost", "melvinsevilla", "M3lv1n**","serverLocal");
-$connServerCloud = mysqli_connect("10.0.10.168", "melvinsevilla", "M3lv1n**", "apiAedPayCustomers");
 $connServerAedPayLocal = mysqli_connect("localhost", "melvinsevilla", "M3lv1n**","apiAedPayCustomers");
 
 //verificar si ya se realizo el setUp
 $datos = $connServerLocal->query("select * from serverDetailsInfo where id = 1;");
 while($row  = $datos->fetch_row()){
-    $statusFirstDb = $row[4];
+    $statusFirstDb = $row[1];
 }
 
 if($statusFirstDb == 'Need Setup'){
 
+$connServerCloud = mysqli_connect("10.0.10.168", "melvinsevilla", "M3lv1n**", "apiAedPayCustomers");
     //se verifica en el cloud
     if ($resultado = $connServerCloud->query("select * from location_accs where username = '".$user."';")) {
   
@@ -32,6 +31,7 @@ if($statusFirstDb == 'Need Setup'){
           while ($fila = $resultado->fetch_row()) {
             $hashUser = $fila[6];
             $hashPassword = $fila[7];  
+            $serverName = $fila[8]; 
             $dbServer = $fila[10]; 
           }    
     
@@ -58,7 +58,8 @@ if($statusFirstDb == 'Need Setup'){
               Shell_exec("/Applications/MAMP/Library/bin/mysql --host=localhost -umelvinsevilla -pM3lv1n**  -DapiAedPayCustomers < /Applications/MAMP/htdocs/php/db/ViewVDistinctSuppliers.sql");
         
               $connServerLocal->query("UPDATE serverDetailsInfo SET statusFirstDb='Setup Complet' WHERE id = 1;");
-              $connServerLocal->query("UPDATE serverDetailsInfo SET serverName='".$dbServer."' WHERE id = 1;");
+              $connServerLocal->query("UPDATE serverDetailsInfo SET serverName='".$serverName."' WHERE id = 1;");
+              $connServerLocal->query("UPDATE serverDetailsInfo SET dbServer='".$dbServer."' WHERE id = 1;");
         
               //return success
               http_response_code(200);
@@ -79,12 +80,13 @@ if($statusFirstDb == 'Need Setup'){
             while ($row = $resulLocal->fetch_row()) {
               $hashUserLocal = $row[6];
               $hashPasswordLocal = $row[7];
+              $dbServerLocal = $row[10];
             }    
             
             if(password_verify($pass,$hashPasswordLocal) && ($user == $hashUserLocal)){
                   //return success
                   http_response_code(200);
-                  echo json_encode($hashUserLocal);
+                  echo json_encode($dbServerLocal);
                   return;    
             }else{
                   echo json_encode('Invalid Credential ');
