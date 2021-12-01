@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class LoginService {
-  url='http://localhost/Appconfig/login.php';
+  url='http://localhost/Appconfig/php/login/login.php';
 
   constructor(private http: HttpClient) { }
 

@@ -5,6 +5,7 @@ import { ListEventsComponent } from './list-events/list-events.component';
 import { ServerSettingsComponent } from './server-settings/server-settings.component';
 import { ListOrdersComponent } from './list-orders/list-orders.component';
 import { WifiSettingsComponent } from './wifi-settings/wifi-settings.component';
+import { StoreComponent } from './store/store.component';
 
 
  const routes: Routes = [
@@ -14,8 +15,9 @@ import { WifiSettingsComponent } from './wifi-settings/wifi-settings.component';
            {path:'events', component: ListEventsComponent},
            {path:'serverSettings', component: ServerSettingsComponent},
            {path:'wifiSettings', component: WifiSettingsComponent},
+           {path:'store', component: StoreComponent},
            {path:'events', component: ListEventsComponent,
-          children:[
+            children:[
             {path:'sales-orders', component: ListOrdersComponent}
           ]},
           // {path:'payment', component: PaymentComponent},
