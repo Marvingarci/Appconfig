@@ -1,6 +1,7 @@
 import {Component, TemplateRef} from '@angular/core';
 import { ToastServiceUpdate } from './toastUpdate.services';
 import { TestService } from 'src/app/test.service';
+import { ToastServiceAlert } from './toastAlert.services';
 
 
 @Component({
@@ -58,12 +59,16 @@ import { TestService } from 'src/app/test.service';
   host: {'[class.ngb-toasts]': 'true'}
 })
 export class ToastsUpdateVersion {
-  constructor(private test: TestService, public toastServiceUpdate: ToastServiceUpdate) {}
+  constructor(private test: TestService, 
+    public toastServiceUpdate: ToastServiceUpdate,
+    public toastAlertService: ToastServiceAlert
+    ) {}
 
   
 
   updateVersion(){
-    this.test.execphp().subscribe(
+    if(navigator.onLine){
+      this.test.execphp().subscribe(
         res => {
           console.log(res);
           window.location.reload();
@@ -71,6 +76,10 @@ export class ToastsUpdateVersion {
           console.log(err);
       }
       );
+    }else{
+      this.toastAlertService.show("You are not connected to the internet", { classname: '  ', delay: 2000 });  
+    }
+    
   }
 
 

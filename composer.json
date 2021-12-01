@@ -7,5 +7,7 @@
             "email": "55658113+Marvingarci@users.noreply.github.com"
         }
     ],
-    "require": {}
+    "require": {
+        "nesbot/carbon": "^2.54"
+    }
 }

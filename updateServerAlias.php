@@ -12,5 +12,5 @@ $request = json_decode($postdata, true);
 $serverAliasInput = $request['serverAliasInput'];
 // Create connections
 $connServerLocal = mysqli_connect("localhost", "melvinsevilla", "M3lv1n**","serverLocal");
-$connServerLocal->query("UPDATE serverDetailsInfo SET testUpdate='".$request."' WHERE id = 1;");
+$connServerLocal->query("UPDATE serverDetailsInfo SET serverAlias='".$serverAliasInput."' WHERE id = 1;");
 

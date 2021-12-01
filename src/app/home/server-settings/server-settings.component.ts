@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServersettingsService } from './serversettings.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as versionsCloud from './../../../../versionsaedpay.json'; 
+import { ToastServiceAlert } from 'src/toastAlert.services';
 
 @Component({
   selector: 'app-server-settings',
@@ -23,7 +24,8 @@ export class ServerSettingsComponent implements OnInit {
     serverAliasInput:new FormControl('',[Validators.required]),
   });
 
-  constructor(private SvcServerSettings: ServersettingsService,) { }
+  constructor(private SvcServerSettings: ServersettingsService,
+    private toastAlertService:ToastServiceAlert) { }
 
   ngOnInit(): void {
    this.getdata();
@@ -95,28 +97,35 @@ export class ServerSettingsComponent implements OnInit {
   }
 
   clickUpdateAppAedPay(){
-    this.SvcServerSettings.updateApp(this.updatedApp).subscribe(
+    if(navigator.onLine){
+      this.SvcServerSettings.updateApp(this.updatedApp).subscribe(
       ()=>{
         this.getdata();
       }, error =>{
         console.log(error)
       }
-    )
+    );
+    }else{ 
+    this.toastAlertService.show("no hay conexion a internet", { classname: ' text-light fixed  left-0  bottom-0 h-16 mb-2 ', delay: 20000 });     
+    }    
   }
 
-  clickUpdateAppConfig(){
-    this.SvcServerSettings.updateApp(this.updateConfig).subscribe(
+  clickUpdateAppConfig(){    
+    if(navigator.onLine){
+      this.SvcServerSettings.updateApp(this.updateConfig).subscribe(
       ()=>{
         this.getdata();
       }, error =>{
         console.log(error)
       }
     )
+    }else{
+      this.toastAlertService.show("You are not connected to the internet", { classname: ' bg-blue-800', delay: 2000 });     
+    }   
   }
 
   seepassword():void{
     this.show = !this.show;
-  }
- 
+  } 
 
 }
