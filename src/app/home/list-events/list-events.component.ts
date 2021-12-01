@@ -13,6 +13,10 @@ export class ListEventsComponent implements OnInit {
   constructor(private homeService: HomeService, private cookies: CookieService) { }
   event_id:any=null;
   ngOnInit(): void {
+   this.getEvents()
+  }
+
+  getEvents():void{
     this.homeService.getEvents({'dbServer':this.cookies.get('dbServer')}).subscribe(
       (data:any)=>{
         this.events = data

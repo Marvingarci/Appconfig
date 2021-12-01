@@ -6,9 +6,9 @@ import { Injectable } from '@angular/core';
 })
 export class ServersettingsService {
 
-  urlGetServerSett='http://localhost/Appconfig/getServerSettings.php';
+  urlGetServerSett='http://localhost/Appconfig/php/serverSettings/getServerSettings.php';
   urlUpdateserverAlias='http://localhost/Appconfig/updateServerAlias.php';
-  urlGetVersions='http://localhost/Appconfig/getVersions.php';
+  urlGetVersions='http://localhost/Appconfig/php/serverSettings/getVersions.php';
   urlUpdateApps='http://localhost/Appconfig/UpdateAppsGitHub.php';
   
   constructor(private http: HttpClient) { }

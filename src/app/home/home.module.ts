@@ -8,6 +8,8 @@ import { ServerSettingsComponent } from './server-settings/server-settings.compo
 import { ListOrdersComponent } from './list-orders/list-orders.component';
 import { WifiSettingsComponent } from './wifi-settings/wifi-settings.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StoreComponent } from './store/store.component';
+import { StylesByStoreComponent } from './styles-by-store/styles-by-store.component';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ListEventsComponent,
     
     ListOrdersComponent,
-    WifiSettingsComponent
+    WifiSettingsComponent,
+    StoreComponent,
+    StylesByStoreComponent
   ],
   imports: [
     CommonModule,
