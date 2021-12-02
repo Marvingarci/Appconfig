@@ -7,6 +7,7 @@ import { ToastServiceUpdate } from 'src/toastUpdate.services';
 import { ToastServiceAlert } from 'src/toastAlert.services';
 import { HomeService } from '../home.service';
 import { CookieService } from 'ngx-cookie-service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard',
@@ -31,10 +32,14 @@ export class DashboardComponent implements OnInit {
     private test: TestService, 
     private modalService: NgbModal, 
     private homeService: HomeService, 
-    private cookies: CookieService) {
-
-
+    private cookies: CookieService,
+    private http:HttpClient) {
    }
+
+   public getIPAddress()  
+   {  
+     return this.http.get("http://api.ipify.org/?format=json");  
+   }  
 
   
 

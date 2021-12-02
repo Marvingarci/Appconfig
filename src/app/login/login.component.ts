@@ -65,12 +65,14 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['home/serverSettings'])
           this.alert.show('Welcome', { classname:'text-light', delay: 5000 });     
           this.loading.hide();  
+
           if(parseFloat(this.versionCloud[this.versionCloud.length-1].appAngularVersion) > parseFloat(this.versionActual[0].version)){
             this.actualV = this.versionActual[0].version; //la version dentro del json local
             this.newV = this.versionCloud[this.versionCloud.length-1].appAngularVersion; //consuminedo la API de versiones de aedpay
             this.msgToast ='aedpay has a new version. You currently have version '+this.actualV+'. Do you want to get version '+this.newV+' right now?';   
             this.toastUpdateService.show(this.msgToast, { classname: ' text-light fixed  left-0  bottom-0 h-16 mb-2 ', delay: 20000 }); 
-           }                   
+           }
+                              
       }, (err) => {
           console.log(err);
           this.alert.show('invalid', { classname:'text-light', delay: 5000 });

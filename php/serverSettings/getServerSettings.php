@@ -8,13 +8,10 @@ $postdata = file_get_contents("php://input");
 
  $request = json_decode($postdata, true);
 
-$mysqli = mysqli_connect('127.0.0.1', 'melvinsevilla', 'M3lv1n**', 'serverLocal');
-if ($mysqli->connect_error) {
-  die("Connection failed: " . $mysqli->connect_error);
-}
+ require_once "../connectionLocal.php";
 
 $myArray = array();
-if ($result = $mysqli->query("SELECT * FROM serverDetailsInfo limit 1")) {
+if ($result = $connServerLocal->query("SELECT * FROM serverDetailsInfo limit 1")) {
 
     while($row = $result->fetch_array(MYSQLI_ASSOC)) {
             $myArray[] = $row;

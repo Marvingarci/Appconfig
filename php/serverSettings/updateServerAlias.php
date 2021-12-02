@@ -4,7 +4,14 @@ header("Access-Control-Allow-Credentials: true");
 header("Access-Control-Max-Age: 1000");
 header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Cache-Control, Pragma, Authorization, Accept, Accept-Encoding");
 header("Access-Control-Allow-Methods:POST");
+$postdata = file_get_contents("php://input");
+ if (!$postdata) {
+       return;
+  }
+$request = json_decode($postdata, true);
+$serverAliasInput = $request['serverAliasInput'];
 
-$hostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
+ require_once "../connectionLocal.php";
 
-echo 'User IP Address : '. $_SERVER['REMOTE_ADDR'];
+$connServerLocal->query("UPDATE serverDetailsInfo SET serverAlias='".$serverAliasInput."' WHERE id = 1;");
+

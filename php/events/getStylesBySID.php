@@ -11,9 +11,9 @@ $postdata = file_get_contents("php://input");
 $request = json_decode($postdata, true);
 $database = $request['dbServer'];
 $SID = $request['SID'];
+
 // Create connection
 $mysqli = mysqli_connect('localhost', 'melvinsevilla', 'M3lv1n**', $database);
-// Check connection
 if ($mysqli->connect_error) {
   die("Connection failed: " . $mysqli->connect_error);
 }

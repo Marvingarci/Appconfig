@@ -12,18 +12,11 @@ $postdata = file_get_contents("php://input");
 $request = json_decode($postdata, true);
 $database = $request['dbServer'];
 $today = date('Y-m-d');
-// Create connection
 
-$mysqli = mysqli_connect('localhost', 'melvinsevilla', 'M3lv1n**', $database);
-// Check connection
-if ($mysqli->connect_error) {
-  die("Connection failed: " . $mysqli->connect_error);
-}
-//echo "Connected successfully";
-//$result = mysqli_query($mysqli, "select * from location_accs where username = 'oel077@aedsoft.com';");
+require_once "../connectionLocal.php";
 
 $myArray = array();
-if ($result = $mysqli->query("SELECT * FROM suppliers;")) {
+if ($result = $connServerLocal->query("SELECT * FROM suppliers;")) {
 
     while($row = $result->fetch_array(MYSQLI_ASSOC)) {
             $myArray[] = $row;

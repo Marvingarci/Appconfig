@@ -4,9 +4,7 @@ import { ToastServiceAlert } from './toastAlert.services';
 @Component({
   selector: 'app-toasts-alert',
   template: `
-    <ngb-toast
-
-  
+    <ngb-toast  
       *ngFor="let toast of toastServiceAlert.toasts"
       [class]="toast.classname"
       [autohide]="true"
