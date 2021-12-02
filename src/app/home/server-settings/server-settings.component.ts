@@ -14,6 +14,8 @@ export class ServerSettingsComponent implements OnInit {
   msgUpdateApp:string='';
   updateConfig:string='';
   msgUpdateConfig:string='';
+  newVersionApp:string='';
+  newVersionConfig:string='';
 
   details:any;
   showEditServerAlias:boolean = false;
@@ -48,13 +50,16 @@ export class ServerSettingsComponent implements OnInit {
         if(parseFloat(this.versionCloud[this.versionCloud.length-1].appAngularVersion) > data[0].appAngular ){
           if(parseFloat(this.versionCloud[this.versionCloud.length-1].appLaravelVersion) > data[0].appLaravel){
             this.updatedApp = 'updateBoth';
+            this.newVersionApp = this.versionCloud[this.versionCloud.length-1].appAngularVersion;
             this.msgUpdateApp = 'aedpay has a new version. You currently have version '+data[0].appAngular+'. Do you want to get version '+this.versionCloud[this.versionCloud.length-1].appAngularVersion+' right now?';
             }else{
+              this.newVersionApp = this.versionCloud[this.versionCloud.length-1].appAngularVersion;
               this.updatedApp = 'updateOnlyAngular';
               this.msgUpdateApp = 'aedpay has a new version. You currently have version '+data[0].appAngular+'. Do you want to get version '+this.versionCloud[this.versionCloud.length-1].appAngularVersion+' right now?';
             }
         }else{
           if(parseFloat(this.versionCloud[this.versionCloud.length-1].appLaravelVersion) > data[0].appLaravel){
+            this.newVersionApp = this.versionCloud[this.versionCloud.length-1].appAngularVersion;
             this.updatedApp = 'updateOnlyLaravel';
             this.msgUpdateApp = 'aedpay has a new version. You currently have version '+data[0].appAngular+'. Do you want to get version '+this.versionCloud[this.versionCloud.length-1].appAngularVersion+' right now?';
             }else{
@@ -65,6 +70,7 @@ export class ServerSettingsComponent implements OnInit {
 
 
           if(parseFloat(this.versionCloud[this.versionCloud.length-1].configAngularVersion) > data[0].configAngular){
+            this.newVersionConfig = this.versionCloud[this.versionCloud.length-1].configAngularVersion;
             this.updateConfig = 'updateOnlyConfig';
             this.msgUpdateConfig = 'aedpay has a new AppConfig version. You currently have version '+data[0].configAngular+'. Do you want to get version '+this.versionCloud[this.versionCloud.length-1].configAngularVersion+' right now?';
 
@@ -86,7 +92,8 @@ export class ServerSettingsComponent implements OnInit {
 
   updateServerAlias(){
     console.log(this.serverAliasForm.value)
-    this.SvcServerSettings.updateServerAlias(this.serverAliasForm.value).subscribe(
+    if(this.serverAliasForm.valid){
+        this.SvcServerSettings.updateServerAlias(this.serverAliasForm.value).subscribe(
       ()=>{
         this.getdata();
         this.showEditServerAlias = false;
@@ -94,6 +101,10 @@ export class ServerSettingsComponent implements OnInit {
         console.log(error)
       }
     )
+    }else{
+      this.toastAlertService.show("Required", { classname: ' ', delay: 2000 })
+    }
+  
   }
 
   clickUpdateAppAedPay(){
@@ -106,13 +117,18 @@ export class ServerSettingsComponent implements OnInit {
       }
     );
     }else{ 
-    this.toastAlertService.show("no hay conexion a internet", { classname: ' text-light fixed  left-0  bottom-0 h-16 mb-2 ', delay: 20000 });     
+    this.toastAlertService.show("You are not connected to the internet", { classname: ' ', delay: 20000 });     
     }    
   }
 
   clickUpdateAppConfig(){    
     if(navigator.onLine){
-      this.SvcServerSettings.updateApp(this.updateConfig).subscribe(
+      var jsonUpdate = 
+      {
+          "typeRepository": this.updateConfig,
+          "newVersion": this.newVersionConfig 
+      };
+      this.SvcServerSettings.updateApp(jsonUpdate).subscribe(
       ()=>{
         this.getdata();
       }, error =>{
@@ -120,7 +136,7 @@ export class ServerSettingsComponent implements OnInit {
       }
     )
     }else{
-      this.toastAlertService.show("You are not connected to the internet", { classname: ' bg-blue-800', delay: 2000 });     
+      this.toastAlertService.show("You are not connected to the internet", { classname: ' ', delay: 2000 });     
     }   
   }
 
