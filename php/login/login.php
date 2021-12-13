@@ -1,9 +1,15 @@
 <?php
-header("Access-Control-Allow-Origin: *");
+$http_origin = $_SERVER['HTTP_ORIGIN'];
+//header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: ".$http_origin);
 header("Access-Control-Allow-Credentials: true");
 header("Access-Control-Max-Age: 1000");
 header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Cache-Control, Pragma, Authorization, Accept, Accept-Encoding");
-header("Access-Control-Allow-Methods: PUT, POST, GET, OPTIONS, DELETE");
+header("Access-Control-Allow-Methods: PUT, PATCH, POST, GET, OPTIONS, DELETE");
+
+
+
+
 $postdata = file_get_contents("php://input");
  if (!$postdata) {
        return;

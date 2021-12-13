@@ -13,5 +13,5 @@ $serverAliasInput = $request['serverAliasInput'];
 
  require_once "../connectionLocal.php";
 
-$connServerLocal->query("UPDATE serverDetailsInfo SET serverAlias='".$serverAliasInput."' WHERE id = 1;");
+$connServerLocal->query("UPDATE server_details SET serverAlias='".$serverAliasInput."' WHERE id = 1;");
 
