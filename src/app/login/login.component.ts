@@ -71,11 +71,10 @@ export class LoginComponent implements OnInit {
             this.newV = this.versionCloud[this.versionCloud.length-1].appAngularVersion; //consuminedo la API de versiones de aedpay
             this.msgToast ='aedpay has a new version. You currently have version '+this.actualV+'. Do you want to get version '+this.newV+' right now?';   
             this.toastUpdateService.show(this.msgToast, { classname: ' text-light fixed  left-0  bottom-0 h-16 mb-2 ', delay: 20000 }); 
-           }
-                              
+           }                  
       }, (err) => {
           console.log(err);
-          this.alert.show('invalid', { classname:'text-light', delay: 5000 });
+          this.alert.show('invalid error', { classname:'text-light', delay: 5000 });
           this.loading.hide();             
         }
       );
@@ -83,5 +82,4 @@ export class LoginComponent implements OnInit {
   }
 
 
-  title = 'testingCreateddatabase';
 }

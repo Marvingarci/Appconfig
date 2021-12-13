@@ -30,7 +30,12 @@ export class ServerSettingsComponent implements OnInit {
     private toastAlertService:ToastServiceAlert) { }
 
   ngOnInit(): void {
+    this.updateIpWifi();
    this.getdata();
+  }
+
+  updateIpWifi(){
+    this.SvcServerSettings.getIpWireless().subscribe();
   }
 
   getdata(){

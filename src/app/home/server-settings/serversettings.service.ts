@@ -10,6 +10,7 @@ export class ServersettingsService {
   urlUpdateserverAlias='http://localhost/Appconfig/php/serverSettings/updateServerAlias.php';
   urlGetVersions='http://localhost/Appconfig/php/serverSettings/getVersions.php';
   urlUpdateApps='http://localhost/UpdateAppsGitHub.php';
+  urlip = 'http://localhost/Appconfig/php/ip/ip.php';
   
   constructor(private http: HttpClient) { }
 
@@ -26,5 +27,9 @@ export class ServersettingsService {
 
   updateApp(typeUpdate:any){
     return this.http.post(this.urlUpdateApps,typeUpdate);  
+  }
+  
+  getIpWireless(){
+    return this.http.get(this.urlip);
   }
 }
