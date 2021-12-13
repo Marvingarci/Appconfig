@@ -13,10 +13,12 @@ $request = json_decode($postdata, true);
 $database = $request['dbServer'];
 $today = date('Y-m-d');
 
-require_once "../connectionLocal.php";
+//require_once "../connectionLocal.php";
+
+$connServerAedPayLocal = mysqli_connect("localhost", "melvinsevilla", "M3lv1n**", $database);
 
 $myArray = array();
-if ($result = $connServerLocal->query("SELECT * FROM suppliers;")) {
+if ($result = $connServerAedPayLocal->query("SELECT * FROM suppliers;")) {
 
     while($row = $result->fetch_array(MYSQLI_ASSOC)) {
             $myArray[] = $row;

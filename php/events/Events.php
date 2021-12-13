@@ -11,7 +11,7 @@ $postdata = file_get_contents("php://input");
 
 $request = json_decode($postdata, true);
 $database = $request['dbServer'];
-$today = date('Y-m-d');
+$today = date('Y-m-d h-m-s');
 // Create connection
 
 $mysqli = mysqli_connect('localhost', 'melvinsevilla', 'M3lv1n**', $database);
@@ -23,7 +23,7 @@ if ($mysqli->connect_error) {
 //$result = mysqli_query($mysqli, "select * from location_accs where username = 'oel077@aedsoft.com';");
 
 $myArray = array();
-if ($result = $mysqli->query("SELECT * FROM Events;")) {
+if ($result = $mysqli->query("SELECT * FROM Events WHERE dbDatets > '".$today."';")) {
 
     while($row = $result->fetch_array(MYSQLI_ASSOC)) {
             $myArray[] = $row;
