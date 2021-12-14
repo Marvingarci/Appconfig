@@ -4,26 +4,39 @@
         <button class="buttonSorange">Refresh</button>
     </header>
 
-    <div class="grid grid-cols-3 gap-4 text-gray-600 max-h-screen overflow-auto">
-        <div *ngFor="let order of orders" class="flex flex-col border-2 border-gray-200 rounded-lg p-3 text-center">
-            <h4>{{order.full_name_tx}}</h4>
-            <h6>{{order.phone1}}</h6>
-            <h6>{{order.city_tx}}</h6>
-            <h6>{{order.SONumber}}</h6>
-            <h6>{{order.DeliveryStatus}}</h6>
-            <h6>{{order.Address1}}</h6>
-            <hr>
-            <div class="flex flex-row justify-between px-5">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-            </div>
+    <table class="table h-100">
+        <thead>
+          <tr>
+            <th scope="col"> full_name_tx</th>
+            <th scope="col">phone1 </th>
+            <th scope="col"> city_tx</th>
+            <th scope="col"> SONumber</th>
+            <th scope="col">DeliveryStatus </th>
+            <th scope="col"> Address1</th>
+            <th scope="col"> </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr  *ngFor="let order of orders">
+            <td>{{order.full_name_tx}}</td>
+            <td>{{order.phone1}}</td>
+            <td>{{order.city_tx}}</td>
+            <td>{{order.SONumber}}</td>
+            <td>{{order.DeliveryStatus}}</td>
+            <td>{{order.Address1}}</td>
+            <td>
 
+                <button  >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </button>
 
-        </div>
-    </div>
+            </td>
+          </tr>
+    
+        </tbody>
+      </table>
+
 
 </div>

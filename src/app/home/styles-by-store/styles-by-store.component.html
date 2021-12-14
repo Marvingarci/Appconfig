@@ -1,29 +1,25 @@
-<div *ngIf="sid != null" class="flex flex-col ">
+
     <header class="flex justify-between w-full p-3 text-gray-600">
         <h4>Styles</h4>
         <button class="buttonSorange">Refresh</button>
     </header>
 
-    <div class="grid grid-cols-3 gap-4 text-gray-600 max-h-screen overflow-auto">
-        <div *ngFor="let style of styles" class="flex flex-col border-2 border-gray-200 rounded-lg p-3 text-center">
-            <h4>{{style.StyleName}}</h4>
-            <h6>{{style.StyleID}}</h6>
-            <h6>{{style.Description}}</h6>
-            <h6>{{style.DesCrpt2}}</h6>
-            <!-- <h6>{{style.DeliveryStatus}}</h6>
-            <h6>{{style.Address1}}</h6> -->
-            <hr>
-            <div class="flex flex-row justify-between px-5">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-            </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Style Name</th>
+                <th> Style Id</th>
+                <th>Description</th>
+                <th>Description 2</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let style of styles">
+                <td>{{style.StyleName}}</td>
+                <td>{{style.StyleID}}</td>
+                <td>{{style.Description}}</td>
+                <td>{{style.DesCrpt2}}</td>
+            </tr>
+        </tbody>
+    </table>
 
-
-        </div>
-    </div>
-
-</div>

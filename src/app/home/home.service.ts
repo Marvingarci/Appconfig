@@ -10,11 +10,11 @@ export class HomeService {
   constructor(private http: HttpClient) { }
 
   getEvents(data:any) {
-    return this.http.post('http://localhost/Appconfig/php/events/Events.php',data);    
+    return this.http.post('http://localhost:8000/api/events',data);    
   }
 
   getSalesOrders(data:any) {
-    return this.http.post('http://localhost/Appconfig/php/events/getOrders.php',data);    
+    return this.http.post('http://localhost:8000/api/getOrders',data);    
   }
 
   getSuppliers(data:any) {
