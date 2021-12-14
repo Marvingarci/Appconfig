@@ -1,8 +1,12 @@
 <div *ngIf="event_id != null" class="flex flex-col ">
     <header class="flex justify-between w-full p-3 text-gray-600">
-        <h4>Sales Orders</h4>
+        <h4>Sales Orders <span *ngIf="count > 0">| {{count}} item selected</span></h4>
+        <button *ngIf="count > 0" class="btn btn-primary" (click)="onLogClick()">Upload Sales Orders</button>
         <button class="buttonSorange">Refresh</button>
     </header>
+
+
+
 
     <table class="table h-100">
         <thead>
@@ -13,21 +17,20 @@
             <th scope="col"> SONumber</th>
             <th scope="col">DeliveryStatus </th>
             <th scope="col"> Address1</th>
-            <th scope="col"> </th>
+            <th scope="col">   <button class="btn btn-primary" (click)="onAllRowClick()"> {{titleselecteAll}}</button> </th>
           </tr>
         </thead>
         <tbody>
-          <tr  *ngFor="let order of orders">
-            <td>{{order.full_name_tx}}</td>
-            <td>{{order.phone1}}</td>
-            <td>{{order.city_tx}}</td>
-            <td>{{order.SONumber}}</td>
-            <td>{{order.DeliveryStatus}}</td>
-            <td>{{order.Address1}}</td>
+          <tr   *ngFor="let u of orders" [class.selectedRow]="rowIsSelected(u.yy_SOID_tx)"  style="cursor: pointer;">
+            <td>{{u.full_name_tx}}</td>
+            <td>{{u.phone1}}</td>
+            <td>{{u.city_tx}}</td>
+            <td>{{u.SONumber}}</td>
+            <td>{{u.DeliveryStatus}}</td>
+            <td>{{u.Address1}}</td>
             <td>
-
                 <button  >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg (click)="onRowClick(u.yy_SOID_tx)" xmlns="http://www.w3.org/2000/svg" [class.selectedRowcheck]="rowIsSelected(u.yy_SOID_tx)" class="h-3 w-3 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                     </svg>
                   </button>
@@ -37,6 +40,9 @@
     
         </tbody>
       </table>
+
+
+ 
 
 
 </div>
