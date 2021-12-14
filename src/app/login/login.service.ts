@@ -7,8 +7,7 @@ import { environment } from 'src/environments/environment';
 })
 export class LoginService {
   //url='http://localhost/Appconfig/php/login/login.php';
-  url='http://10.0.10.165/Appconfig/php/login/login.php';
-  urlip = 'http://localhost/Appconfig/php/ip/ip.php';
+  // url='http://10.0.10.165/Appconfig/php/login/login.php';
   headers:any;
   headers2:any;
   
@@ -37,7 +36,5 @@ export class LoginService {
     // return this.http.post(this.url, data, {headers: this.headers});    
   }
 
-  getIpWireless(){
-    return this.http.get(this.urlip);
-  }
+
 }

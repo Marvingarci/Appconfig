@@ -11,7 +11,6 @@ $postdata = file_get_contents("php://input");
 $request = json_decode($postdata, true);
 $serverAliasInput = $request['serverAliasInput'];
 
- require_once "../connectionLocal.php";
+require_once "../connectionLocal.php";
 
 $connServerLocal->query("UPDATE server_details SET serverAlias='".$serverAliasInput."' WHERE id = 1;");
-

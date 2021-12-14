@@ -41,7 +41,7 @@ export class ServerSettingsComponent implements OnInit {
   getdata(){
      this.SvcServerSettings.getDetailsServer().subscribe(
       (data:any)=>{
-        this.details = data[0]
+        this.details = data;
         console.log(this.details)
       }, error =>{
         console.log(error)
@@ -50,38 +50,40 @@ export class ServerSettingsComponent implements OnInit {
 
     this.SvcServerSettings.getVersions().subscribe(
       (data:any)=>{
+
+        console.log(data);
         
         //verificacion de actualizacinoes del aedpay
-        if(parseFloat(this.versionCloud[this.versionCloud.length-1].appAngularVersion) > data[0].appAngular ){
-          if(parseFloat(this.versionCloud[this.versionCloud.length-1].appLaravelVersion) > data[0].appLaravel){
+        if(parseFloat(this.versionCloud[this.versionCloud.length-1].appAngularVersion) > data.appAngular ){
+          if(parseFloat(this.versionCloud[this.versionCloud.length-1].appLaravelVersion) > data.appLaravel){
             this.updatedApp = 'updateBoth';
             this.newVersionApp = this.versionCloud[this.versionCloud.length-1].appAngularVersion;
-            this.msgUpdateApp = 'aedpay has a new version. You currently have version '+data[0].appAngular+'. Do you want to get version '+this.versionCloud[this.versionCloud.length-1].appAngularVersion+' right now?';
+            this.msgUpdateApp = 'aedpay has a new version. You currently have version '+data.appAngular+'. Do you want to get version '+this.versionCloud[this.versionCloud.length-1].appAngularVersion+' right now?';
             }else{
               this.newVersionApp = this.versionCloud[this.versionCloud.length-1].appAngularVersion;
               this.updatedApp = 'updateOnlyAngular';
-              this.msgUpdateApp = 'aedpay has a new version. You currently have version '+data[0].appAngular+'. Do you want to get version '+this.versionCloud[this.versionCloud.length-1].appAngularVersion+' right now?';
+              this.msgUpdateApp = 'aedpay has a new version. You currently have version '+data.appAngular+'. Do you want to get version '+this.versionCloud[this.versionCloud.length-1].appAngularVersion+' right now?';
             }
         }else{
-          if(parseFloat(this.versionCloud[this.versionCloud.length-1].appLaravelVersion) > data[0].appLaravel){
+          if(parseFloat(this.versionCloud[this.versionCloud.length-1].appLaravelVersion) > data.appLaravel){
             this.newVersionApp = this.versionCloud[this.versionCloud.length-1].appAngularVersion;
             this.updatedApp = 'updateOnlyLaravel';
-            this.msgUpdateApp = 'aedpay has a new version. You currently have version '+data[0].appAngular+'. Do you want to get version '+this.versionCloud[this.versionCloud.length-1].appAngularVersion+' right now?';
+            this.msgUpdateApp = 'aedpay has a new version. You currently have version '+data.appAngular+'. Do you want to get version '+this.versionCloud[this.versionCloud.length-1].appAngularVersion+' right now?';
             }else{
               this.updatedApp = 'AppUpdated';
-              this.msgUpdateApp = 'aedpay updated to the latest version '+data[0].appAngular;
+              this.msgUpdateApp = 'aedpay updated to the latest version '+data.appAngular;
             }
         }
 
 
-          if(parseFloat(this.versionCloud[this.versionCloud.length-1].configAngularVersion) > data[0].configAngular){
+          if(parseFloat(this.versionCloud[this.versionCloud.length-1].configAngularVersion) > data.configAngular){
             this.newVersionConfig = this.versionCloud[this.versionCloud.length-1].configAngularVersion;
             this.updateConfig = 'updateOnlyConfig';
-            this.msgUpdateConfig = 'aedpay has a new AppConfig version. You currently have version '+data[0].configAngular+'. Do you want to get version '+this.versionCloud[this.versionCloud.length-1].configAngularVersion+' right now?';
+            this.msgUpdateConfig = 'aedpay has a new AppConfig version. You currently have version '+data.configAngular+'. Do you want to get version '+this.versionCloud[this.versionCloud.length-1].configAngularVersion+' right now?';
 
           }else{
             this.updateConfig = 'ConfigUpdated';
-            this.msgUpdateConfig = 'appConfig updated to the latest version '+data[0].configAngular;
+            this.msgUpdateConfig = 'appConfig updated to the latest version '+data.configAngular;
           }
 
       }, error =>{
