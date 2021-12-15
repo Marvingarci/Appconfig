@@ -17,6 +17,10 @@ export class HomeService {
     return this.http.post('http://localhost:8000/api/getOrders',data);    
   }
 
+  UploadManyOrders(data:any) {
+    return this.http.post('http://localhost:8000/api/UploadManyOrders',data);    
+  }
+
   getSuppliers(data:any) {
     return this.http.post('http://localhost/Appconfig/php/events/getSuppliers.php',data);    
   }

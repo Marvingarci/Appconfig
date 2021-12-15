@@ -63,7 +63,6 @@ export class ListOrdersComponent implements OnInit, OnChanges {
     for (var val of this.orders) {
       if(this.selectedRowIds.has(val.yy_SOID_tx)){
         var c = c +1;
-        console.log("esta seleccionando")
       }    
     }
     if(c == this.orders.length){
@@ -88,13 +87,22 @@ export class ListOrdersComponent implements OnInit, OnChanges {
     return this.selectedRowIds.has(id);
   }
 
-  getSelectedRows(){
-    return this.orders.filter(x => this.selectedRowIds.has(x.yy_SOID_tx));
-  }
+
 
   onLogClick() {
-    console.log(this.getSelectedRows());
+    // let vari = this.orders.filter(x => this.selectedRowIds.has(x.yy_SOID_tx));
+    
+   var json = {
+    "dbServer":this.cookie.get('dbServer'),
+    "orders":this.orders.filter(x => this.selectedRowIds.has(x.yy_SOID_tx))
   }
+ 
+    this.homeService.UploadManyOrders(json).subscribe((data:any)=>{
+      console.log(data)
+    })
+  }
+
+  
 
 
 

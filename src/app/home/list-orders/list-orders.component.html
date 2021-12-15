@@ -1,14 +1,18 @@
-<div *ngIf="event_id != null" class="flex flex-col ">
+<div *ngIf="event_id != null" >
     <header class="flex justify-between w-full p-3 text-gray-600">
         <h4>Sales Orders <span *ngIf="count > 0">| {{count}} item selected</span></h4>
-        <button *ngIf="count > 0" class="btn btn-primary" (click)="onLogClick()">Upload Sales Orders</button>
+        <div>
+        <button class="buttonSorange " *ngIf="count > 0" (click)="onLogClick()">Upload Selected Sales Orders</button>
+        &nbsp;
         <button class="buttonSorange">Refresh</button>
+        </div>
+       
     </header>
 
 
 
 
-    <table class="table h-100">
+    <table class="table overflow-auto h-50">
         <thead>
           <tr>
             <th scope="col"> full_name_tx</th>
@@ -29,9 +33,10 @@
             <td>{{u.DeliveryStatus}}</td>
             <td>{{u.Address1}}</td>
             <td>
-                <button  >
-                    <svg (click)="onRowClick(u.yy_SOID_tx)" xmlns="http://www.w3.org/2000/svg" [class.selectedRowcheck]="rowIsSelected(u.yy_SOID_tx)" class="h-3 w-3 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                <button (click)="onRowClick(u.yy_SOID_tx)"  >
+                 
+                    <svg  xmlns="http://www.w3.org/2000/svg"[class.selectedRowcheck]="rowIsSelected(u.yy_SOID_tx)" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                     </svg>
                   </button>
 
