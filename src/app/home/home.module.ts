@@ -10,6 +10,8 @@ import { WifiSettingsComponent } from './wifi-settings/wifi-settings.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreComponent } from './store/store.component';
 import { StylesByStoreComponent } from './styles-by-store/styles-by-store.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 @NgModule({
@@ -25,6 +27,7 @@ import { StylesByStoreComponent } from './styles-by-store/styles-by-store.compon
   imports: [
     CommonModule,
     HomeRoutingModule,
+    NgbModule
   ]
 })
 export class HomeModule { }

@@ -13,10 +13,13 @@ export class HomeService {
     return this.http.post('http://localhost:8000/api/events',data);    
   }
 
-  getSalesOrders(data:any) {
-    return this.http.post('http://localhost:8000/api/getOrders',data);    
+  getSalesOrdersLocal(data:any) {
+    return this.http.post('http://localhost:8000/api/getOrdersLocal',data);    
   }
 
+  getSalesOrdersCloud(data:any) {
+    return this.http.post('http://localhost:8000/api/getOrdersCloud',data);    
+  }
   UploadManyOrders(data:any) {
     return this.http.post('http://localhost:8000/api/UploadManyOrders',data);    
   }

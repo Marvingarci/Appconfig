@@ -12,24 +12,33 @@ export class ListOrdersComponent implements OnInit, OnChanges {
   constructor(private homeService:HomeService, private cookie:CookieService) { }
   @Input() event_id = null;
   orders:any[] = [];
+  ordersCloud:any[] = [];
   selectedAll:boolean = false;
   titleselecteAll:String = "Select All";
   selectedRowIds: Set<any> = new Set<any>();
   count:number= 0;
-
+  active = 1;
 
   ngOnInit(): void {
    
   }
 
   ngOnChanges():void{
+
+
     
-    this.homeService.getSalesOrders({"event_id":this.event_id, "dbServer":this.cookie.get('dbServer')}).subscribe((data:any)=>{
-      console.log(data)
-      this.orders=data
+    this.homeService.getSalesOrdersLocal({"event_id":this.event_id, "dbServer":this.cookie.get('dbServer')}).subscribe((data:any)=>{     
+      this.orders= data
     }, err =>{
       console.log(err)
     })
+
+    this.homeService.getSalesOrdersCloud({"event_id":this.event_id, "dbServer":this.cookie.get('dbServer')}).subscribe((data:any)=>{     
+      this.ordersCloud= data
+    }, err =>{
+      console.log(err)
+    })
+
   }
 
   onAllRowClick(){
@@ -46,9 +55,10 @@ export class ListOrdersComponent implements OnInit, OnChanges {
       this.selectedAll = false;
       this.titleselecteAll = "Select All";
     }
-    this.countItemSelected();
-    
+    this.countItemSelected();    
   }
+
+
 
   onRowClick(id: any) {
     if(this.selectedRowIds.has(id)) {
