@@ -14,6 +14,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ServerSettingsComponent } from './home/server-settings/server-settings.component';
+import { TestnavbarComponent } from './testnavbar/testnavbar.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ServerSettingsComponent } from './home/server-settings/server-settings.
   
     ToastsUpdateVersion,
     ToastsAlert,
+    TestnavbarComponent,
   ],
   imports: [
     BrowserModule,

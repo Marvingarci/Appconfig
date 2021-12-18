@@ -24,10 +24,12 @@ export class ListOrdersComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges():void{
+    this.getSalesOrders(); 
+ }
 
-
-    
-    this.homeService.getSalesOrdersLocal({"event_id":this.event_id, "dbServer":this.cookie.get('dbServer')}).subscribe((data:any)=>{     
+  getSalesOrders(){
+    this.selectedRowIds = new Set<any>();
+     this.homeService.getSalesOrdersLocal({"event_id":this.event_id, "dbServer":this.cookie.get('dbServer')}).subscribe((data:any)=>{     
       this.orders= data
     }, err =>{
       console.log(err)
@@ -38,7 +40,10 @@ export class ListOrdersComponent implements OnInit, OnChanges {
     }, err =>{
       console.log(err)
     })
+  }
 
+  refreshSalesOrders(){
+    this.getSalesOrders(); 
   }
 
   onAllRowClick(){
@@ -56,6 +61,15 @@ export class ListOrdersComponent implements OnInit, OnChanges {
       this.titleselecteAll = "Select All";
     }
     this.countItemSelected();    
+  }
+
+  resetItemSelected(){
+    for (var val of this.orders) {
+      this.selectedRowIds.delete(val.yy_SOID_tx); 
+    }
+    this.selectedAll = false;
+    this.titleselecteAll = "Select All";
+    this.count = 0;
   }
 
 
@@ -83,6 +97,9 @@ export class ListOrdersComponent implements OnInit, OnChanges {
 
     this.countItemSelected();
   } 
+
+
+
   
   countItemSelected(){
     this.count = 0;
@@ -100,16 +117,21 @@ export class ListOrdersComponent implements OnInit, OnChanges {
 
 
   onLogClick() {
-    // let vari = this.orders.filter(x => this.selectedRowIds.has(x.yy_SOID_tx));
     
    var json = {
     "dbServer":this.cookie.get('dbServer'),
     "orders":this.orders.filter(x => this.selectedRowIds.has(x.yy_SOID_tx))
   }
  
-    this.homeService.UploadManyOrders(json).subscribe((data:any)=>{
-      console.log(data)
-    })
+    this.homeService.UploadManyOrders(json).subscribe(
+      (data:any)=>{console.log(data),
+         this.resetItemSelected(),
+        this.getSalesOrders()
+       
+
+      },
+      (error:any)=>{console.log(error)}
+      )
   }
 
   

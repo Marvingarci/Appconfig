@@ -1,13 +1,13 @@
-<div *ngIf="event_id == null; else navOrders" style="height: 100%;overflow: hidden;background-color: azure;">
-  Choose an event, please
+<div *ngIf="event_id == null; else navOrders" style="height: 100%;overflow: hidden;text-align:center;position: relative;" class="bg-gray-50">
+  <div style=" top: 50%;left: 50%;position:absolute;transform: translate(-50%, -50%);">  <h4>Choose an event, please</h4></div>
 </div>
 
 
 
 <ng-template #navOrders  style="height: 100%;overflow: hidden;">
   
-<div *ngIf="orders.length == 0 && ordersCloud.length == 0; else salesOrders" class="bg-gray-50 px-3 pt-3" style="height: auto; ">
-  <h2>no hay nada de ordeenes para este evento</h2>
+<div *ngIf="orders.length == 0 && ordersCloud.length == 0; else salesOrders" style="height: 100%;text-align:center;position: relative;" class="bg-gray-50 px-3 pt-3" >
+  <div style=" top: 50%;left: 50%;position:absolute;transform: translate(-50%, -50%);">  <h4>There aren't sale orders for this event</h4></div>
 </div>
 
 
@@ -16,13 +16,13 @@
 
 
 
-<div class="bg-gray-50 px-3 pt-3" style="height: auto; ">
-  <header class="flex justify-between w-full  text-gray-600" >
+<div class="bg-gray-50  pt-3" >
+  <header class="flex justify-between w-full  text-gray-600 px-3" >
     <h4>Sales Orders <span *ngIf="count > 0 && active == 1">| {{count}} item selected</span></h4>
     <div>
     <button class="buttonSorange " *ngIf="count > 0 && active == 1" (click)="onLogClick()">Upload Selected Sales Orders</button>
     &nbsp;
-    <button class="buttonSorange">Refresh</button>
+    <button class="buttonSorange" (click)="refreshSalesOrders()">Refresh</button>
     </div>    
   </header>
 
@@ -31,48 +31,89 @@
       <a ngbNavLink class="text-gray-500">To upload</a>
       <ng-template ngbNavContent>
 
-        <div *ngIf="orders.length == 0 ; else orderslocales" class="bg-gray-50 px-3 pt-3" style="height: auto; ">
-          <h2>no hay ordenes para subir</h2>
+        <div *ngIf="orders.length == 0 ; else orderslocales" class=" px-3 pt-3" style="height: 100%; position: relative;">
+          <div style=" top: 50%;left: 50%;position:absolute;transform: translate(-50%, -50%);">  <h4>There aren't sale orders to upload</h4></div>
         </div>
         
         <ng-template #orderslocales>
           
         <div class="mt-3" style="height: 100%;overflow: auto;">
-          <table class="table overflow-auto h-50">
-              <thead>
-                <tr>
-                  <th scope="col"> full_name_tx</th>
-                  <th scope="col">phone1 </th>
-                  <th scope="col"> city_tx</th>
-                  <th scope="col"> SONumber</th>
-                  <th scope="col">DeliveryStatus </th>
-                  <th scope="col"> Address1</th>
-                  <th scope="col">   <button class="btn btn-primary" (click)="onAllRowClick()"> {{titleselecteAll}}</button> </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr   *ngFor="let u of orders" [class.selectedRow]="rowIsSelected(u.yy_SOID_tx)"  >
-                
-                    
-                  <td>{{u.full_name_tx}}</td>
-                  <td>{{u.phone1}}</td>
-                  <td>{{u.city_tx}}</td>
-                  <td>{{u.SONumber}}</td>
-                  <td>{{u.DeliveryStatus}}</td>
-                  <td>{{u.Address1}}</td>
-                  <td>
-                      <button (click)="onRowClick(u.yy_SOID_tx)"  >
-                      
-                          <svg [ngClass]="{'text-blue-500': u.statusLocal == 'cloud'}"   xmlns="http://www.w3.org/2000/svg"[class.selectedRowcheck]="rowIsSelected(u.yy_SOID_tx)" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                          </svg>
-                        </button>
 
-                  </td>
-                </tr>
-          
-              </tbody>
-            </table>
+
+
+
+
+
+
+
+  <!-- table -->
+  <div class="flex flex-col" >
+    <div class="-my-2  overflow-x-auto ">
+      <div class="py-2 align-middle inline-block min-w-full ">
+        <div class=" overflow-hidden border-b border-gray-200 sm:rounded-lg">
+         
+
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead>
+              <tr>
+                <th scope="col"> full_name_tx</th>
+                <th scope="col">phone1 </th>
+                <th scope="col"> city_tx</th>
+                <th scope="col"> SONumber</th>
+                <th scope="col">DeliveryStatus </th>
+                <th scope="col"> Address1</th>
+                <th scope="col">   <button class="buttonSorange" (click)="onAllRowClick()"> {{titleselecteAll}}</button> </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr   *ngFor="let u of orders" [class.selectedRow]="rowIsSelected(u.yy_SOID_tx)"  >
+              
+                  
+                <td>{{u.first_name_tx}}</td>
+                <td>{{u.phone1}}</td>
+                <td>{{u.city_tx}}</td>
+                <td>{{u.SONumber}}</td>
+                <td>{{u.DeliveryStatus}}</td>
+                <td>{{u.Address1}}</td>
+                <td>
+                    <button (click)="onRowClick(u.yy_SOID_tx)"  >
+                    
+                        <svg [ngClass]="{'text-blue-500': u.statusLocal == 'cloud'}"   xmlns="http://www.w3.org/2000/svg"[class.selectedRowcheck]="rowIsSelected(u.yy_SOID_tx)" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                        </svg>
+                      </button>
+
+                </td>
+              </tr>
+        
+            </tbody>
+          </table>
+  
+        
+  
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
       </div>     
       </ng-template>
     
@@ -83,14 +124,22 @@
       <a ngbNavLink class="text-gray-500" >Uploads</a>
       <ng-template ngbNavContent >
 
-        <div *ngIf="ordersCloud.length == 0 ; else ordersencloud" class="bg-gray-50 px-3 pt-3" style="height: auto; ">
-          <h2>no hay ordenes para subidas</h2>
+        <div *ngIf="ordersCloud.length == 0 ; else ordersencloud" class=" px-3 pt-3" style="height: 100%; position: relative;">
+          <div style=" top: 50%;left: 50%;position:absolute;transform: translate(-50%, -50%);">  <h4>There aren't sale orders uploads</h4></div>
         </div>
         
         <ng-template #ordersencloud>
           
         <div class="m-3" style="height: 100%;overflow: auto;">
-          <table class="table overflow-auto h-50">
+
+            <!-- table -->
+  <div class="flex flex-col" >
+    <div class="-my-2  overflow-x-auto ">
+      <div class="py-2 align-middle inline-block min-w-full ">
+        <div class=" overflow-hidden border-b border-gray-200 sm:rounded-lg">
+         
+
+          <table class="min-w-full divide-y divide-gray-200">
               <thead>
                 <tr>
                   <th scope="col"> full_name_tx</th>
@@ -117,16 +166,20 @@
               </tbody>
             </table>
       </div>  
+    </div>  
+  </div>  
+</div>  
+</div>  
       
       </ng-template>
       </ng-template>
     </li>  
   </ul>
 
-</div>
+
 
  
-  
+</div>  
   <div [ngbNavOutlet]="nav" style="height: 100%;"></div>
 
 
