@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreComponent } from './store/store.component';
 import { StylesByStoreComponent } from './styles-by-store/styles-by-store.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 
@@ -27,7 +28,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     CommonModule,
     HomeRoutingModule,
-    NgbModule
+    NgbModule,
+    NgxSpinnerModule
   ]
 })
 export class HomeModule { }

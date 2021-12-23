@@ -1,16 +1,24 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Output,EventEmitter } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HomeService {
 
+ @Output() titleloading:EventEmitter<any> =  new EventEmitter();
 
   constructor(private http: HttpClient) { }
 
+  titleloadind:string = "";
+
+
+
   getEvents(data:any) {
     return this.http.post('http://localhost:8000/api/events',data);    
+  }
+  downloadEvents(data:any) {
+    return this.http.post('http://localhost:8000/api/downloadEvents',data);    
   }
 
   getSalesOrdersLocal(data:any) {

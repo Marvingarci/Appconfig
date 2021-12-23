@@ -61,7 +61,7 @@ import { ToastServiceAlert } from './toastAlert.services';
 export class ToastsUpdateVersion {
   constructor(private test: TestService, 
     public toastServiceUpdate: ToastServiceUpdate,
-    public toastAlertService: ToastServiceAlert
+    public toastServiceAlert: ToastServiceAlert
     ) {}
 
   
@@ -77,7 +77,7 @@ export class ToastsUpdateVersion {
       }
       );
     }else{
-      this.toastAlertService.show("You are not connected to the internet", { classname: '  ', delay: 2000 });  
+      this.toastServiceAlert.show("You are not connected to the internet", { classname:'fixed bottom-0 right-0 m-1', delay: 5000 });  
     }
     
   }

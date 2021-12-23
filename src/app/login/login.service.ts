@@ -30,10 +30,22 @@ export class LoginService {
   // headers.append('Access-Control-Allow-Methods', 'GET');
   // headers.append('Access-Control-Allow-Origin', '*');
 
-
+  start() {
+    return this.http.get(`${environment.apiUrl}/start`);  
+  }
   execphpLogin(data:any) {
     return this.http.post(`${environment.apiUrl}/login`,data);
     // return this.http.post(this.url, data, {headers: this.headers});    
+  }
+
+  logout() {
+    return this.http.get(`${environment.apiUrl}/logout`);  
+  }
+
+  
+
+  getVersions() {
+    return this.http.get(`${environment.apiUrl}/getVersions`);    
   }
 
 

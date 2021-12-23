@@ -26,6 +26,7 @@ export class ServersettingsService {
     return this.http.get(`${environment.apiUrl}/getVersions`);    
   }
 
+
   updateApp(typeUpdate:any){
     return this.http.post(this.urlUpdateApps,typeUpdate);  
   }

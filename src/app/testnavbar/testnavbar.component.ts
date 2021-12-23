@@ -7,8 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TestnavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor() { 
+  }
 
+  change(){
+    var miElto = document.getElementsByClassName("close")[0];
+    if(miElto){
+    miElto.className = "sidebar click"; 
+    }else{
+    var close = document.getElementsByClassName("click")[0];
+    close.className = "sidebar close";
+    }
+  }
   ngOnInit(): void {
   }
 

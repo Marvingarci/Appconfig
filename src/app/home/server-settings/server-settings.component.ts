@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ServersettingsService } from './serversettings.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import * as versionsCloud from './../../../../versionsaedpay.json'; 
 import { ToastServiceAlert } from 'src/toastAlert.services';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-server-settings',
@@ -20,14 +20,14 @@ export class ServerSettingsComponent implements OnInit {
   details:any;
   showEditServerAlias:boolean = false;
   show: boolean = false;
-  versionCloud:  any  = (versionsCloud  as  any).default;
+  // versionCloud:  any  = (versionsCloud  as  any).default;
 
   serverAliasForm =new FormGroup({
     serverAliasInput:new FormControl('',[Validators.required]),
   });
 
   constructor(private SvcServerSettings: ServersettingsService,
-    private toastAlertService:ToastServiceAlert) { }
+    private toastServiceAlert:ToastServiceAlert,private Cookie: CookieService, ) { }
 
   ngOnInit(): void {
     this.updateIpWifi();
@@ -51,40 +51,24 @@ export class ServerSettingsComponent implements OnInit {
     this.SvcServerSettings.getVersions().subscribe(
       (data:any)=>{
 
-        console.log(data);
-        
-        //verificacion de actualizacinoes del aedpay
-        if(parseFloat(this.versionCloud[this.versionCloud.length-1].appAngularVersion) > data.appAngular ){
-          if(parseFloat(this.versionCloud[this.versionCloud.length-1].appLaravelVersion) > data.appLaravel){
-            this.updatedApp = 'updateBoth';
-            this.newVersionApp = this.versionCloud[this.versionCloud.length-1].appAngularVersion;
-            this.msgUpdateApp = 'aedpay has a new version. You currently have version '+data.appAngular+'. Do you want to get version '+this.versionCloud[this.versionCloud.length-1].appAngularVersion+' right now?';
-            }else{
-              this.newVersionApp = this.versionCloud[this.versionCloud.length-1].appAngularVersion;
-              this.updatedApp = 'updateOnlyAngular';
-              this.msgUpdateApp = 'aedpay has a new version. You currently have version '+data.appAngular+'. Do you want to get version '+this.versionCloud[this.versionCloud.length-1].appAngularVersion+' right now?';
-            }
+        if(data.aedpayCloud > data.aedpay){
+          this.newVersionApp = data.aedpayCloud;
+          this.updatedApp = 'updateAedpay';
+          this.msgUpdateApp = 'aedpay has a new version. You currently have version '+data.aedpay+'. Do you want to get version '+data.aedpayCloud+' right now?';
         }else{
-          if(parseFloat(this.versionCloud[this.versionCloud.length-1].appLaravelVersion) > data.appLaravel){
-            this.newVersionApp = this.versionCloud[this.versionCloud.length-1].appAngularVersion;
-            this.updatedApp = 'updateOnlyLaravel';
-            this.msgUpdateApp = 'aedpay has a new version. You currently have version '+data.appAngular+'. Do you want to get version '+this.versionCloud[this.versionCloud.length-1].appAngularVersion+' right now?';
-            }else{
-              this.updatedApp = 'AppUpdated';
-              this.msgUpdateApp = 'aedpay updated to the latest version '+data.appAngular;
-            }
+          this.updatedApp = 'aedpayUpdated';
+          this.msgUpdateApp = 'aedpay updated to the latest version '+data.aedpayCloud;
         }
 
 
-          if(parseFloat(this.versionCloud[this.versionCloud.length-1].configAngularVersion) > data.configAngular){
-            this.newVersionConfig = this.versionCloud[this.versionCloud.length-1].configAngularVersion;
-            this.updateConfig = 'updateOnlyConfig';
-            this.msgUpdateConfig = 'aedpay has a new AppConfig version. You currently have version '+data.configAngular+'. Do you want to get version '+this.versionCloud[this.versionCloud.length-1].configAngularVersion+' right now?';
-
-          }else{
-            this.updateConfig = 'ConfigUpdated';
-            this.msgUpdateConfig = 'appConfig updated to the latest version '+data.configAngular;
-          }
+        if(data.managementAppCloud > data.managementApp){
+          this.newVersionConfig = data.managementAppCloud ;
+          this.updateConfig = 'updateConfig';
+          this.msgUpdateConfig = 'aedpay has a new AppConfig version. You currently have version '+data.managementApp+'. Do you want to get version '+data.managementAppCloud+' right now?';
+        }else{
+          this.updateConfig = 'ConfigUpdated';
+          this.msgUpdateConfig = 'appConfig updated to the latest version '+data.managementAppCloud;
+        }
 
       }, error =>{
         console.log(error)
@@ -109,14 +93,20 @@ export class ServerSettingsComponent implements OnInit {
       }
     )
     }else{
-      this.toastAlertService.show("Required", { classname: ' ', delay: 2000 })
+      this.toastServiceAlert.show("Required", { classname: 'fixed bottom-0 right-0 m-1', delay: 5000 })
     }
   
   }
 
   clickUpdateAppAedPay(){
     if(navigator.onLine){
-      this.SvcServerSettings.updateApp(this.updatedApp).subscribe(
+      var jsonUpdate = 
+      {
+          "typeRepository": this.updatedApp,
+          "newVersion": this.newVersionApp 
+      };
+
+      this.SvcServerSettings.updateApp(jsonUpdate).subscribe(
       ()=>{
         this.getdata();
       }, error =>{
@@ -124,7 +114,7 @@ export class ServerSettingsComponent implements OnInit {
       }
     );
     }else{ 
-    this.toastAlertService.show("You are not connected to the internet", { classname: ' ', delay: 20000 });     
+    this.toastServiceAlert.show("You are not connected to the internet", { classname:'fixed bottom-0 right-0 m-1', delay: 5000 });     
     }    
   }
 
@@ -143,7 +133,7 @@ export class ServerSettingsComponent implements OnInit {
       }
     )
     }else{
-      this.toastAlertService.show("You are not connected to the internet", { classname: ' ', delay: 2000 });     
+      this.toastServiceAlert.show("You are not connected to the internet", { classname: 'fixed bottom-0 right-0 m-1', delay: 5000 });     
     }   
   }
 

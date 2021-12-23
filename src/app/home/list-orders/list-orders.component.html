@@ -56,29 +56,27 @@
           <table class="min-w-full divide-y divide-gray-200">
             <thead>
               <tr>
-                <th scope="col"> full_name_tx</th>
-                <th scope="col">phone1 </th>
-                <th scope="col"> city_tx</th>
+                <th scope="col"> Full nama</th>
+                <th scope="col">Phone </th>
+                <th scope="col"> City</th>
                 <th scope="col"> SONumber</th>
-                <th scope="col">DeliveryStatus </th>
-                <th scope="col"> Address1</th>
+                <th scope="col">Delivery Status </th>
                 <th scope="col">   <button class="buttonSorange" (click)="onAllRowClick()"> {{titleselecteAll}}</button> </th>
               </tr>
             </thead>
             <tbody>
-              <tr   *ngFor="let u of orders" [class.selectedRow]="rowIsSelected(u.yy_SOID_tx)"  >
+              <tr   *ngFor="let u of orders" [class.selectedRow]="rowIsSelected(u.SOID)"  >
               
                   
-                <td>{{u.first_name_tx}}</td>
-                <td>{{u.phone1}}</td>
-                <td>{{u.city_tx}}</td>
-                <td>{{u.SONumber}}</td>
-                <td>{{u.DeliveryStatus}}</td>
-                <td>{{u.Address1}}</td>
+                <td>{{u.firstName}} {{u.lastName}}</td>
+                  <td>{{u.phone1}}</td>
+                  <td>{{u.city}}</td>
+                  <td>{{u.SONumber}}</td>
+                  <td>{{u.deliveryStatus}}</td>
                 <td>
-                    <button (click)="onRowClick(u.yy_SOID_tx)"  >
+                    <button (click)="onRowClick(u.SOID)"  >
                     
-                        <svg [ngClass]="{'text-blue-500': u.statusLocal == 'cloud'}"   xmlns="http://www.w3.org/2000/svg"[class.selectedRowcheck]="rowIsSelected(u.yy_SOID_tx)" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg [ngClass]="{'text-blue-500': u.statusLocal == 'cloud'}"   xmlns="http://www.w3.org/2000/svg"[class.selectedRowcheck]="rowIsSelected(u.SOID)" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                         </svg>
                       </button>
@@ -142,24 +140,22 @@
           <table class="min-w-full divide-y divide-gray-200">
               <thead>
                 <tr>
-                  <th scope="col"> full_name_tx</th>
-                  <th scope="col">phone1 </th>
-                  <th scope="col"> city_tx</th>
+                  <th scope="col"> Full nama</th>
+                  <th scope="col">Phone </th>
+                  <th scope="col"> City</th>
                   <th scope="col"> SONumber</th>
-                  <th scope="col">DeliveryStatus </th>
-                  <th scope="col"> Address1</th>
+                  <th scope="col">Delivery Status </th>
                 </tr>
               </thead>
               <tbody>
                 <tr   *ngFor="let u of ordersCloud"  >
                 
                     
-                  <td>{{u.full_name_tx}}</td>
+                  <td>{{u.firstName}} {{u.lastName}}</td>
                   <td>{{u.phone1}}</td>
-                  <td>{{u.city_tx}}</td>
+                  <td>{{u.city}}</td>
                   <td>{{u.SONumber}}</td>
-                  <td>{{u.DeliveryStatus}}</td>
-                  <td>{{u.Address1}}</td>
+                  <td>{{u.deliveryStatus}}</td>
                
                 </tr>
           
@@ -188,3 +184,4 @@
 
 
 </ng-template>
+

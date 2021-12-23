@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule , CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -15,6 +15,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ServerSettingsComponent } from './home/server-settings/server-settings.component';
 import { TestnavbarComponent } from './testnavbar/testnavbar.component';
+import { LoadingBarModule } from '@ngx-loading-bar/core';
+import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import { JwtinterceptorInterceptor } from './jwt/jwtinterceptor.interceptor';
+
+// import { LoadingBarModule } from '@ngx-loading-bar/core';
+// import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
+// import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 
 @NgModule({
   declarations: [
@@ -35,9 +43,20 @@ import { TestnavbarComponent } from './testnavbar/testnavbar.component';
     NgbModule,
     NgxSpinnerModule,
     BrowserAnimationsModule,
-    FontAwesomeModule
+    FontAwesomeModule,   
+    LoadingBarModule,
+    LoadingBarRouterModule,
+    LoadingBarHttpClientModule,
+    // LoadingBarModule
   ],
-  providers: [CookieService],
+  providers: [
+    CookieService,
+    {
+      provide: HTTP_INTERCEPTORS,
+        useClass: JwtinterceptorInterceptor,
+        multi: true,
+    }
+  ],
   bootstrap: [AppComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })

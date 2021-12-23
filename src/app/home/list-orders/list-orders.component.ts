@@ -1,5 +1,7 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastServiceAlert } from 'src/toastAlert.services';
 import { HomeService } from '../home.service';
 
 @Component({
@@ -9,7 +11,9 @@ import { HomeService } from '../home.service';
 })
 export class ListOrdersComponent implements OnInit, OnChanges {
 
-  constructor(private homeService:HomeService, private cookie:CookieService) { }
+  constructor(private homeService:HomeService, private cookie:CookieService,
+    public toastServiceAlert: ToastServiceAlert,
+    private loading: NgxSpinnerService) { }
   @Input() event_id = null;
   orders:any[] = [];
   ordersCloud:any[] = [];
@@ -23,8 +27,14 @@ export class ListOrdersComponent implements OnInit, OnChanges {
    
   }
 
+
+
+
+  
   ngOnChanges():void{
-    this.getSalesOrders(); 
+    this.getSalesOrders();
+    this.count = 0; 
+    this.titleselecteAll = "Select All";
  }
 
   getSalesOrders(){
@@ -46,34 +56,33 @@ export class ListOrdersComponent implements OnInit, OnChanges {
     this.getSalesOrders(); 
   }
 
+
+
+
   onAllRowClick(){
     if(this.selectedAll == false){
       for (var val of this.orders) {
-          this.selectedRowIds.add(val.yy_SOID_tx); 
+          this.selectedRowIds.add(val.SOID); 
       }
       this.selectedAll = true;
       this.titleselecteAll = "Deselect";
     }else{
       for (var val of this.orders) {
-        this.selectedRowIds.delete(val.yy_SOID_tx); 
+        this.selectedRowIds.delete(val.SOID); 
       }
       this.selectedAll = false;
       this.titleselecteAll = "Select All";
     }
     this.countItemSelected();    
   }
-
   resetItemSelected(){
     for (var val of this.orders) {
-      this.selectedRowIds.delete(val.yy_SOID_tx); 
+      this.selectedRowIds.delete(val.SOID); 
     }
     this.selectedAll = false;
     this.titleselecteAll = "Select All";
     this.count = 0;
   }
-
-
-
   onRowClick(id: any) {
     if(this.selectedRowIds.has(id)) {
      this.selectedRowIds.delete(id);
@@ -85,7 +94,7 @@ export class ListOrdersComponent implements OnInit, OnChanges {
       
     var c = 0;
     for (var val of this.orders) {
-      if(this.selectedRowIds.has(val.yy_SOID_tx)){
+      if(this.selectedRowIds.has(val.SOID)){
         var c = c +1;
       }    
     }
@@ -104,7 +113,7 @@ export class ListOrdersComponent implements OnInit, OnChanges {
   countItemSelected(){
     this.count = 0;
     for (var val of this.orders) {
-      if(this.selectedRowIds.has(val.yy_SOID_tx)){
+      if(this.selectedRowIds.has(val.SOID)){
         this.count = this.count +1;
       }    
     } 
@@ -115,23 +124,32 @@ export class ListOrdersComponent implements OnInit, OnChanges {
   }
 
 
-
+// upload sales orders
   onLogClick() {
-    
-   var json = {
-    "dbServer":this.cookie.get('dbServer'),
-    "orders":this.orders.filter(x => this.selectedRowIds.has(x.yy_SOID_tx))
-  }
- 
-    this.homeService.UploadManyOrders(json).subscribe(
-      (data:any)=>{console.log(data),
-         this.resetItemSelected(),
-        this.getSalesOrders()
-       
 
-      },
-      (error:any)=>{console.log(error)}
-      )
+    if(navigator.onLine){
+      this.homeService.titleloading.emit('Upload Sales Orders');
+      this.loading.show();      
+      var json = {
+        "dbServer":this.cookie.get('dbServer'),
+        "orders":this.orders.filter(x => this.selectedRowIds.has(x.SOID))
+      }
+  
+      this.homeService.UploadManyOrders(json).subscribe(
+        (data:any)=>{console.log(data),
+          this.resetItemSelected(),
+          this.getSalesOrders(),
+          this.loading.hide();
+          this.toastServiceAlert.show(data, { classname: 'fixed bottom-0 right-0 m-1', delay: 5000 });        
+        },
+        (error:any)=>{console.log(error),         
+          this.loading.hide();
+        }
+      );
+    }else{
+      this.toastServiceAlert.show("You are not connected to the internet", { cclassname: 'fixed bottom-0 right-0 m-1', delay: 5000  });  
+    }
+
   }
 
   

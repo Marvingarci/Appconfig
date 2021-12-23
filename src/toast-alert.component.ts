@@ -5,6 +5,7 @@ import { ToastServiceAlert } from './toastAlert.services';
   selector: 'app-toasts-alert',
   template: `
     <ngb-toast  
+      style="background-color:#f57317;color:#fff"
       *ngFor="let toast of toastServiceAlert.toasts"
       [class]="toast.classname"
       [autohide]="true"

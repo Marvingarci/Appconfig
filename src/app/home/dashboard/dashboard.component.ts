@@ -8,6 +8,8 @@ import { ToastServiceAlert } from 'src/toastAlert.services';
 import { HomeService } from '../home.service';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/login/login.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -31,15 +33,41 @@ export class DashboardComponent implements OnInit {
   constructor( public toastUpdateService:ToastServiceUpdate,
     private test: TestService, 
     private modalService: NgbModal, 
-    private homeService: HomeService, 
-    private cookies: CookieService,
-    private http:HttpClient) {
+    private router: Router, 
+    private cookieservices: CookieService,
+    private http:HttpClient,
+    private SvcLogin: LoginService,
+    public toastServiceAlert:ToastServiceAlert) {
    }
 
    public getIPAddress()  
    {  
      return this.http.get("http://api.ipify.org/?format=json");  
    }  
+
+    openmodallogout(content:any) {
+      this.modalService.open(content)
+    }
+   
+
+   logout(){
+   
+     this.SvcLogin.logout().subscribe(
+      (data:any) => { 
+    this.cookieservices.delete('token');
+    this.cookieservices.delete('dbServer');
+    this.router.navigate(['/']);
+    this.toastServiceAlert.show(data.message, { classname:'fixed bottom-0 right-0 m-1', delay: 5000 });
+    this.modalService.dismissAll();
+      console.log(data)
+    }, (err:any) => {
+        console.log(err);
+    }
+    );
+   
+   }
+
+
 
   
 
