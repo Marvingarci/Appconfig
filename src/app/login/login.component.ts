@@ -20,6 +20,10 @@ export class LoginComponent implements OnInit {
   // versionActual:  any  = (versionActual  as  any).default;
   titleloading:any;start:any;
   msgToast:any;
+  requeriedfields:boolean =false;
+  username:boolean =false;
+  password:boolean =false;
+  invalidcredencials:boolean = false;
 
   constructor(private Cookie: CookieService, 
               private SvcLogin: LoginService, 
@@ -54,6 +58,7 @@ export class LoginComponent implements OnInit {
   // }
 
   login(){
+    this.username= false;this.password = false;this.requeriedfields =false;this.invalidcredencials = false;
     if(this.formLogin.valid){
       
       //title loadin
@@ -74,7 +79,7 @@ export class LoginComponent implements OnInit {
             (data:any)=>{      
               if(data.aedpayCloud > data.aedpay){
                 this.msgToast ='aedpay has a new version. You currently have version '+data.aedpay+'. Do you want to get version '+data.aedpayCloud+' right now?';   
-                this.toastUpdateService.show(this.msgToast, { classname: ' text-light fixed  left-0  bottom-0 h-16 mb-2 ', delay: 20000 }); 
+                this.toastUpdateService.show(this.msgToast, { classname: ' text-light fixed  left-0  bottom-0 h-16 mb-2 ', delay: 200000 }); 
              }
             }, error =>{
               console.log(error)
@@ -86,6 +91,7 @@ export class LoginComponent implements OnInit {
           if(err.status == 302){
             this.toastServiceAlert.show(err.error, { classname: 'fixed bottom-0 right-0 m-1', delay: 5000 }); 
           }else if (err.status == 402){
+            this.invalidcredencials =true;
             this.toastServiceAlert.show(err.error, { classname: 'fixed bottom-0 right-0 m-1', delay: 5000 });  
           }else{
             this.toastServiceAlert.show('An error has occurred', { classname: 'fixed bottom-0 right-0 m-1', delay: 5000 });  
@@ -96,8 +102,10 @@ export class LoginComponent implements OnInit {
     }else{
       if((this.formLogin.value.username == "" && this.formLogin.value.password == "")|| (this.formLogin.value.username == "")||(this.formLogin.value.password == "")){
         this.toastServiceAlert.show('required fields', { classname: 'fixed bottom-0 right-0 m-1', delay: 5000 });
+        this.requeriedfields = true;
       }else  if(!this.formLogin.value.username.valid ){
         this.toastServiceAlert.show('username invalid', { classname: 'fixed bottom-0 right-0 m-1', delay: 5000 });
+        this.username =true;
       }
     }
   }

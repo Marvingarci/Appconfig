@@ -19,7 +19,7 @@
   <div>
     <div class="max-w-md py-2 px-4  shadow-sm  rounded-xl my-3 mx-2 pb-5" style="background: #f57317; ">
       <div class="flex justify-center md:justify-end ">
-        <div class="w-6 h-6 p-1 -mr-3 object-cover rounded-full " style="background: white;color: #f57317;">
+        <div class="w-6 h-6 p-1 -mr-3 object-cover rounded-full transform rotate-45 " style="background: white;color: #f57317;">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 p-0 m-0 transform rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
           </svg>
@@ -43,7 +43,7 @@
       </div>
       <div>
         <h2 class="text-white text-3xl font-semibold">Wi-Fi Password</h2>
-        <div class="mt-2 text-white mb-3">
+        <div class="mt-2 text-white ">
            <button (click)="seepassword()" > 
             <svg xmlns="http://www.w3.org/2000/svg" *ngIf="show == false" class="h-3 w-3 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -72,7 +72,7 @@
       <div>
         <h2 class="text-white text-3xl font-semibold">ServerAlias</h2>
       
-        <div class="mt-2 text-white mb-3" *ngIf="showEditServerAlias==false"> 
+        <div class="mt-2 text-white " *ngIf="showEditServerAlias==false"> 
           <button (click)=editserverAlias(details.serverAlias)>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
@@ -81,7 +81,7 @@
           {{details?.serverAlias}} 
         </div>
 
-        <div class="mt-2 text-white mb-3" *ngIf="showEditServerAlias==true"> 
+        <div class="mt-2 text-white " *ngIf="showEditServerAlias==true"> 
         <form [formGroup]="serverAliasForm" >
           <button (click)=updateServerAlias()>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -94,7 +94,7 @@
             </svg>
           </button>
          
-          <input style="background-color: #f57317; border: 0;outline: none;" minlength="2" maxlength="50" formControlName="serverAliasInput" type="text" placeholder="Please Complete this information" > 
+          <input style="background-color: #f57317; border: 0; border-bottom: 1px solid; outline: none;" minlength="2" maxlength="50" formControlName="serverAliasInput" type="text" placeholder="Please Complete this information" > 
         </form>
 
         </div>
@@ -165,4 +165,10 @@
 
 
 </div>
+
+<div class="fixed bottom-0">
+<app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
+</div>
+
+
 

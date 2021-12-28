@@ -3,6 +3,7 @@ import { ServersettingsService } from './serversettings.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastServiceAlert } from 'src/toastAlert.services';
 import { CookieService } from 'ngx-cookie-service';
+import { ToastServiceUpdate } from 'src/toastUpdate.services';
 
 @Component({
   selector: 'app-server-settings',
@@ -27,11 +28,14 @@ export class ServerSettingsComponent implements OnInit {
   });
 
   constructor(private SvcServerSettings: ServersettingsService,
-    private toastServiceAlert:ToastServiceAlert,private Cookie: CookieService, ) { }
+    private toastServiceAlert:ToastServiceAlert,private Cookie: CookieService, 
+    public toastUpdateService:ToastServiceUpdate) { }
 
   ngOnInit(): void {
     this.updateIpWifi();
    this.getdata();
+   this.toastUpdateService.show('aedpay has a new version. You currently have version 10. Do you want to get version 11 right now?', { classname: ' font-bold ', delay: 200000 }); 
+
   }
 
   updateIpWifi(){
