@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
   // events:any;
 
 @ViewChild('modallogout', {static: false}) content!: ElementRef;;
-
+url:any;
 
   constructor( public toastUpdateService:ToastServiceUpdate,
     private test: TestService, 
@@ -38,6 +38,8 @@ export class DashboardComponent implements OnInit {
     private http:HttpClient,
     private SvcLogin: LoginService,
     public toastServiceAlert:ToastServiceAlert) {
+      this.url = this.router.url;
+      console.log(this.url)
    }
 
    public getIPAddress()  
@@ -66,6 +68,42 @@ export class DashboardComponent implements OnInit {
     );
    
    }
+
+   changeclassactive(clas:any){
+     if(clas =='manage'){
+    var miElto = document.getElementsByClassName("manageStore")[0];    
+    miElto.className = "manageStore itemnavbaractive flex px-3 py-1 rounded-md  mb-3";   
+    var miElto2 = document.getElementsByClassName("event")[0];    
+    miElto2.className = "event logout  px-3 py-1 rounded-md  mb-3"; 
+    var miElto3 = document.getElementsByClassName("wifisettings")[0];    
+    miElto3.className = "wifisettings itemnavbar flex px-3 py-1 rounded-md  mb-3";      
+     } else if(clas =='event'){
+      var miElto = document.getElementsByClassName("manageStore")[0];    
+      miElto.className = "manageStore itemnavbaractive flex px-3 py-1 rounded-md  mb-3"; 
+      var miElto2 = document.getElementsByClassName("event")[0];    
+      miElto2.className = "event itemnavbaractive  px-3 py-1 rounded-md  mb-3"; 
+     }else if(clas =='wifi'){
+      var miElto = document.getElementsByClassName("manageStore")[0];    
+      miElto.className = "manageStore itemnavbar flex px-3 py-1 rounded-md  mb-3"; 
+      var miElto2 = document.getElementsByClassName("event")[0];    
+      miElto2.className = "event itemnavbar flex px-3 py-1 rounded-md  mb-3"; 
+      var miElto3 = document.getElementsByClassName("wifisettings")[0];    
+      miElto3.className = "wifisettings itemnavbaractive flex px-3 py-1 rounded-md  mb-3"; 
+       }else{
+      var miElto = document.getElementsByClassName("manageStore")[0];    
+      miElto.className = "manageStore itemnavbar flex px-3 py-1 rounded-md  mb-3"; 
+      var miElto2 = document.getElementsByClassName("event")[0];    
+      miElto2.className = "event itemnavbar  px-3 py-1 rounded-md  mb-3"; 
+      var miElto3 = document.getElementsByClassName("wifisettings")[0];    
+      miElto3.className = "wifisettings itemnavbar flex px-3 py-1 rounded-md  mb-3"; 
+     }
+ 
+    }
+
+    goBack(action:any,root:any){
+
+    }
+   
 
 
 

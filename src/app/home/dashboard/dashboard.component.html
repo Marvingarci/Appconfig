@@ -22,19 +22,75 @@
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar">
-          <div class=" h-30" style="background-color: bisque;" >
-
+          <div style="height: 20%;width: 100%;">
+          <div class="px-3 pt-5 ">
+            
+            <button *ngIf="url != '/home/serverSettings'" (click)="goBack('','')" >
+              <div class="flex">
+                <strong><svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 found-bold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg></strong> &nbsp;<span style="margin: auto;">Go Back</span>
+              </div>
+              
+            </button>
+            
           </div>
-          <div class="h-80" >
-
           </div>
-          <div class=" h-30" >
+          <div style="height: 55%;width: 100%;">
+          
+            <div class="px-5 " style="height: auto; width: 100%;margin-bottom: 1rem;  ">
+               
+              <div style="text-align: center;">
+                  <div> <strong>Oscar Lopez</strong></div>
+                  <div><small>sf Miami</small> </div>
+                  <hr style="height: 2px; background-color: white;">
+                </div>
+            </div>
+          
+            <div x-data="{open: false}" id="Navigation" class="px-14 " style="height: auto; width: 100%; ">
+              <div x-on:click="open = false" (click)="changeclassactive('')" [routerLink]="['/home/serverSettings']" class="serverSettings itemnavbar flex px-3 py-1 rounded-md  mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 p-0 m-0 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+                </svg> 
+                &nbsp;
+                Server Settings
+              </div>
 
+              <div  class=" mb-3">               
+              <div (click)="changeclassactive('manage')" x-on:click="open = !open" class="manageStore itemnavbar flex px-3 py-1 rounded-md  mb-1">
+                <svg  xmlns="http://www.w3.org/2000/svg" class="group-hover:text-white h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                &nbsp;
+                Manage Store
+              </div>
+                <div x-transition x-show="open" style="text-align: center;">
+              <button class="event px-6 rounded-md logout" (click)="changeclassactive('event')" [routerLink]="['/home/events']">Events</button>
+                
+              </div>
+            </div>              
+            
+
+              <div x-on:click="open = false" (click)="changeclassactive('wifi')" [routerLink]="['/home/wifiSettings']" class="wifisettings itemnavbar flex px-3 py-1 rounded-md  mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
+                </svg>
+                &nbsp;
+                WIFI Settings
+              </div>
+              
+            </div>
+            
+          </div>
+          <div style="height: 25%;width: 100%;" class="flex justify-center items-center text-center">
+                  <button (click)="openmodallogout(modallogout)" class=" px-3 rounded-md logout ">Log Out</button> 
           </div>
         </nav>
 
         <div id="content">
-          <router-outlet ></router-outlet>          
+        <div style="height: 15%;width: 100%;padding-top: auto;"><img style="height: 4rem;width: 12rem; margin-left:auto;" src="assets/img/aedpay.png" ></div>
+        <div style="height: 85%;width: 100%;"><router-outlet ></router-outlet> </div>
+                   
          </div>
     </div>
 
@@ -125,7 +181,7 @@
 
 
      <!-- modal delete -->
-<!-- <ng-template #modallogout let-modal>  
+<ng-template #modallogout let-modal>  
   <div class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
   <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
    
@@ -148,4 +204,4 @@
   
   </div>
   </div>
-  </ng-template> -->
+  </ng-template>

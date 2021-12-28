@@ -33,6 +33,50 @@ a:focus {
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
+
+.logout{
+    border: #f8b78c;
+    border-style: solid;
+    box-shadow: none;
+    outline: none !important;
+}
+.logout:hover {
+    -webkit-transition: background-color 2s ease-in;
+    -moz-transition: background-color 1s ease-out;
+    -o-transition: background-color 1s ease-out;
+    transition: background-color 1s ease-out;
+    background-color: #f8b78c;
+    color: #f57317;
+    outline: none !important;
+    box-shadow: none;
+}
+ul#Navigation .active{
+    border-color: white;
+    border-left-color: black; 
+    border-top-color: black;
+    color: white; 
+    background-color: #adadad;
+}
+
+.itemnavbar{
+border: 1px solid #f57317;
+    cursor: pointer;
+}
+
+.itemnavbaractive{
+    border: 1px solid #fff;
+    cursor: pointer;
+    background-color: #fff;
+    color: #f57317;
+}
+
+
+
+.itemnavbar:hover{
+
+    border: 1px solid #f8b78c;
+}
+
 .navbar-btn {
     box-shadow: none;
     outline: none !important;
@@ -59,7 +103,7 @@ a:focus {
 #sidebar {
     min-width: 300px;
     max-width: 300px;
-    background: #7386D5;
+    background: #f57317;
     color: #fff;
     transition: all 0.3s;
 }
@@ -150,6 +194,7 @@ a.article:hover {
     padding: 20px;
     min-height: 100vh;
     transition: all 0.3s;
+    background-color: #fff;
 }
 
 /* ---------------------------------------------------

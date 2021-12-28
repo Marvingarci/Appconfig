@@ -6,6 +6,11 @@
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
 
+
+@tailwind base; 
+@tailwind components;
+@tailwind utilities;
+
 .toast {
     max-width: 100% !important;
   }
@@ -34,13 +39,22 @@
   }
 
   .buttonSorange{
-    @apply py-1 text-sm font-bold px-3 text-orange-500 transition delay-300 ease-in-out font-bold border-2 border-orange-500 rounded-xl hover:bg-orange-500 hover:text-white hover:opacity-50;
+    @apply py-1 text-sm font-bold px-3 text-aedblue transition delay-300 ease-in-out font-bold border-2 border-aedblue rounded-xl hover:bg-aedblue hover:text-white hover:opacity-50;
   }
+ 
 
+  .nav-tabs .nav-link.active  {
+   color: #a9afb9;
+    border-color: #fff #fff #fff !important;
+}
+.nav-tabs {
+  border-bottom: none;
+}
 
 //es para qeu la seccion de subir las salesordesrs aparezaca el scroll  
   .tab-content > .active {
     display: block;
     height: 85% !important;
 }
+//TABLES
 
