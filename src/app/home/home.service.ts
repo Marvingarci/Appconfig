@@ -7,10 +7,10 @@ import { Injectable, Output,EventEmitter } from '@angular/core';
 export class HomeService {
 
  @Output() titleloading:EventEmitter<any> =  new EventEmitter();
+ @Output() actionGoBack:EventEmitter<any> =  new EventEmitter();
 
   constructor(private http: HttpClient) { }
 
-  titleloadind:string = "";
 
 
 

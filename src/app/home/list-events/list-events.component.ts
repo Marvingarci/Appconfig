@@ -55,6 +55,7 @@ export class ListEventsComponent implements OnInit {
 
 
   orders(event_id:any){
+    this.homeService.actionGoBack.emit('selectEvent');
     this.event_id = event_id;
   }
 

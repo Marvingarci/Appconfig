@@ -12,7 +12,7 @@
     <div class="bg-gray-200  " >
     
           <header class="flex justify-between w-full  text-gray-400 px-3 py-3" >
-            <h2>Sales Orders <span *ngIf="count > 0 && active == 1">| {{count}} item selected</span></h2>
+            <h3>Sales Orders <span *ngIf="count > 0 && active == 1">| {{count}} item selected</span></h3>
             <div>
             <button class="buttonSorange " *ngIf="count > 0 && active == 1" (click)="onLogClick()">Upload Selected Sales Orders</button>
             &nbsp;
@@ -30,12 +30,12 @@
                                   <table class="min-w-full divide-y mt-3">
                                     <thead>
                                       <tr style="border-bottom: solid 2px #3cadee;" class="text-gray-400" >
-                                        <th scope="col"> Full nama</th>
+                                        <th scope="col">Full name</th>
                                         <th scope="col">Phone </th>
-                                        <th scope="col"> City</th>
-                                        <th scope="col"> SONumber</th>
+                                        <th scope="col">City</th>
+                                        <th scope="col">SONumber</th>
                                         <th scope="col">Delivery Status </th>
-                                        <th scope="col">   <button class="buttonSorange" (click)="onAllRowClick()"> {{titleselecteAll}}</button> </th>
+                                        <th scope="col"><button class="buttonSorange" (click)="onAllRowClick()"> {{titleselecteAll}}</button> </th>
                                       </tr>
                                     </thead>
                                     
@@ -43,7 +43,7 @@
                                     <tbody>
                                       <ng-container *ngFor="let u of orders">
 
-                                        <hr style="height: 2px; color: white; border: none;">
+                                        <hr style="height: 2px; color: white; border: none;margin: 0;">
                                         <tr  [class.selectedRow]="rowIsSelected(u.SOID)" class="text-gray-400 text-sm" >
                                           <td>{{u.firstName}} {{u.lastName}}</td>
                                             <td>{{u.phone1}}</td>
@@ -99,10 +99,10 @@
                                   <table class="min-w-full divide-y mt-3 ">
                                     <thead>
                                       <tr style="border-bottom: solid 2px #3cadee;" class="text-gray-400" >
-                                        <th scope="col"> Full nama</th>
+                                        <th scope="col">Full name</th>
                                         <th scope="col">Phone </th>
-                                        <th scope="col"> City</th>
-                                        <th scope="col"> SONumber</th>
+                                        <th scope="col">City</th>
+                                        <th scope="col">SONumber</th>
                                         <th scope="col">Delivery Status </th>
                                       </tr>
                                     </thead>
@@ -111,7 +111,7 @@
                                     <tbody>
                                       <ng-container *ngFor="let u of ordersCloud">
 
-                                        <hr style="height: 2px; color: white; border: none;">
+                                        <hr style="height: 2px; color: white; border: none;margin: 0;">
                                         <tr  [class.selectedRow]="rowIsSelected(u.SOID)" class="text-gray-400 text-sm" >
                                           <td>{{u.firstName}} {{u.lastName}}</td>
                                             <td>{{u.phone1}}</td>

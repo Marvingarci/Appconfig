@@ -9,7 +9,7 @@ import { ToastServiceAlert } from './toastAlert.services';
   template: `
     <ngb-toast
 
-      style="background-color:#ddd; color:#3cadee;opacity: 0.90;position:initial;"
+      style="background-color:#ddd; color:#3cadee;opacity: 0.90;"
         *ngFor="let toast of toastServiceUpdate.toasts"
         [class]="toast.classname "
         [autohide]="true"

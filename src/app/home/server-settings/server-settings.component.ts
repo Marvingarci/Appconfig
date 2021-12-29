@@ -18,6 +18,10 @@ export class ServerSettingsComponent implements OnInit {
   newVersionApp:string='';
   newVersionConfig:string='';
 
+
+
+
+
   details:any;
   showEditServerAlias:boolean = false;
   show: boolean = false;
@@ -34,7 +38,6 @@ export class ServerSettingsComponent implements OnInit {
   ngOnInit(): void {
     this.updateIpWifi();
    this.getdata();
-   this.toastUpdateService.show('aedpay has a new version. You currently have version 10. Do you want to get version 11 right now?', { classname: ' font-bold ', delay: 200000 }); 
 
   }
 

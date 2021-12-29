@@ -8,7 +8,7 @@ import { ToastServiceAlert } from 'src/toastAlert.services';
 import { HomeService } from '../home.service';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { LoginService } from 'src/app/login/login.service';
 
 @Component({
@@ -17,6 +17,9 @@ import { LoginService } from 'src/app/login/login.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {  
+
+  fullName:string = "";
+companyLegalName:string = "";
 
 
   // versionCloud:  any  = (versionsCloud  as  any).default;
@@ -27,8 +30,9 @@ export class DashboardComponent implements OnInit {
   // msgToast:any;
   // events:any;
 
-@ViewChild('modallogout', {static: false}) content!: ElementRef;;
+@ViewChild('modallogout', {static: false}) content!: ElementRef;
 url:any;
+actionGoback:any;
 
   constructor( public toastUpdateService:ToastServiceUpdate,
     private test: TestService, 
@@ -37,9 +41,11 @@ url:any;
     private cookieservices: CookieService,
     private http:HttpClient,
     private SvcLogin: LoginService,
-    public toastServiceAlert:ToastServiceAlert) {
+    public toastServiceAlert:ToastServiceAlert,
+    private homeService: HomeService) {
       this.url = this.router.url;
-      console.log(this.url)
+      this.fullName = this.cookieservices.get('fullName');
+this.companyLegalName = this.cookieservices.get('companyLegalName');
    }
 
    public getIPAddress()  
@@ -71,18 +77,21 @@ url:any;
 
    changeclassactive(clas:any){
      if(clas =='manage'){
+      this.homeService.actionGoBack.emit('manageStore');//para el goback
     var miElto = document.getElementsByClassName("manageStore")[0];    
     miElto.className = "manageStore itemnavbaractive flex px-3 py-1 rounded-md  mb-3";   
     var miElto2 = document.getElementsByClassName("event")[0];    
     miElto2.className = "event logout  px-3 py-1 rounded-md  mb-3"; 
     var miElto3 = document.getElementsByClassName("wifisettings")[0];    
     miElto3.className = "wifisettings itemnavbar flex px-3 py-1 rounded-md  mb-3";      
-     } else if(clas =='event'){
+     } else if(clas =='event'){      
+      this.homeService.actionGoBack.emit('events');//para el goback
       var miElto = document.getElementsByClassName("manageStore")[0];    
       miElto.className = "manageStore itemnavbaractive flex px-3 py-1 rounded-md  mb-3"; 
       var miElto2 = document.getElementsByClassName("event")[0];    
       miElto2.className = "event itemnavbaractive  px-3 py-1 rounded-md  mb-3"; 
      }else if(clas =='wifi'){
+      this.homeService.actionGoBack.emit('wifi');//para el goback
       var miElto = document.getElementsByClassName("manageStore")[0];    
       miElto.className = "manageStore itemnavbar flex px-3 py-1 rounded-md  mb-3"; 
       var miElto2 = document.getElementsByClassName("event")[0];    
@@ -90,6 +99,8 @@ url:any;
       var miElto3 = document.getElementsByClassName("wifisettings")[0];    
       miElto3.className = "wifisettings itemnavbaractive flex px-3 py-1 rounded-md  mb-3"; 
        }else{
+
+      this.homeService.actionGoBack.emit('');//para el goback
       var miElto = document.getElementsByClassName("manageStore")[0];    
       miElto.className = "manageStore itemnavbar flex px-3 py-1 rounded-md  mb-3"; 
       var miElto2 = document.getElementsByClassName("event")[0];    
@@ -100,52 +111,59 @@ url:any;
  
     }
 
-    goBack(action:any,root:any){
+    goBack(){
+ if(this.actionGoback == "selectEvent"){ 
+  let currentUrl = this.router.url;
+  this.router.navigateByUrl('/home', {skipLocationChange: true}).then(() => {
+      this.router.navigate([currentUrl]);
+  });
+  this.actionGoback = "events"
+ }else if(this.actionGoback =="events"){
+  this.router.navigate(['/home/serverSettings']);
+  this.actionGoback = "";
+  var miElto = document.getElementsByClassName("manageStore")[0];    
+  miElto.className = "manageStore itemnavbar flex px-3 py-1 rounded-md  mb-3"; 
+  var miElto2 = document.getElementsByClassName("event")[0];    
+  miElto2.className = "event itemnavbar  px-3 py-1 rounded-md  mb-3"; 
+  var miElto3 = document.getElementsByClassName("wifisettings")[0];    
+  miElto3.className = "wifisettings itemnavbar flex px-3 py-1 rounded-md  mb-3"; 
 
-    }
-   
+ }else if(this.actionGoback =="manageStore"){
+  this.actionGoback = "";
+  var miElto = document.getElementsByClassName("manageStore")[0];    
+  miElto.className = "manageStore itemnavbar flex px-3 py-1 rounded-md  mb-3"; 
+  var miElto2 = document.getElementsByClassName("event")[0];    
+  miElto2.className = "event itemnavbar  px-3 py-1 rounded-md  mb-3"; 
+  var miElto3 = document.getElementsByClassName("wifisettings")[0];    
+  miElto3.className = "wifisettings itemnavbar flex px-3 py-1 rounded-md  mb-3"; 
+
+ }else if(this.actionGoback == "wifi"){
+  this.router.navigate(['/home/serverSettings']);
+  this.actionGoback = "";
+  var miElto = document.getElementsByClassName("manageStore")[0];    
+  miElto.className = "manageStore itemnavbar flex px-3 py-1 rounded-md  mb-3"; 
+  var miElto2 = document.getElementsByClassName("event")[0];    
+  miElto2.className = "event itemnavbar  px-3 py-1 rounded-md  mb-3"; 
+  var miElto3 = document.getElementsByClassName("wifisettings")[0];    
+  miElto3.className = "wifisettings itemnavbar flex px-3 py-1 rounded-md  mb-3"; 
+
+ }
+}
 
 
 
   
 
   
-
-  // events: Array<any> =[
-  //   {
-  //     eventId:"d837e36f-0b0e-4e5e-a76a-c06c98e2f50a",
-  //     name:"Cancer day's charity",
-  //     date:"12/12/2022",
-  //     place:"High School Miami Saint George"
-  //   },
-  //   {
-  //     eventId:"d837e36f-0b0e-4e5e-a76a-c06c98e2f50a",
-  //     name:"Father's day charity",
-  //     date:"11/03/2022",
-  //     place:"Primary School Los Angeles"
-  //   },
-  //   {
-  //     eventId:"d837e36f-0b0e-4e5e-a76a-c06c98e2f50a",
-  //     name:"Mother's day's charity",
-  //     date:"12/02/2021",
-  //     place:"College US united for 3"
-  //   },
-  // ]
-  ngOnInit(): void { 
-   
+  ngOnInit() { 
+    this.homeService.actionGoBack.subscribe(
+      (data) => {this.actionGoback = data},
+      (err)=>{console.log(err)});
    }
-
 
 
   ngAfterViewInit() {
 
-   
-      // if(parseFloat(this.versionCloud[this.versionCloud.length-1].appAngularVersion) > parseFloat(this.versionActual[0].version)){
-      //  this.actualV = this.versionActual[0].version; //la version dentro del json local
-      //  this.newV = this.versionCloud[this.versionCloud.length-1].version; //consuminedo la API de versiones de aedpay
-      //  this.msgToast ='aedpay has a new version. You currently have version '+this.actualV+'. Do you want to get version '+this.newV+' right now?';   
-      //  this.toastUpdateService.show(this.msgToast, { classname: ' text-light fixed  left-0  bottom-0 h-16 mb-2 ', delay: 20000 }); 
-      // }
   }
 
 

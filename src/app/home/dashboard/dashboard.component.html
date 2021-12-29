@@ -1,38 +1,25 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <title>Collapsible sidebar using Bootstrap 4</title>
-
-    <!-- Bootstrap CSS CDN -->
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous"> -->
-    <!-- Our Custom CSS -->
-    <!-- <link rel="stylesheet" href="style.css"> -->
-
-    <!-- Font Awesome JS -->
-    <!-- <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script> -->
-    <!-- <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script> -->
-</head>
-
-<body>
     <div class="wrapper">
         <!-- Sidebar  -->
-        <nav id="sidebar">
+        <nav  x-data="{open: false}" id="sidebar" class="w-1/5">
           <div style="height: 20%;width: 100%;">
-          <div class="px-3 pt-5 ">
+          <div class="px-5 pt-5 ">
             
-            <button *ngIf="url != '/home/serverSettings'" (click)="goBack('','')" >
+            <button x-on:click="open = false" *ngIf="actionGoback ==  'events' || actionGoback ==  'wifi' || actionGoback == 'manageStore'"  (click)="goBack()" >
               <div class="flex">
                 <strong><svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 found-bold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-            </svg></strong> &nbsp;<span style="margin: auto;">Go Back</span>
-              </div>
-              
+            </svg></strong> &nbsp;<span style="margin: auto;">Go Back  </span>
+              </div>              
             </button>
+
+            <button  *ngIf="actionGoback =='selectEvent'"  (click)="goBack()" >
+              <div class="flex">
+                <strong><svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 found-bold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg></strong> &nbsp;<span style="margin: auto;">Go Back  </span>
+              </div>              
+            </button>
+           
             
           </div>
           </div>
@@ -41,13 +28,13 @@
             <div class="px-5 " style="height: auto; width: 100%;margin-bottom: 1rem;  ">
                
               <div style="text-align: center;">
-                  <div> <strong>Oscar Lopez</strong></div>
-                  <div><small>sf Miami</small> </div>
+                  <div> <strong>{{fullName}}</strong></div>
+                  <div><small>{{companyLegalName}}</small> </div>
                   <hr style="height: 2px; background-color: white;">
                 </div>
             </div>
           
-            <div x-data="{open: false}" id="Navigation" class="px-14 " style="height: auto; width: 100%; ">
+            <div id="Navigation" class="px-14 " style="height: auto; width: 100%; ">
               <div x-on:click="open = false" (click)="changeclassactive('')" [routerLink]="['/home/serverSettings']" class="serverSettings itemnavbar flex px-3 py-1 rounded-md  mb-3">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 p-0 m-0 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
@@ -94,9 +81,7 @@
     </div>
 
    
-</body>
 
-</html>
 
 
 

@@ -69,6 +69,8 @@ export class LoginComponent implements OnInit {
         (res:any) => {
           this.Cookie.set('dbServer', res.dbServerLocal);
           this.Cookie.set('token', res.token);
+          this.Cookie.set('fullName', res.fullName);
+          this.Cookie.set('companyLegalName', res.companyLegalName);
           //console.log(this.Cookie.get('dbServer'))
           this.router.navigate(['home/serverSettings'])
 
@@ -79,7 +81,7 @@ export class LoginComponent implements OnInit {
             (data:any)=>{      
               if(data.aedpayCloud > data.aedpay){
                 this.msgToast ='aedpay has a new version. You currently have version '+data.aedpay+'. Do you want to get version '+data.aedpayCloud+' right now?';   
-                this.toastUpdateService.show(this.msgToast, { classname: ' text-light fixed  left-0  bottom-0 h-16 mb-2 ', delay: 200000 }); 
+                this.toastUpdateService.show(this.msgToast, {classname: 'fixed bottom-0 right-0 font-bold w-full ml-1/5', delay: 20000 }); 
              }
             }, error =>{
               console.log(error)

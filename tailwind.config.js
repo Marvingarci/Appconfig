@@ -19,6 +19,7 @@ module.exports = {
       transparent: 'transparent',
       current: 'currentColor',
       aedblue:'#00adee',
+      aedbluestrong:'#006d88',
       black: colors.black,
       orange: colors.orange,
       white: colors.white,
@@ -30,6 +31,7 @@ module.exports = {
       indigo: colors.indigo,
       purple: colors.violet,
       pink: colors.pink,
+      lightBlue: colors.lightBlue,
     },
     spacing: {
       px: '1px',

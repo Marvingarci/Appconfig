@@ -1,25 +1,31 @@
 <div class="flex p-4 " >
 
-  <div class="px-2 bg-white" style="width: 20rem;" >
+  <div class="px-2 bg-white" style="width: 24rem;" >
 
           <header class="flex w-full py-3 text-gray-600 " style="height:10%;">
             <span style="color: #3cadee;" class="text-3xl"> <strong>Events</strong></span>
             &nbsp;&nbsp;
-            <button class="text-gray-400 " (click)="downloadEvents()" >
-              <svg xmlns="http://www.w3.org/2000/svg"  fill="currentColor" class="bi bi-arrow-clockwise w-8 h-8 font-bold" viewBox="0 0 16 16">
+            <button class="text-gray-400 font-bold text-5xl" (click)="downloadEvents()" >
+              <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="rotate-right" class="svg-inline--fa fa-rotate-right w-8 h-8" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <path fill="currentColor" d="M468.9 32.11c13.87 0 27.18 10.77 27.18 27.04v145.9c0 10.59-8.584 19.17-19.17 19.17h-145.7c-16.28 0-27.06-13.32-27.06-27.2c0-6.634 2.461-13.4 7.96-18.9l45.12-45.14c-28.22-23.14-63.85-36.64-101.3-36.64c-88.09 0-159.8 71.69-159.8 159.8S167.8 415.9 255.9 415.9c73.14 0 89.44-38.31 115.1-38.31c18.48 0 31.97 15.04 31.97 31.96c0 35.04-81.59 70.41-147 70.41c-123.4 0-223.9-100.5-223.9-223.9S132.6 32.44 256 32.44c54.6 0 106.2 20.39 146.4 55.26l47.6-47.63C455.5 34.57 462.3 32.11 468.9 32.11z"></path>
+              </svg>
+              <!-- <svg xmlns="http://www.w3.org/2000/svg"  fill="currentColor" class="bi bi-arrow-clockwise w-8 h-8 " viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
                 <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
-              </svg>
+              </svg> -->
+              <!-- <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg> -->
             </button>
           </header>
 
 
           <div style="height: 35rem;overflow: auto;" >
           
-            <div *ngFor="let event of events" [ngClass]="{' text-aedblue': event.CID == event_id}" class="  justify-center  flex  py-2 my-1 ">
+            <div *ngFor="let event of events" [ngClass]="{' text-lightBlue-400': event.CID == event_id}" class="justify-center text-gray-400 flex  py-2 my-1 ">
 
               <div class="w-1/5  ">
-                <svg (click)="orders(event.CID)" class="bi bi-eye-fill w-7 h-7  hover:text-aedblue" xmlns="http://www.w3.org/2000/svg"  fill="currentColor"  viewBox="0 0 16 16">
+                <svg (click)="orders(event.CID)"    class="bi bi-eye-fill w-7 h-7 hover:text-aedblue" xmlns="http://www.w3.org/2000/svg"  fill="currentColor"  viewBox="0 0 16 16">
                   <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
                   <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
                 </svg>
