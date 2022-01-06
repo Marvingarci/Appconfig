@@ -39,6 +39,6 @@ export class HomeService {
   getStylesBySID(data:any) {
     return this.http.post('http://localhost/Appconfig/php/events/getStylesBySID.php',data);    
   }
-
+ 
   
 }

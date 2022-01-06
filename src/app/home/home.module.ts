@@ -12,6 +12,7 @@ import { StoreComponent } from './store/store.component';
 import { StylesByStoreComponent } from './styles-by-store/styles-by-store.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -23,13 +24,16 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     ListOrdersComponent,
     WifiSettingsComponent,
     StoreComponent,
-    StylesByStoreComponent
+    StylesByStoreComponent,
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
     NgbModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
   ]
 })
 export class HomeModule { }

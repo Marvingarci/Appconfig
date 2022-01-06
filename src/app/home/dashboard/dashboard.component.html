@@ -87,27 +87,18 @@
 
 
      <!-- modal delete -->
+     <!-- modal delete-->
 <ng-template #modallogout let-modal>  
-  <div class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-  <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-   
-    <div class="inline-block align-bottom bg-white rounded-lg  overflow-hidden shadow-xl transform transition-all  sm:align-middle sm:max-w-lg sm:w-full">
-      <div class="bg-white px-4 py-4 sm:p-6 sm:pb-4">
-        <div class="text-center ">
-            <h3 class="text-lg mb-3 leading-6 font-medium text-gray-900" id="modal-title"> Log out Confirmation</h3>
-            <div class="container">
-              <p>Are you sure to log out?</p>
-            </div>
-        </div>
-      </div>
   
-      <div class="bg-gray-50 px-4 py-2 sm:px-6 sm:flex sm:flex-row-reverse">
-        <button (click)="logout()"  type="button" class="buttonprimary  w-auto" >Exit</button>
-          &nbsp;
-        <button (click)="modal.close()" type="button" class="buttonsecondary  w-auto"  > Cancel</button> 
-      </div>
-    </div>
-  
+  <div class="bg-orange-500 text-white px-16 py-12  rounded-2xl">
+    <div class="text-center w-full ">             
+      <div class=" text-3xl font-bold "> <span > Log out Confirmation</span></div>    
+      <div class=" text-lg py-4 "> <span >Are you sure to log out?</span></div>   
+      <div class=" text-lg  ">
+        <button (click)="logout()" class=" btndialog px-3 rounded-lg" >Exit</button>   &nbsp;
+      <button (click)="modal.close()" class="btndialog px-3 rounded-lg" > Cancel</button>      
+      </div>       
   </div>
   </div>
-  </ng-template>
+
+</ng-template>

@@ -54,7 +54,7 @@ this.companyLegalName = this.cookieservices.get('companyLegalName');
    }  
 
     openmodallogout(content:any) {
-      this.modalService.open(content)
+      this.modalService.open(content, {backdrop: false,centered:true,size: 'md'});
     }
    
 
@@ -62,8 +62,7 @@ this.companyLegalName = this.cookieservices.get('companyLegalName');
    
      this.SvcLogin.logout().subscribe(
       (data:any) => { 
-    this.cookieservices.delete('token');
-    this.cookieservices.delete('dbServer');
+    this.cookieservices.deleteAll();
     this.router.navigate(['/']);
     this.toastServiceAlert.show(data.message, { classname:'fixed bottom-0 right-0 m-1', delay: 5000 });
     this.modalService.dismissAll();

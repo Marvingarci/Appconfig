@@ -7,13 +7,15 @@ import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { catchError, retry } from 'rxjs/internal/operators';
 import { ToastServiceAlert } from 'src/toastAlert.services';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable()
 export class JwtinterceptorInterceptor implements HttpInterceptor {
 
 
   constructor(    private cookieservices: CookieService, private router:Router,
-    public toastServiceAlert:ToastServiceAlert) {}
+    public toastServiceAlert:ToastServiceAlert,
+    private modalService: NgbModal ) {}
 
     intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
       const token =   this.cookieservices.get('token');
@@ -30,16 +32,16 @@ export class JwtinterceptorInterceptor implements HttpInterceptor {
           return next.handle(req).pipe(
             catchError((err: HttpErrorResponse) => {
               console.log(err.status)
-                  if(err.status == 401  ){            
-                      this.cookieservices.delete('token');
-                      this.cookieservices.delete('dbServer');
+                  if(err.status == 401  ){ 
+                      this.modalService.dismissAll();           
+                      this.cookieservices.deleteAll();
                       this.router.navigate(['/']);                      
                       this.toastServiceAlert.show('Token is Expired,Sign in again', { classname: 'fixed bottom-0 right-0 m-1', delay: 5000 });                    
                   }
 
                   if(err.status == 404){ 
-                      this.cookieservices.delete('token');
-                      this.cookieservices.delete('dbServer');
+                      this.modalService.dismissAll(); 
+                      this.cookieservices.deleteAll();
                       this.toastServiceAlert.show('Token is Invalid,Sign in again', { classname: ' fixed bottom-0 right-0 m-1', delay: 5000 });
                       this.router.navigate(['/']);
                   }

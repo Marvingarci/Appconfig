@@ -16,6 +16,8 @@ constructor(private cookieservices:CookieService, private router:Router,
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       const cookie = this.cookieservices.get('token');
+      console.log('esta es la cookie del guardian login');
+      console.log(cookie);
       if(cookie){
        this.router.navigate(['/home/serverSettings']); 
        this.toastServiceAlert.show('Please Logout', { classname: 'fixed bottom-0 right-0 m-1', delay: 5000 });

@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
           //console.log(this.Cookie.get('dbServer'))
           this.router.navigate(['home/serverSettings'])
 
-          this.toastServiceAlert.show('Welcome', { classname: 'fixed bottom-0 right-0 m-1', delay: 5000 });   
+          this.toastServiceAlert.show('Welcome '+res.fullName, { classname: 'fixed bottom-0 right-0 m-1', delay: 5000 });   
           this.loading.hide();  
 
           this.SvcLogin.getVersions().subscribe(

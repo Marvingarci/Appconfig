@@ -34,4 +34,17 @@ export class ServersettingsService {
   getIpWireless(){
     return this.http.get(this.urlip);
   }
+
+  changeWifiPass(pass:any) {
+    return this.http.post(`${environment.apiUrl}/changeWifiPass`,pass);   
+  }
+  changeRouterName(name:any) {
+    return this.http.post(`${environment.apiUrl}/changeRouterName`,name);   
+  } 
+  
+  getNameRouter() {
+    return this.http.get(`${environment.apiUrl}/getNameRouter`);   
+  }
+
+
 }

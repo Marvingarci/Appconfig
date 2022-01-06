@@ -7,11 +7,13 @@ import { TestnavbarComponent } from './testnavbar/testnavbar.component';
 
 const routes: Routes = [
   {
-    path:'home', loadChildren: ()=>import('./home/home.module').then(m => m.HomeModule),canActivate:[UserGuard], ///edit
+    path: '', component: LoginComponent, canActivate:[LoginGuard]
   },
   {
-    path: '', component: LoginComponent, canActivate:[LoginGuard]
-  },{
+    path:'home', loadChildren: ()=>import('./home/home.module').then(m => m.HomeModule),canActivate:[UserGuard], 
+  },
+  
+  {
     path: 'testnavbar', component: TestnavbarComponent
   },
   {

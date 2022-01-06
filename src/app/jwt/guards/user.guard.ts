@@ -19,7 +19,7 @@ export class UserGuard implements CanActivate {
         if(!cookie){
          this.router.navigate(['/']); 
          this.toastServiceAlert.show('Please Login', { classname: 'fixed bottom-0 right-0 m-1', delay: 5000 });
-       } 
+       }
         
         return true;
     }
