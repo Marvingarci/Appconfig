@@ -47,7 +47,12 @@ export class WifiSettingsComponent implements OnInit {
        console.log(data)
      }
    )
-   .catch(error =>{console.log(error)});
+   .catch(error =>{
+     console.log(error);
+     if(error.status == 500){
+      this.toastServiceAlert.show('Not connected to Mikrotik', { classname: 'fixed bottom-0 right-0 m-1', delay: 5000 });
+     }
+    });
 
     this.SvcServerSettings.getDetailsServer().toPromise()
     .then(
@@ -108,7 +113,11 @@ export class WifiSettingsComponent implements OnInit {
       .catch(
         error =>{
           console.log(error);
+          if(error.status == 500){
+            this.toastServiceAlert.show('Not connected to Mikrotik', { classname: 'fixed bottom-0 right-0 m-1', delay: 5000 });
+           }
           this.loading.hide(); 
+          this.modalService.dismissAll();
         }
         );
   }
@@ -125,7 +134,15 @@ export class WifiSettingsComponent implements OnInit {
       this.toastServiceAlert.show(data, { classname: 'fixed bottom-0 right-0 m-1', delay: 5000 });
       
     })
-    .catch(error =>{console.log(error)});
+    .catch(error =>{
+      console.log(error);
+          if(error.status == 500){
+            this.toastServiceAlert.show('Not connected to Mikrotik', { classname: 'fixed bottom-0 right-0 m-1', delay: 5000 });
+           }
+          this.loading.hide(); 
+          this.modalService.dismissAll();
+
+    });
 }
 
   logout(){
