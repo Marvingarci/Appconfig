@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
   username:boolean =false;
   password:boolean =false;
   invalidcredencials:boolean = false;
+  show: boolean = false;
 
   constructor(private Cookie: CookieService, 
               private SvcLogin: LoginService, 
@@ -46,16 +47,9 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  // save() {
-  //   console.log(this.formInfo.value);
-  //   this.test.post(this.formInfo.value).subscribe(
-  //     res => {
-  //       console.log(res);
-  //   }, (err) => {
-  //       console.log(err);
-  //   }
-  //   );
-  // }
+  seepassword():void{
+    this.show = !this.show;
+  }
 
   login(){
     this.username= false;this.password = false;this.requeriedfields =false;this.invalidcredencials = false;
