@@ -1,0 +1,25 @@
+
+    <header class="flex justify-between w-full p-3 text-gray-600">
+        <h4>Styles</h4>
+        <button class="buttonSorange">Refresh</button>
+    </header>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Style Name</th>
+                <th> Style Id</th>
+                <th>Description</th>
+                <th>Description 2</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let style of styles">
+                <td>{{style.StyleName}}</td>
+                <td>{{style.StyleID}}</td>
+                <td>{{style.Description}}</td>
+                <td>{{style.DesCrpt2}}</td>
+            </tr>
+        </tbody>
+    </table>
+

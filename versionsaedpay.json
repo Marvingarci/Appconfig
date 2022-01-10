@@ -2,26 +2,36 @@
     {
       "id": 1,
       "date": "2022-02-01",
-      "version": "1"
+      "appAngularVersion": "1",
+      "appLaravelVersion": "1",
+      "configAngularVersion": "1"
     },
     {
       "id": 2,
       "date": "2022-05-01",
-      "version": "1.2.1"
+      "version": "1.2.1",
+      "appLaravelVersion": "1.2.1",
+      "configAngularVersion": "1.2.1"
     },
     {
       "id": 3,
       "date": "2022-10-01",
-      "version": "2.0.0"
+      "appAngularVersion": "2.0.0",
+      "appLaravelVersion": "2.0.0",
+      "configAngularVersion": "2.0.0"
     },
     {
       "id": 4,
       "date": "2023-01-23",
-      "version": "1.1"
+      "appAngularVersion": "1.1",
+      "appLaravelVersion": "1.1",
+      "configAngularVersion": "1.1"
     },
      {
       "id": 4,
       "date": "2023-01-23",
-      "version": "11"
+      "appAngularVersion": "11",
+      "appLaravelVersion": "11",
+      "configAngularVersion": "11"
     }
 ]

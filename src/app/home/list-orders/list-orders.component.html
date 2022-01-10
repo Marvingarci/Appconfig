@@ -1,0 +1,150 @@
+<div *ngIf="event_id == null; else navOrders" style="height: 100%;width: -webkit-fill-available;display: table;" class="bg-gray-200">
+  <div style="display: table-cell;vertical-align: middle;text-align: center;" class="text-xl text-gray-400">  Choose a event, please</div>
+</div>
+
+<ng-template #navOrders>
+  
+  <div *ngIf="orders.length == 0 && ordersCloud.length == 0; else salesOrders" style="height: 100%;width: -webkit-fill-available;display: table;" class="bg-gray-200" >
+    <div style="display: table-cell;vertical-align: middle;text-align: center;" class="text-xl text-gray-400">  There aren't sale orders for this event</div>
+  </div>
+
+    <ng-template #salesOrders>
+    <div class="bg-gray-200  " >
+    
+          <header class="flex justify-between w-full  text-gray-400 px-3 py-3" >
+            <h3>Sales Orders <span *ngIf="count > 0 && active == 1">| {{count}} item selected</span></h3>
+            <div>
+            <button class="buttonSorange " *ngIf="count > 0 && active == 1" (click)="onLogClick()">Upload Selected Sales Orders</button>
+            &nbsp;
+            <button class="buttonSorange" (click)="refreshSalesOrders()">Refresh</button>
+            </div>    
+          </header>
+
+                <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+                  <li [ngbNavItem]="1" >
+                    <a ngbNavLink class="text-gray-400">To upload</a>
+                    <ng-template ngbNavContent>
+
+                      <div *ngIf="orders.length > 0 ; else orderslocales" class=" px-3  bg-white rounded-b-xl rounded-r-xl">
+                        <div style="height: 30rem;overflow: auto;">
+                                  <table class="min-w-full divide-y mt-3">
+                                    <thead>
+                                      <tr style="border-bottom: solid 2px #3cadee;" class="text-gray-400" >
+                                        <th scope="col">Full name</th>
+                                        <th scope="col">Phone </th>
+                                        <th scope="col">City</th>
+                                        <th scope="col">SONumber</th>
+                                        <th scope="col">Delivery Status </th>
+                                        <th scope="col"><button class="buttonSorange" (click)="onAllRowClick()"> {{titleselecteAll}}</button> </th>
+                                      </tr>
+                                    </thead>
+                                    
+
+                                    <tbody>
+                                      <ng-container *ngFor="let u of orders">
+
+                                        <hr style="height: 2px; color: white; border: none;margin: 0;">
+                                        <tr  [class.selectedRow]="rowIsSelected(u.SOID)" class="text-gray-400 text-sm" >
+                                          <td>{{u.firstName}} {{u.lastName}}</td>
+                                            <td>{{u.phone1}}</td>
+                                            <td>{{u.city}}</td>
+                                            <td>{{u.SONumber}}</td>
+                                            <td>{{u.deliveryStatus}}</td>
+                                          <td><button (click)="onRowClick(u.SOID)"  >                                            
+                                                  <svg [ngClass]="{'text-blue-500': u.statusLocal == 'cloud'}"   xmlns="http://www.w3.org/2000/svg"[class.selectedRowcheck]="rowIsSelected(u.SOID)" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                                                  </svg>
+                                              </button></td>                                      
+                                        </tr>
+                                      </ng-container>  
+                                    </tbody>
+                                  </table>                          
+                        </div>    
+                      
+                      </div>
+                      
+                      <ng-template #orderslocales  >                        
+                        <div class=" px-3 pt-3 bg-white rounded-b-xl rounded-r-xl" style="height: 30rem;overflow: auto;width: -webkit-fill-available;display: table;">
+                          <div style="display: table-cell;vertical-align: middle;text-align: center;" class="text-xl text-gray-400">
+                            There aren't sale orders to upload
+                          </div>                             
+                        </div>                    
+                      </ng-template>
+                  
+                  </ng-template>
+                  </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  <li [ngbNavItem]="2" >
+                    <a ngbNavLink class="text-gray-400">Uploads</a>
+                    <ng-template ngbNavContent>
+
+                      <div *ngIf="ordersCloud.length > 0 ; else ordersencloud" class=" px-3  bg-white rounded-b-xl rounded-r-xl">
+                        <div  style="height: 30rem;overflow: auto;">
+                                  <table class="min-w-full divide-y mt-3 ">
+                                    <thead>
+                                      <tr style="border-bottom: solid 2px #3cadee;" class="text-gray-400" >
+                                        <th scope="col">Full name</th>
+                                        <th scope="col">Phone </th>
+                                        <th scope="col">City</th>
+                                        <th scope="col">SONumber</th>
+                                        <th scope="col">Delivery Status </th>
+                                      </tr>
+                                    </thead>
+                                    
+
+                                    <tbody>
+                                      <ng-container *ngFor="let u of ordersCloud">
+
+                                        <hr style="height: 2px; color: white; border: none;margin: 0;">
+                                        <tr  [class.selectedRow]="rowIsSelected(u.SOID)" class="text-gray-400 text-sm" >
+                                          <td>{{u.firstName}} {{u.lastName}}</td>
+                                            <td>{{u.phone1}}</td>
+                                            <td>{{u.city}}</td>
+                                            <td>{{u.SONumber}}</td>
+                                            <td>{{u.deliveryStatus}}</td>
+                                                                     
+                                        </tr>
+                                      </ng-container>  
+                                    </tbody>
+                                  </table>                          
+                        </div>    
+                      
+                      </div>
+                      
+                      <ng-template #ordersencloud >                        
+                        <div class=" px-3 pt-3 bg-white rounded-b-xl rounded-r-xl" style="height: 30rem;overflow: auto;width: -webkit-fill-available;display: table;">
+                          <div style="display: table-cell;vertical-align: middle;text-align: center;" class="text-xl text-gray-400">
+                            There aren't sale orders uploads
+                          </div>                             
+                        </div>                    
+                      </ng-template>
+                  
+                  </ng-template>
+                  </li>
+
+                </ul>    
+      </div>  
+
+      <div [ngbNavOutlet]="nav"></div>
+
+    </ng-template>
+
+
+</ng-template>
+

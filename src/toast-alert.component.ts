@@ -4,11 +4,10 @@ import { ToastServiceAlert } from './toastAlert.services';
 @Component({
   selector: 'app-toasts-alert',
   template: `
-    <ngb-toast
-
-    style="background-color:blue; width:100%;opacity: 0.90;"
+    <ngb-toast  
+      style="background-color:#f57317;color:#fff"
       *ngFor="let toast of toastServiceAlert.toasts"
-      [class]="toast.classname "
+      [class]="toast.classname"
       [autohide]="true"
       [delay]="toast.delay || 5000"    
     >

@@ -1,100 +1,104 @@
-<div class="flex-row w-full min-h-screen">
-    <div class="flex-row full">
-        <div class="flex justify-between w-full bg-white px-10 items-center border-2 shadow-xl absolute top-0">
-            <!-- <div ngbDropdown class="d-inline-block">
-                <button  id="dropdownBasic1" ngbDropdownToggle><svg xmlns="http://www.w3.org/2000/svg" class="ml-24  text-gray h-14 w-14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                  </svg></button>
-                <div class="ml-20" ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                  <button ngbDropdownItem (click)="logout()">Logout</button>
-                
-                </div>
-              </div> -->
-
-              <div class="transform flex flex-row items-end justify-end scale-50 -my-5">
-                <img  class="img-responsive" src="assets/img/aedpaylogo2.png">
-            </div>
-
-            <div class="flex flex-row items-end justify-center space-x-10">
-                <a class="text-blue-500 text-2xl font-semibold" href="" >AEDPAY local v1.1</a>
-            </div>
-
-            <div class="flex flex-row items-end justify-center space-x-10">
-                    <!-- <a class="text-gray-600 text-xl font-thin" href="" >Events v1</a> -->
-                    <!-- <a class="text-gray-600 text-xl font-thin" href="" >Another link</a> -->
-                    <a class="text-gray-600 text-xl font-thin" href="" >Sign out</a>
-            </div>
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav  x-data="{open: false}" id="sidebar" class="w-1/5">
+          <div style="height: 20%;width: 100%;">
+          <div class="px-5 pt-5 ">
             
-            <!-- <div class="flex flex-row items-end justify-center space-x-10">
-                <h1 class="text-blue-500 text-3xl font-bold mt-3">AEDPAY Configuration</h1>
-                <h1 class="text-gray-600 text-xl font-thin">Company name</h1>
-            </div> -->
+            <button x-on:click="open = false" *ngIf="actionGoback ==  'events' || actionGoback ==  'wifi' || actionGoback == 'manageStore'"  (click)="goBack()" >
+              <div class="flex">
+                <strong><svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 found-bold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg></strong> &nbsp;<span style="margin: auto;">Go Back  </span>
+              </div>              
+            </button>
+
+            <button  *ngIf="actionGoback =='selectEvent'"  (click)="goBack()" >
+              <div class="flex">
+                <strong><svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 found-bold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg></strong> &nbsp;<span style="margin: auto;">Go Back  </span>
+              </div>              
+            </button>
            
-        </div>
-        <!-- <div class="full border-t border-blue-400 border-2 mx-24"></div> -->
-    
-        <div class="flex flex-row">
-            <div class="w-52 h-screen pt-24 space-y-2 px-2 bg-white border-r border-2 border-gray-200 min-h-69">
-                <div [routerLink]="['/home/events']" class="flex flex-row gap-5 transition border-2 border-blue-400 text-gray-600 group hover:bg-blue-400 rounded-xl px-2 py-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="group-hover:text-white h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                    <h1 class="font-semibold text-lg group-hover:text-white">Server Settings</h1>
-                </div>
-
-                <div class="flex flex-row gap-5 transition border-2 border-blue-400 text-gray-600 group hover:bg-blue-400 rounded-xl px-2 py-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="group-hover:text-white h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                      </svg>
-                    <h1 class="font-semibold text-lg group-hover:text-white">Manage Store</h1>
-                </div>
-
-                <div class="flex flex-row gap-5 transition border-2 border-blue-400 text-gray-600 group hover:bg-blue-400 rounded-xl px-2 py-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="group-hover:text-white h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-                      </svg>
-                    <h1 class="font-semibold text-lg group-hover:text-white">WIFI Settings</h1>
-                </div>
-            </div>
             
-            
-            <div class="pt-28 p-10 w-full">
-             <router-outlet></router-outlet>   
-
-            </div>
-            
-
-            
-        </div>
-    </div>
-
-
-  
-   
-  
-
-
-
- <!-- modal delete -->
- <ng-template #modallogout let-modal >  
-    <div aria-labelledby="modal-title"  >
-  
-     
-        <div class=" px-4 py-4 ">
-          <div class="text-center ">
-              <h3 class="text-lg  font-medium text-gray-900" > aedpay has a new version</h3>
-             
-                <div class=" font-small text-gray-500">You currently have version {{actualV}}</div>
-                <div class=" font-small text-gray-500">Do you want to get version {{newV}} right now?</div>
-                 
           </div>
+          </div>
+          <div style="height: 55%;width: 100%;">
+          
+            <div class="px-5 " style="height: auto; width: 100%;margin-bottom: 1rem;  ">
+               
+              <div style="text-align: center;">
+                  <div> <strong>{{fullName}}</strong></div>
+                  <div><small>{{companyLegalName}}</small> </div>
+                  <hr style="height: 2px; background-color: white;">
+                </div>
+            </div>
+          
+            <div id="Navigation" class="px-14 " style="height: auto; width: 100%; ">
+              <div x-on:click="open = false" (click)="changeclassactive('')" [routerLink]="['/home/serverSettings']" class="serverSettings itemnavbar flex px-3 py-1 rounded-md  mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 p-0 m-0 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+                </svg> 
+                &nbsp;
+                Server Settings
+              </div>
+
+              <div  class=" mb-3">               
+              <div (click)="changeclassactive('manage')" x-on:click="open = !open" class="manageStore itemnavbar flex px-3 py-1 rounded-md  mb-1">
+                <svg  xmlns="http://www.w3.org/2000/svg" class="group-hover:text-white h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                &nbsp;
+                Manage Store
+              </div>
+                <div x-transition x-show="open" style="text-align: center;">
+              <button class="event px-6 rounded-md logout" (click)="changeclassactive('event')" [routerLink]="['/home/events']">Events</button>
+                
+              </div>
+            </div>              
+            
+
+              <div x-on:click="open = false" (click)="changeclassactive('wifi')" [routerLink]="['/home/wifiSettings']" class="wifisettings itemnavbar flex px-3 py-1 rounded-md  mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
+                </svg>
+                &nbsp;
+                WIFI Settings
+              </div>
+              
+            </div>
+            
+          </div>
+          <div style="height: 25%;width: 100%;" class="flex justify-center items-center text-center">
+                  <button (click)="openmodallogout(modallogout)" class=" px-3 rounded-md logout ">Log Out</button> 
+          </div>
+        </nav>
+
+        <div id="content">
+          <div style="width: 100%"><img style="height: 4rem;width: 12rem; margin-left:auto;" src="assets/img/aedpay.png" ></div>
+          <div style="width: 100%;"><router-outlet ></router-outlet> </div>                   
         </div>
-    
-        <div class="bg-gray-100 px-4 py-2 sm:px-6 sm:flex sm:flex-row-reverse">
-          <button (click)="updateVersion()" class=" w-auto px-3 text-white bg-gray-900 border-2 border-gray-300 rounded-xl outline-none hover:bg-gray-800" >Update</button>
-            &nbsp;
-          <button (click)="modal.close()" class=" w-auto px-3  border-2 border-gray-300 rounded-xl outline-none hover:bg-gray-200" > Later</button> 
-        </div>
-    
     </div>
-    </ng-template>
+
+   
+
+
+
+
+
+     <!-- modal delete -->
+     <!-- modal delete-->
+<ng-template #modallogout let-modal>  
+  
+  <div class="bg-orange-500 text-white px-16 py-12  rounded-2xl">
+    <div class="text-center w-full ">             
+      <div class=" text-3xl font-bold "> <span > Log out Confirmation</span></div>    
+      <div class=" text-lg py-4 "> <span >Are you sure to log out?</span></div>   
+      <div class=" text-lg  ">
+        <button (click)="logout()" class=" btndialog px-3 rounded-lg" >Exit</button>   &nbsp;
+      <button (click)="modal.close()" class="btndialog px-3 rounded-lg" > Cancel</button>      
+      </div>       
+  </div>
+  </div>
+
+</ng-template>

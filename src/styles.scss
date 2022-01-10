@@ -6,6 +6,82 @@
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
 
+
+@tailwind base; 
+@tailwind components;
+@tailwind utilities;
+
+
 .toast {
     max-width: 100% !important;
   }
+
+  ::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: #edf2f7;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 100vh;
+    border: 3px solid #edf2f7;
+    border: 3px solid #006d88;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a0aec0;
+  }
+
+  .buttonSorange{
+    @apply py-1 text-sm font-bold px-3 text-aedblue transition delay-300 ease-in-out font-bold border-2 border-aedblue rounded-xl hover:bg-aedblue hover:text-white hover:opacity-50;
+  }
+ 
+
+  .nav-tabs .nav-link.active  {
+   color: #a9afb9;
+    border-color: #fff #fff #fff !important;
+}
+.nav-tabs {
+  border-bottom: none;
+}
+
+//es para qeu la seccion de subir las salesordesrs aparezaca el scroll  
+  .tab-content > .active {
+    display: block;
+    height: 85% !important;
+}
+//TABLES
+
+//boton general del modals
+.btndialog{
+  border: 1px solid #fff ;
+  color: #fff;
+  box-shadow: none;
+  outline: none !important;
+}
+.btndialog:hover {
+  -webkit-transition: background-color 2s ease-in;
+  -moz-transition: background-color 1s ease-out;
+  -o-transition: background-color 1s ease-out;
+  transition: background-color 1s ease-out;
+
+  border: 1px solid #f8b78c ;
+  background-color: #f8b78c;
+  color: #fff;
+  outline: none !important;
+  box-shadow: none;
+}
+//paraq eu no aparezaca el borde gris en los modales
+.modal-content {
+  border: none !important;
+  border-radius: 4rem !important;
+}
+

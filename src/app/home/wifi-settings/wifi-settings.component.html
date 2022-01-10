@@ -1,0 +1,179 @@
+<div class="w-full flex">
+  
+  <div *ngIf="formwifi == false" class="ml-auto mr-auto w-1/3">
+      <div class=" p-4 rounded-xl" style="background: #f57317; ">
+        <div class="flex justify-center md:justify-end ">
+          <div class="w-6 h-6 p-1 -mr-3 object-cover rounded-full " style="background: white;color: #f57317;">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 p-0 m-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
+            </svg>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="text-white text-3xl font-semibold">Wi-Fi Password</h2>
+          <div class="mt-2 text-white ">
+            <button (click)="seeformwifi()" > 
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>            
+            </button>
+          <input style="background-color: #f57317; border: 0;outline: none;" value="{{passWiFi}}" [readOnly]="true"  >
+          </div>
+        
+        </div>
+
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+  <div *ngIf="formwifi == true" class="ml-auto mr-auto w-1/3">
+      <div class="p-4  border-2 border-orange-500 rounded-xl" >
+      
+          <div class="text-center w-full" >             
+              <div class=" text-xl font-bold "> <span class="text-gray-400">Change WiFi Password | {{routerName}}</span></div>
+          </div>
+
+          <form [formGroup]="changePass">
+              
+              <div class="flex w-full pt-4">
+              <input formControlName="password" type="text" minlength="8" maxlength="50" placeholder="New WiFi Password" class="outline-none border-b-2 border-aedgrays pb-2 w-full text-gray-400 text-sm;">
+            
+              </div> 
+              <div class="flex w-full " *ngIf="changePass.get('password')?.errors?.minlength"  >        
+                  <div class="ml-auto mr-auto text-sm text-gray-300"> 
+                      <span>At least 8 characters, please</span> 
+                  </div> 
+              </div>
+            
+      
+              <div class="flex w-full pt-4">
+              <div class="ml-auto mr-auto">
+                  <button (click)="cancelChengePass()"   class=" px-3 rounded-md logout text-orange-500 font-bold " style="height: fit-content;" >Cancel</button>
+                  &nbsp;
+                  <button (click)="openChangePass(mymodalsavePass)"  class=" px-3 rounded-md logout text-orange-500 font-bold " style="height: fit-content;" >Save</button>   
+                  </div>
+              </div>
+          
+          </form>
+        
+      </div>
+  </div>
+  
+
+</div>
+
+
+<div class="w-full flex mt-4">
+  
+  <div *ngIf="formrouter == false" class="ml-auto mr-auto w-1/3">
+      <div class=" p-4 rounded-xl" style="background: #f57317; ">
+        <div class="flex justify-center md:justify-end ">
+          <div class="w-6 h-6 p-1 -mr-3 object-cover rounded-full " style="background: white;color: #f57317;">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 p-0 m-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
+            </svg>
+          </div>
+        </div>
+  
+        <div>
+          <h2 class="text-white text-3xl font-semibold">Router Name</h2>
+          <div class="mt-2 text-white ">
+             <button (click)="seeformrouterN()" > 
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>            
+             </button>
+          <input style="background-color: #f57317; border: 0;outline: none;" value="{{routerName}}" [readOnly]="true"  >
+          </div>
+         
+        </div>
+  
+      </div>
+    
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  <div *ngIf="formrouter == true" class="ml-auto mr-auto w-1/3 ">
+      <div class="p-4  border-2 border-orange-500 rounded-xl" >
+      
+          <div class="text-center w-full" >             
+              <div class=" text-xl font-bold "> <span class="text-gray-400">Change Router Name</span></div>
+          </div>
+  
+          <form [formGroup]="changeRouter">
+              
+              <div class="flex w-full pt-4">
+              <input formControlName="name" type="text" minlength="3" maxlength="50" placeholder="New Router Name" class="outline-none border-b-2 border-aedgrays pb-2 w-full text-gray-400 text-sm;">
+            
+              </div> 
+              <div class="flex w-full " *ngIf="changeRouter.get('name')?.errors?.minlength"  >        
+                  <div class="ml-auto mr-auto text-sm text-gray-300"> 
+                      <span>At least 3 characters, please</span> 
+                  </div> 
+              </div>
+             
+      
+              <div class="flex w-full pt-4">
+              <div class="ml-auto mr-auto">
+                  <button (click)="cancelChengeRouter()"   class=" px-3 rounded-md logout text-orange-500 font-bold " style="height: fit-content;" >Cancel</button>
+                  &nbsp;
+                  <button (click)="openChangeRouter(mymodalsaveRouter)"  class=" px-3 rounded-md logout text-orange-500 font-bold " style="height: fit-content;" >Save</button>   
+                  </div>
+              </div>
+          
+          </form>
+         
+      </div>
+  </div>
+    
+  
+  </div>
+
+
+ 
+
+<!-- modal confirm change pasword-->
+<ng-template #mymodalsavePass let-modal>  
+  
+    <div class="bg-orange-500 text-white px-16 py-12  rounded-2xl">
+      <div class="text-center w-full ">             
+        <div class=" text-3xl font-bold "> <span > Change WiFi Password</span></div>    
+        <div class=" text-lg py-4 "> <span > Once the password is changed, you must connect to the router with that password and log in again</span></div>   
+        <div class=" text-lg  ">
+          <button (click)="saveChangePass()" class=" btndialog px-3 rounded-lg" >Ok</button>   &nbsp;
+        <button (click)="modal.close()" class="btndialog px-3 rounded-lg" > Cancel</button>      
+        </div>       
+    </div>
+    </div>
+  
+  </ng-template>
+
+  <!-- modal confirm change rotername-->
+<ng-template #mymodalsaveRouter let-modal>  
+  
+  <div class="bg-orange-500 text-white px-16 py-12  rounded-2xl">
+    <div class="text-center w-full ">             
+      <div class=" text-3xl font-bold "> <span > Change Router Name</span></div>    
+      <div class=" text-lg py-4 "> <span > Once the router name is changed, you must connect to the router with that new name and log in again</span></div>   
+      <div class=" text-lg  ">
+        <button (click)="saveChangeRouter()" class=" btndialog px-3 rounded-lg" >Ok</button>   &nbsp;
+      <button (click)="modal.close()" class="btndialog px-3 rounded-lg" > Cancel</button>      
+      </div>       
+  </div>
+  </div>
+
+</ng-template>
+
+  
