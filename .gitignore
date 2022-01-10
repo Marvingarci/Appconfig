@@ -43,3 +43,14 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+package-lock.json
+angular.json
+*.json
+angular.json
+package-lock.json
+*.json
+angular.json
+package-lock.json
+*.json
+*.json
+*.json
