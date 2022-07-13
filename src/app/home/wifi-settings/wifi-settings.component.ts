@@ -101,48 +101,44 @@ export class WifiSettingsComponent implements OnInit {
   saveChangePass(){
       this.homeService.titleloading.emit('Changing WiFi Password');
       this.loading.show();
-      this.SvcServerSettings.changeWifiPass(this.changePass.value).toPromise()
+      this.logout();
+      this.loading.hide(); 
+      this.modalService.dismissAll();
+
+      this.SvcServerSettings.changeWifiPass(this.changePass.value).toPromise()     
       .then(
-      (data:any)=>{
-        this.loading.hide(); 
-        this.logout();
-        this.modalService.dismissAll();
-        this.toastServiceAlert.show(data, { classname: 'fixed bottom-0 right-0 m-1', delay: 5000 });
-        
+      (data:any)=>{        
+        this.toastServiceAlert.show(data, { classname: 'fixed bottom-0 right-0 m-1', delay: 5000 });        
       })
       .catch(
         error =>{
-          console.log(error);
-          if(error.status == 500){
-            this.toastServiceAlert.show('Not connected to Mikrotik', { classname: 'fixed bottom-0 right-0 m-1', delay: 5000 });
-           }
+         console.log(error);
           this.loading.hide(); 
           this.modalService.dismissAll();
         }
         );
+
   }
 
   saveChangeRouter(){
     this.homeService.titleloading.emit('Changing Router Name');
     this.loading.show();
+    this.logout();
+    this.loading.hide(); 
+    this.modalService.dismissAll();
+
     this.SvcServerSettings.changeRouterName(this.changeRouter.value).toPromise()
     .then(
-    (data:any)=>{
-      this.loading.hide();
-      this.logout();
-      this.modalService.dismissAll();
-      this.toastServiceAlert.show(data, { classname: 'fixed bottom-0 right-0 m-1', delay: 5000 });
-      
+    (data:any)=>{     
+      this.toastServiceAlert.show(data, { classname: 'fixed bottom-0 right-0 m-1', delay: 5000 });      
     })
     .catch(error =>{
-      console.log(error);
-          if(error.status == 500){
-            this.toastServiceAlert.show('Not connected to Mikrotik', { classname: 'fixed bottom-0 right-0 m-1', delay: 5000 });
-           }
+      console.log(error);       
           this.loading.hide(); 
           this.modalService.dismissAll();
-
     });
+
+
 }
 
   logout(){

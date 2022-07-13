@@ -1,7 +1,12 @@
-<div class="grid grid-cols-3 gap-4">
+<div class="grid 
+grid-cols-1
+sm:grid-cols-1
+md:grid-cols-1
+lg:grid-cols-2
+ ">
   
-  <div>
-    <div class="max-w-md py-2 px-4  shadow-sm  rounded-xl my-3 mx-2 pb-5" style="background: #f57317; ">
+  <div class="mx-1">
+    <div class="max-w-md py-2 px-4  shadow-sm  rounded-xl my-3 mx-auto pb-5" style="background: #f57317; ">
       <div class="flex justify-center md:justify-end ">
         <div class="w-6 h-6 p-1 -mr-3 object-cover rounded-full " style="background: white;color: #f57317;">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 p-0 m-0 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -16,8 +21,8 @@
     </div>
   </div>
 
-  <div>
-    <div class="max-w-md py-2 px-4  shadow-sm  rounded-xl my-3 mx-2 pb-5" style="background: #f57317; ">
+  <div class="mx-1">
+    <div class="max-w-md py-2 px-4  shadow-sm  rounded-xl my-3 mx-auto pb-5" style="background: #f57317; ">
       <div class="flex justify-center md:justify-end ">
         <div class="w-6 h-6 p-1 -mr-3 object-cover rounded-full transform rotate-45 " style="background: white;color: #f57317;">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 p-0 m-0 transform rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -32,8 +37,8 @@
     </div>
   </div>
 
-  <div>
-    <div class="max-w-md py-2 px-4  shadow-sm  rounded-xl my-3 mx-2 pb-5" style="background: #f57317; ">
+  <div class="mx-1">
+    <div class="max-w-md py-2 px-4  shadow-sm  rounded-xl my-3 mx-auto pb-5" style="background: #f57317; ">
       <div class="flex justify-center md:justify-end ">
         <div class="w-6 h-6 p-1 -mr-3 object-cover rounded-full " style="background: white;color: #f57317;">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 p-0 m-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -60,8 +65,8 @@
     </div>
   </div>
 
-  <div>
-    <div class="max-w-md py-2 px-4  shadow-sm  rounded-xl my-3 mx-2 pb-5" style="background: #f57317; ">
+  <div class="mx-1">
+    <div class="max-w-md py-2 px-4  shadow-sm  rounded-xl my-3 mx-auto pb-5" style="background: #f57317; ">
       <div class="flex justify-center md:justify-end ">
         <div class="w-6 h-6 p-1 -mr-3 object-cover rounded-full " style="background: white;color: #f57317;">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 p-0 m-0 " fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -102,8 +107,8 @@
     </div>
   </div>
 
-  <div>
-    <div class="max-w-md py-2 px-4  shadow-sm  rounded-xl my-3 mx-2 pb-5" style="background: #f57317; ">
+  <div class="mx-1">
+    <div class="max-w-md py-2 px-4  shadow-sm  rounded-xl my-3 mx-auto pb-5" style="background: #f57317; ">
       <div class="flex justify-center md:justify-end ">
         <div class="w-6 h-6 p-1 -mr-3 object-cover rounded-full " style="background: white;color: #f57317;">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 p-0 m-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -114,13 +119,15 @@
       </div>
       <div>
         <h2 class="text-white text-3xl font-semibold">Ip Address</h2>
-        <div class="mt-2 text-white">{{details?.ipAdress}} </div>
+        <div class="mt-2 text-white" >Wi-Fi: <span *ngIf="details?.ipAdress"> {{details?.ipAdress}} </span><span *ngIf="details?.ipAdress=='' || details?.ipAdress==''"> No conected </span></div>
+        <div class="mt-2 text-white">Ethernet: <span  *ngIf="details?.ipAdressEther">  {{details?.ipAdressEther}} </span> <span *ngIf="details?.ipAdressEther=='' || details?.ipAdressEther==''"> No conected </span></div>
+        
       </div>
     </div>
   </div>
 
-  <div>
-    <div class="max-w-md py-2 px-4  shadow-sm  rounded-xl my-3 mx-2  pb-5" style="background: #f57317; ">
+  <div class="mx-1">
+    <div class="max-w-md py-2 px-4  shadow-sm  rounded-xl my-3 mx-auto  pb-5" style="background: #f57317; ">
       <div class="flex justify-center md:justify-end ">
         <div class="w-6 h-6 p-1 -mr-3 object-cover rounded-full " style="background: white;color: #f57317;">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 p-0 m-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -132,11 +139,13 @@
         <h2 class="text-white text-3xl font-semibold">Updates</h2>
        
         <div class="mt-2 text-white"> 
-          <button (click)="clickUpdateAppAedPay()" *ngIf="updatedApp =='updateAedpay'">
+          
+        <button (click)="openUpdateAppAedPay(mymodalupdateAedpay)" *ngIf="updatedApp =='updateAedpay'">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
           </svg> 
         </button>
+
         <button  *ngIf="updatedApp =='aedpayUpdated'">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
@@ -146,17 +155,19 @@
       </div>
         
         <div class="mt-2 text-white">
-        <button (click)="clickUpdateAppConfig()" *ngIf="updateConfig == 'updateConfig'">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-          </svg> 
-        </button>
-<button *ngIf="updateConfig =='ConfigUpdated'">
-  <svg  xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-          </svg>
-</button>
-          {{msgUpdateConfig}} 
+
+          <button (click)="openUpdateAppConfig(mymodalupdateConfig)" *ngIf="updateConfig == 'updateConfig'">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg> 
+          </button>
+
+          <button *ngIf="updateConfig =='ConfigUpdated'">
+            <svg  xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+          </button>
+            {{msgUpdateConfig}} 
         </div>
        
       </div>
@@ -167,6 +178,33 @@
 </div>
 
 
+  <!-- modal confirm change rotername-->
+  <ng-template #mymodalupdateAedpay let-modal>    
+    <div class="bg-orange-500 border-2 border-white text-white px-16 py-12  rounded-2xl">
+      <div class="text-center w-full ">             
+        <div class=" text-3xl font-bold "> <span > Update aedpay</span></div>    
+        <div class=" text-lg py-4 "> <span > When updating aedpay, the application will be closed</span></div>   
+        <div class=" text-lg  ">
+          <button (click)="clickUpdateAppAedPay()" class=" btndialog px-3 rounded-lg" >Ok</button>   &nbsp;
+        <button (click)="modal.close()" class="btndialog px-3 rounded-lg" > Cancel</button>      
+        </div>       
+    </div>
+    </div>  
+  </ng-template>
 
+
+    <!-- modal confirm change rotername-->
+    <ng-template #mymodalupdateConfig let-modal>    
+      <div class="bg-orange-500 border-2 border-white text-white px-16 py-12  rounded-2xl">
+        <div class="text-center w-full ">             
+          <div class=" text-3xl font-bold "> <span > Update appconfig</span></div>    
+          <div class=" text-lg py-4 "> <span > When updating appconfig, the application will be closed</span></div>   
+          <div class=" text-lg  ">
+            <button (click)="clickUpdateAppConfig()" class=" btndialog px-3 rounded-lg" >Ok</button>   &nbsp;
+          <button (click)="modal.close()" class="btndialog px-3 rounded-lg" > Cancel</button>      
+          </div>       
+      </div>
+      </div>    
+    </ng-template>
 
 

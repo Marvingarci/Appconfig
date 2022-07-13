@@ -54,6 +54,7 @@ export class ListOrdersComponent implements OnInit, OnChanges {
 
   refreshSalesOrders(){
     this.getSalesOrders(); 
+    this.count = 0;
   }
 
 

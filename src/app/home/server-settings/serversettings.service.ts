@@ -7,13 +7,12 @@ import { environment } from 'src/environments/environment';
 })
 export class ServersettingsService {
 
-  // urlGetServerSett='http://localhost/Appconfig/php/serverSettings/getServerSettings.php';
-  // urlUpdateserverAlias='http://localhost/Appconfig/php/serverSettings/updateServerAlias.php';
-  // urlGetVersions='http://localhost/Appconfig/php/serverSettings/getVersions.php';
-  urlUpdateApps='http://localhost/UpdateAppsGitHub.php';
-  urlip = 'http://localhost/Appconfig/php/ip/ip.php';
   
   constructor(private http: HttpClient) { }
+
+  updateApp(typeUpdate:any){
+    return this.http.post(`${environment.apiUrl}/updateApp`,typeUpdate);
+  }
 
   getDetailsServer() {
     return this.http.get(`${environment.apiUrl}/getServerSetting`); 
@@ -24,16 +23,7 @@ export class ServersettingsService {
   }
   getVersions() {
     return this.http.get(`${environment.apiUrl}/getVersions`);    
-  }
-
-
-  updateApp(typeUpdate:any){
-    return this.http.post(this.urlUpdateApps,typeUpdate);  
-  }
-  
-  getIpWireless(){
-    return this.http.get(this.urlip);
-  }
+  } 
 
   changeWifiPass(pass:any) {
     return this.http.post(`${environment.apiUrl}/changeWifiPass`,pass);   
@@ -45,6 +35,5 @@ export class ServersettingsService {
   getNameRouter() {
     return this.http.get(`${environment.apiUrl}/getNameRouter`);   
   }
-
 
 }

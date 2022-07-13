@@ -45,6 +45,9 @@ export class JwtinterceptorInterceptor implements HttpInterceptor {
                       this.toastServiceAlert.show('Token is Invalid,Sign in again', { classname: ' fixed bottom-0 right-0 m-1', delay: 5000 });
                       this.router.navigate(['/']);
                   }
+                  if(err.status == 0){ 
+                    this.toastServiceAlert.show('Connect to the local network', { classname: ' fixed bottom-0 right-0 m-1', delay: 5000 });
+                  }
                               
                   if (err.status == 500) {
                     this.toastServiceAlert.show('Server connection error', { classname: ' fixed bottom-0 right-0 m-1', delay: 5000 });

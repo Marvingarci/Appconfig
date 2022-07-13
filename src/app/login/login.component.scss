@@ -1,14 +1,12 @@
 .inputlogin{
-    border: 0; border-bottom: 2px solid rgb(129, 129, 129); outline: none;
+  border: 0; border-bottom: 2px solid rgb(129, 129, 129); outline: none;
 }
 
 .inputlogin::placeholder {
-    color: rgb(211, 211, 211);
-  }
-
-
-  input { 
-	font-family: FontAwesome, "Open Sans", sans-serif;
+  color: rgb(211, 211, 211);
 }
 
- 
+
+input { 
+font-family: FontAwesome, "Open Sans", sans-serif;
+}

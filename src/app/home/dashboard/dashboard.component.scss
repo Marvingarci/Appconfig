@@ -95,7 +95,6 @@ border: 1px solid #f57317;
 ----------------------------------------------------- */
 
 .wrapper {
-    display: flex;
     width: 100%;
     align-items: stretch;
 }
@@ -187,21 +186,31 @@ a.article:hover {
     CONTENT STYLE
 ----------------------------------------------------- */
 
-#content {
-    width: 100%;
-    padding: 20px;
+// #content {
+//     min-height: 100vh;
+//     transition: all 0.3s;
+//     background-color: #fff;
+// }
+.widtcontent{
+    margin-right: -20rem !important; 
+    width: calc(100% - 20rem);
     min-height: 100vh;
     transition: all 0.3s;
     background-color: #fff;
 }
-
+.widtNOcontent{
+    width: 100%;
+    min-height: 100vh;
+    transition: all 0.3s;
+    background-color: #fff;
+}
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
 
 @media (max-width: 768px) {
     #sidebar {
-        margin-left: -250px;
+        margin-left: 0;
     }
     #sidebar.active {
         margin-left: 0;

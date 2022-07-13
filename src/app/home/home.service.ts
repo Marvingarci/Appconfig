@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Output,EventEmitter } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,21 +16,25 @@ export class HomeService {
 
 
   getEvents(data:any) {
-    return this.http.post('http://localhost:8000/api/events',data);    
+    return this.http.post(`${environment.apiUrl}/events`,data);    
   }
   downloadEvents(data:any) {
-    return this.http.post('http://localhost:8000/api/downloadEvents',data);    
+    return this.http.post(`${environment.apiUrl}/downloadEvents`,data);    
+  }
+
+  forceUpdate(dbserver:any){
+    return this.http.post(`${environment.apiUrl}/forceupdate`,dbserver); 
   }
 
   getSalesOrdersLocal(data:any) {
-    return this.http.post('http://localhost:8000/api/getOrdersLocal',data);    
+    return this.http.post(`${environment.apiUrl}/getOrdersLocal`,data);    
   }
 
   getSalesOrdersCloud(data:any) {
-    return this.http.post('http://localhost:8000/api/getOrdersCloud',data);    
+    return this.http.post(`${environment.apiUrl}/getOrdersCloud`,data);    
   }
   UploadManyOrders(data:any) {
-    return this.http.post('http://localhost:8000/api/UploadManyOrders',data);    
+    return this.http.post(`${environment.apiUrl}/UploadManyOrders`,data);    
   }
 
   getSuppliers(data:any) {

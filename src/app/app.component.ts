@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HomeService } from './home/home.service';
 import { TestService } from './test.service';
@@ -11,6 +11,7 @@ import { TestService } from './test.service';
 })
 export class AppComponent implements OnInit{
   
+
 
 
   constructor(private test: TestService, 
@@ -32,6 +33,7 @@ export class AppComponent implements OnInit{
     //title of loading
     this.homeService.titleloading.subscribe(data => this.titleloading = data);
   }
+
 
 
 

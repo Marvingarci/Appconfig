@@ -7,6 +7,7 @@ import { TestService } from '../test.service';
 import { LoginService } from './login.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import { ToastServiceUpdate } from 'src/toastUpdate.services';
+import { HomeService } from '../home/home.service';
 
 @Component({
   selector: 'app-login',
@@ -32,7 +33,8 @@ export class LoginComponent implements OnInit {
               private router: Router, 
               private toastServiceAlert: ToastServiceAlert,
               private loading: NgxSpinnerService,
-              public toastUpdateService:ToastServiceUpdate){
+              public toastUpdateService:ToastServiceUpdate,
+              private homeService:HomeService){
   }
 
   public formLogin! : FormGroup;
@@ -54,9 +56,17 @@ export class LoginComponent implements OnInit {
   login(){
     this.username= false;this.password = false;this.requeriedfields =false;this.invalidcredencials = false;
     if(this.formLogin.valid){
+
+     
       
       //title loadin
-      if(this.start == "Need Setup"){ this.titleloading = "Setting Up";}else{this.titleloading = "Logging in" }      
+      if(this.start == "Need Setup"){ 
+        this.homeService.titleloading.emit('Setting Up');
+        // this.titleloading = "Setting Up";
+      }else{
+        this.homeService.titleloading.emit('Logging in');
+        // this.titleloading = "Logging in" 
+      }      
       this.loading.show();
 
       this.SvcLogin.execphpLogin(this.formLogin.value).subscribe(
@@ -89,6 +99,8 @@ export class LoginComponent implements OnInit {
           }else if (err.status == 402){
             this.invalidcredencials =true;
             this.toastServiceAlert.show(err.error, { classname: 'fixed bottom-0 right-0 m-1', delay: 5000 });  
+          }else if (err.status == 0){
+            this.toastServiceAlert.show('Connect to the local network', { classname: 'fixed bottom-0 right-0 m-1', delay: 5000 });  
           }else{
             this.toastServiceAlert.show('An error has occurred', { classname: 'fixed bottom-0 right-0 m-1', delay: 5000 });  
           }

@@ -4,6 +4,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastServiceAlert } from 'src/toastAlert.services';
 import { CookieService } from 'ngx-cookie-service';
 import { ToastServiceUpdate } from 'src/toastUpdate.services';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LoginService } from 'src/app/login/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-server-settings',
@@ -32,18 +35,18 @@ export class ServerSettingsComponent implements OnInit {
   });
 
   constructor(private SvcServerSettings: ServersettingsService,
-    private toastServiceAlert:ToastServiceAlert,private Cookie: CookieService, 
-    public toastUpdateService:ToastServiceUpdate) { }
+    private modalService: NgbModal, 
+    private toastServiceAlert:ToastServiceAlert,
+    public toastUpdateService:ToastServiceUpdate,
+    private cookieservices: CookieService,
+    private SvcLogin: LoginService,    
+    private router: Router) { }
 
   ngOnInit(): void {
-    this.updateIpWifi();
    this.getdata();
 
   }
 
-  updateIpWifi(){
-    this.SvcServerSettings.getIpWireless().subscribe();
-  }
 
   getdata(){
      this.SvcServerSettings.getDetailsServer().subscribe(
@@ -58,23 +61,23 @@ export class ServerSettingsComponent implements OnInit {
     this.SvcServerSettings.getVersions().subscribe(
       (data:any)=>{
 
-        if(data.aedpayCloud > data.aedpay){
+        if(Number( data.aedpayCloud.replace(/\./g,'')) > Number(data.aedpay.replace(/\./g,''))){
           this.newVersionApp = data.aedpayCloud;
           this.updatedApp = 'updateAedpay';
           this.msgUpdateApp = 'aedpay has a new version. You currently have version '+data.aedpay+'. Do you want to get version '+data.aedpayCloud+' right now?';
         }else{
           this.updatedApp = 'aedpayUpdated';
-          this.msgUpdateApp = 'aedpay updated to the latest version '+data.aedpayCloud;
+          this.msgUpdateApp = 'aedpay updated to the latest version '+data.aedpay;
         }
 
 
-        if(data.managementAppCloud > data.managementApp){
+        if(Number(data.managementAppCloud.replace(/\./g,'')) > Number(data.managementApp.replace(/\./g,''))){
           this.newVersionConfig = data.managementAppCloud ;
           this.updateConfig = 'updateConfig';
           this.msgUpdateConfig = 'aedpay has a new AppConfig version. You currently have version '+data.managementApp+'. Do you want to get version '+data.managementAppCloud+' right now?';
         }else{
           this.updateConfig = 'ConfigUpdated';
-          this.msgUpdateConfig = 'appConfig updated to the latest version '+data.managementAppCloud;
+          this.msgUpdateConfig = 'appConfig updated to the latest version '+data.managementApp;
         }
 
       }, error =>{
@@ -104,9 +107,12 @@ export class ServerSettingsComponent implements OnInit {
     }
   
   }
-
+  openUpdateAppAedPay(content:any){
+    this.modalService.open(content, {backdrop: false,centered:true,size: 'md'});
+  }
   clickUpdateAppAedPay(){
     if(navigator.onLine){
+      this.modalService.dismissAll();   
       var jsonUpdate = 
       {
           "typeRepository": this.updatedApp,
@@ -114,34 +120,61 @@ export class ServerSettingsComponent implements OnInit {
       };
 
       this.SvcServerSettings.updateApp(jsonUpdate).subscribe(
-      ()=>{
+      (data:any)=>{
+        console.log(data);
+        this.toastServiceAlert.show(data, { classname:'fixed bottom-0 right-0 m-1', delay: 5000 });     
+    
         this.getdata();
       }, error =>{
         console.log(error)
       }
     );
     }else{ 
-    this.toastServiceAlert.show("You are not connected to the internet", { classname:'fixed bottom-0 right-0 m-1', delay: 5000 });     
+    this.toastServiceAlert.show("You are not connected to the internet", { classname:'fixed bottom-0 right-0 m-1', delay: 5000 });  
+    this.modalService.dismissAll();   
     }    
   }
 
-  clickUpdateAppConfig(){    
+  openUpdateAppConfig(content:any){
+    this.modalService.open(content, {backdrop: false,centered:true,size: 'md'});
+  }
+
+  clickUpdateAppConfig(){ 
     if(navigator.onLine){
+    this.modalService.dismissAll();   
       var jsonUpdate = 
       {
           "typeRepository": this.updateConfig,
           "newVersion": this.newVersionConfig 
       };
+
       this.SvcServerSettings.updateApp(jsonUpdate).subscribe(
-      ()=>{
+      (data)=>{
+        console.log(data);
         this.getdata();
       }, error =>{
         console.log(error)
       }
-    )
+    );
+    this.logout();
+
     }else{
-      this.toastServiceAlert.show("You are not connected to the internet", { classname: 'fixed bottom-0 right-0 m-1', delay: 5000 });     
+      this.toastServiceAlert.show("You are not connected to the internet", { classname: 'fixed bottom-0 right-0 m-1', delay: 5000 }); 
+      this.modalService.dismissAll();     
     }   
+  }
+
+  logout(){
+    this.SvcLogin.logout().toPromise().then(
+    (data:any) => { 
+  this.cookieservices.deleteAll();
+  this.router.navigate(['/']); 
+  this.modalService.dismissAll(); 
+    console.log(data)
+  }
+  ).catch((err:any) => {
+      console.log(err);
+  });
   }
 
   seepassword():void{

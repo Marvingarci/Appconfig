@@ -20,7 +20,13 @@ export class DashboardComponent implements OnInit {
 
   fullName:string = "";
 companyLegalName:string = "";
+openSideBar:boolean = false
 
+platform = '';
+showMobile = false;
+isIOS = false;
+isAndroid = false;
+showcontent:boolean =  true
 
   // versionCloud:  any  = (versionsCloud  as  any).default;
   // versionActual:  any  = (versionActual  as  any).default;
@@ -57,6 +63,22 @@ this.companyLegalName = this.cookieservices.get('companyLegalName');
       this.modalService.open(content, {backdrop: false,centered:true,size: 'md'});
     }
    
+
+    openclosesidebar(action:any){
+
+      console.log(this.showMobile)
+if(action == 'close'){
+  if(this.showMobile){
+    this.showcontent = true;
+  }
+this.openSideBar = false;
+}else if(action == 'open'){
+if(this.showMobile){
+  this.showcontent = false;
+}
+this.openSideBar = true;
+}
+    }
 
    logout(){
    
@@ -155,9 +177,35 @@ this.companyLegalName = this.cookieservices.get('companyLegalName');
 
   
   ngOnInit() { 
+
+    if (this.platform.match(/Android/i)) {
+      this.showMobile = true;
+      this.isAndroid = true;
+    }
+    if (this.platform.match(/iPhone|iPad|iPod/i)) {
+      this.showMobile = true;
+      this.isIOS = true;
+    }
+    if (this.platform.includes('')) {
+      this.showMobile = false;
+    }
+    if (this.platform.match('Mac')) {
+      this.showMobile = true;
+      this.isIOS = true;
+    }
+    if (this.platform.includes('Win')) {
+      this.showMobile = false;
+    }
+
     this.homeService.actionGoBack.subscribe(
       (data) => {this.actionGoback = data},
       (err)=>{console.log(err)});
+
+
+      if(!this.showMobile){
+        this.openSideBar = true
+      }
+
    }
 
 

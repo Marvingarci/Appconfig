@@ -12,7 +12,7 @@
     <div class="bg-gray-200  " >
     
           <header class="flex justify-between w-full  text-gray-400 px-3 py-3" >
-            <h3>Sales Orders <span *ngIf="count > 0 && active == 1">| {{count}} item selected</span></h3>
+            <h3>Sales Orders <span *ngIf="count > 0 && active == 1">| {{count}} <span *ngIf="count == 1">item</span><span *ngIf="count > 1">items</span>   selected</span></h3>
             <div>
             <button class="buttonSorange " *ngIf="count > 0 && active == 1" (click)="onLogClick()">Upload Selected Sales Orders</button>
             &nbsp;
