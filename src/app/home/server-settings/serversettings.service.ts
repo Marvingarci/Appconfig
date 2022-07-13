@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ServersettingsService {
 
+  urlUpdateApps='http://localhost/UpdateAppsGitHub.php';
   
   constructor(private http: HttpClient) { }
 
